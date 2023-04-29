@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
 const Chatbot = () => {
@@ -55,7 +57,7 @@ const Chatbot = () => {
                     <div>
                         <div className="w-full">
                             <Navbar name="Shruti" logo="https://i.postimg.cc/vBd2MN55/5cb480cd5f1b6d3fbadece79.png" />
-                            <div className="relative w-full p-6 overflow-y-auto h-[40rem]">
+                            <div className="relative w-full p-6 h-[40rem]">
                                 <ul className="space-y-2">
                                     {conversation.map((item, index) => (
                                         <React.Fragment key={index}>
@@ -68,7 +70,7 @@ const Chatbot = () => {
                                                 <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
                                                     <span className="block text-justify">
                                                         {programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase())) ? (
-                                                            <code>{item.output}</code>
+                                                            <code dangerouslySetInnerHTML={{ __html: Prism.highlight(item.output, Prism.languages.javascript, 'javascript') }} />
                                                         ) : (
                                                             item.output
                                                         )}
