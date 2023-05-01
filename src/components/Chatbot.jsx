@@ -9,7 +9,7 @@ const Chatbot = () => {
     const [input, setInput] = useState("");
     const [conversation, setConversation] = useState([]);
 
-    const programmingKeywords = ["programming", "code", "coding", "program", "developer", "c", "java", "python", "html", "javascript", "react"];
+    const programmingKeywords = ["programming", "code", "coding", "program", "developer", "c programming", "java", "python", "html", "javascript", "react"];
 
     const handleInput = (e) => {
         setInput(e.target.value);
@@ -67,7 +67,7 @@ const Chatbot = () => {
                                                 </div>
                                             </li>
                                             <li className="flex justify-end">
-                                                <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+                                                <div className="relative max-w-xl px-4 py-2 text-white bg-blue-600 rounded shadow">
                                                     <span className="block text-justify">
                                                         {programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase())) ? (
                                                             <code dangerouslySetInnerHTML={{ __html: Prism.highlight(item.output, Prism.languages.javascript, 'javascript') }} />
@@ -93,7 +93,7 @@ const Chatbot = () => {
                                         />
                                         <button
                                             type="submit"
-                                            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+                                            className="hidden md:block px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
                                         >
                                             Send
                                         </button>
