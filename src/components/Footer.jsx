@@ -13,17 +13,17 @@ const Footer = () => {
                                 className="w-10 h-10 text-white p-2  rounded-full"
                                 src="https://i.postimg.cc/vBd2MN55/5cb480cd5f1b6d3fbadece79.png"
                             />
-                            <span className="ml-3 text-xl">Shruti.AI</span>
+                            <span className="ml-3 text-xl">VoiceAI</span>
                         </a>
                         <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
                             © 2023 —
                             <a
-                                href="https://www.linkedin.com/in/manish-gupta-9a6658266/"
+                                href=" "
                                 className="text-gray-600 ml-1"
                                 rel="noopener noreferrer"
                                 target="_blank"
                             >
-                                Lumina Tech
+                                OpenAi Tools
                             </a>
                         </p>
                         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
