@@ -34,8 +34,7 @@ const Contact = () => {
                         Address
                       </h2>
                       <h2 className="text-gray-800 text-base md:text-lg leading-8 tracking-wider mt-2">
-                        Postmaster, Post Office NAIHATI (SUB OFFICE), NORTH 24
-                        PARGANAS, WEST BENGAL (WB), India (IN), Pin Code:- 743165
+                        Postmaster, Post Office
                       </h2>
                     </div>
                     <div className="mt-4 md:mt-8">
@@ -43,7 +42,7 @@ const Contact = () => {
                         Contact
                       </h2>
                       <h2 className="text-gray-800 text-base md:text-lg leading-8 tracking-wider mt-2">
-                        +91 9830355637 (Phone)
+                        +00 0000000(Phone)
                       </h2>
                     </div>
                     <div className="mt-4 md:mt-8">
@@ -51,8 +50,8 @@ const Contact = () => {
                         Email
                       </h2>
                       <h2 className="text-gray-800 text-base md:text-lg leading-8 tracking-wider mt-2">
-                        <a href="mailto: luminatech88@gmail.com" target="_blank">
-                          luminatech88@gmail.com
+                        <a href="mailto: instabot2.0@gmail.com" target="_blank">
+                          instabot2.0@gmail.com
                         </a>
                       </h2>
                     </div>
