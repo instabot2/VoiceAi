@@ -23,14 +23,17 @@ const Chatbot = () => {
           url: 'https://chatgpt-open-ai-nlp.p.rapidapi.com/',
           headers: {
             'content-type': 'application/json',
-            Type: 'chatgpt4-chat',
+            Type: 'chatgpt4',
             'X-RapidAPI-Key': '1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c',
             'X-RapidAPI-Host': 'chatgpt-open-ai-nlp.p.rapidapi.com'
           },
-          data: `{"query":"${input}"}`,  
-             temperature: '0.7'
+          data: {
+            query: input, // Replace "prompt" with "query" and set the value to the input variable
+            temperature: '0.7'
+          }
         };
-    
+
+
        //method: "POST",
        //     url: "https://chatgpt-api7.p.rapidapi.com/ask",
        //     headers: {
