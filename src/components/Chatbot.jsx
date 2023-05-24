@@ -19,31 +19,15 @@ const Chatbot = () => {
         e.preventDefault();
         
         const options = {
-          method: 'POST',
-          url: 'https://chatgpt-open-ai-nlp.p.rapidapi.com/',
-          headers: {
-            'content-type': 'application/json',
-            Type: 'chatgpt4',
-            'X-RapidAPI-Key': '1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c',
-            'X-RapidAPI-Host': 'chatgpt-open-ai-nlp.p.rapidapi.com'
-          },
-          data: {
-            query: input, // Replace "prompt" with "query" and set the value to the input variable
-            temperature: '0.7'
-          }
+            method: "POST",
+            url: "https://chatgpt-api7.p.rapidapi.com/ask",
+            headers: {
+                "content-type": "application/json",
+                "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
+                "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
+            },
+            data: `{"query":"${input}"}`,
         };
-
-
-       //method: "POST",
-       //     url: "https://chatgpt-api7.p.rapidapi.com/ask",
-       //     headers: {
-       //        "content-type": "application/json",
-       //         "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
-       //         "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
-       //     },
-       //     data: `{"query":"${input}"}`,
-       // };
-    
     
         try {
             const response = await axios.request(options);
