@@ -86,7 +86,7 @@ const Chatbot = () => {
                                     <div className="flex items-center">
                                         <input
                                             type="text"
-                                            placeholder="Ask me something..."
+                                            placeholder="Ask something..."
                                             value={input}
                                             onChange={handleInput}
                                             className="w-full px-4 py-2 mr-2 text-gray-700 border rounded focus:outline-none"
