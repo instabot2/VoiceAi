@@ -3,28 +3,9 @@
 
 Meet VoiceAi, a language model powered by the GPT-3.5 architecture., capable of conversing with you on a wide range of topics. Developed using advanced machine learning algorithms, ChatGPT can understand and respond to natural language queries with impressive accuracy. With a vast knowledge base and a dedication to learning, ChatGPT is always ready to assist and engage with users seeking information or conversation.
 
-
-
-
-
-
-
-
-
-
-
 ## Deployment
 
 [https://voice-ai-two.vercel.app](https://voice-ai-two.vercel.app)
-
-
-## Screenshots
-
-![portfolio](https://i.postimg.cc/2SyPg4Rz/Screenshot-from-2023-04-25-21-35-19.png)
-
-### Responsive
-
-![portfolio](https://i.postimg.cc/Jhccq26t/mobile-7.png)
 
 ## Running Development Server
 
