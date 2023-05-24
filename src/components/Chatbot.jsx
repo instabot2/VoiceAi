@@ -20,15 +20,16 @@ const Chatbot = () => {
 
         const options = {
             method: "POST",
-            url: "https://openai80.p.rapidapi.com/chat/completions",
+            url: "https://chatgpt-open-ai-nlp.p.rapidapi.com/",
             headers: {
                 "content-type": "application/json",
-                "X-RapidAPI-Key": "1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c",
-                "X-RapidAPI-Host": "openai80.p.rapidapi.com",
+                Type: 'chatgpt4-chat',
+                'X-RapidAPI-Key': '1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c',
+                'X-RapidAPI-Host': 'chatgpt-open-ai-nlp.p.rapidapi.com'            
             },
             data: `{"query":"${input}"}`,
         };
-                
+           
         try {
             const response = await axios.request(options);
             const { conversation_id, response: botResponse } = response.data;
