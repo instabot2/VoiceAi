@@ -42,7 +42,7 @@ const About = () => {
                                 />
                                 <div className="flex-grow sm:pl-8">
                                     <h2 className="title-font font-medium text-lg text-white">
-                                        Manish Gupta
+                                        AI 1st
                                     </h2>
                                     <h3 className="text-gray-500 mb-3">Web Developer</h3>
                                     <p className="mb-4 text-justify">
@@ -101,7 +101,7 @@ const About = () => {
                                 />
                                 <div className="flex-grow sm:pl-8">
                                     <h2 className="title-font font-medium text-lg text-white">
-                                        Pratyush Singha
+                                        Ai 2nd
                                     </h2>
                                     <h3 className="text-gray-500 mb-3">Web Developer</h3>
                                     <p className="mb-4 text-justify">
