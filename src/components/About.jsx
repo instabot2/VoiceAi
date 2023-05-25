@@ -38,7 +38,7 @@ const About = () => {
                                 <img
                                     alt="team"
                                     className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="https://i.postimg.cc/YC1VxwD7/Manish-dp.png"
+                                    src="https://i.postimg.cc/gjrFJS3m/images-1.jpg"
                                 />
                                 <div className="flex-grow sm:pl-8">
                                     <h2 className="title-font font-medium text-lg text-white">
@@ -97,7 +97,7 @@ const About = () => {
                                 <img
                                     alt="team"
                                     className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="https://i.postimg.cc/sDKKfDLv/pratyush-dp.jpg"
+                                    src="https://i.postimg.cc/gjrFJS3m/images-1.jpg"
                                 />
                                 <div className="flex-grow sm:pl-8">
                                     <h2 className="title-font font-medium text-lg text-white">
