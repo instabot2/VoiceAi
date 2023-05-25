@@ -71,44 +71,46 @@ const Chatbot = () => {
           <div>
             <div className="w-full">
               <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
-              <div className="relative w-full p-6 h-[40rem] overflow-y-scroll" ref={conversationRef}>
-                <ul className="space-y-2">
-                  {conversation.map((item, index) => (
-                    <React.Fragment key={index}>
-                      <li className="flex justify-start">
-                        <div className="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
-                          <span className="block">{item.input}</span>
-                        </div>
-                      </li>
-                      <li className="flex justify-end">
-                        <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
-                          <span className="block text-justify">
-                            {formatOutput(item)}
-                          </span>
-                        </div>
-                      </li>
-                    </React.Fragment>
-                  ))}
-                </ul>
-              </div>
-              <div className="sticky bottom-0 z-10">
-                <form onSubmit={handleSubmit}>
-                  <div className="flex items-center">
-                    <input
-                      type="text"
-                      placeholder="Ask something..."
-                      value={input}
-                      onChange={handleInput}
-                      className="w-full px-4 py-2 mr-2 text-gray-700 border rounded focus:outline-none"
-                    />
-                    <button
-                      type="submit"
-                      className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
-                    >
-                      Send
-                    </button>
-                  </div>
-                </form>
+              <div className="flex flex-col flex-1">
+                <div className="relative flex-1 p-6 overflow-y-auto" ref={conversationRef}>
+                  <ul className="space-y-2">
+                    {conversation.map((item, index) => (
+                      <React.Fragment key={index}>
+                        <li className="flex justify-start">
+                          <div className="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
+                            <span className="block">{item.input}</span>
+                          </div>
+                        </li>
+                        <li className="flex justify-end">
+                          <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+                            <span className="block text-justify">
+                              {formatOutput(item)}
+                            </span>
+                          </div>
+                        </li>
+                      </React.Fragment>
+                    ))}
+                  </ul>
+                </div>
+                <div className="sticky bottom-0 z-10">
+                  <form onSubmit={handleSubmit}>
+                    <div className="flex items-center">
+                      <input
+                        type="text"
+                        placeholder="Ask something..."
+                        value={input}
+                        onChange={handleInput}
+                        className="w-full px-4 py-2 mr-2 text-gray-700 border rounded focus:outline-none"
+                      />
+                      <button
+                        type="submit"
+                        className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+                      >
+                        Send
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
