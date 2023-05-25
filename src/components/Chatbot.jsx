@@ -57,7 +57,7 @@ const Chatbot = () => {
                     <div>
                         <div className="w-full">
                             <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />        
-                            <div className="relative w-full p-6 h-[40rem]">
+                            <div className="relative w-full p-6 h-[40rem] overflow-y-scroll" style={{ visibility: 'hidden' }}>
                                 <ul className="space-y-2">
                                     {conversation.map((item, index) => (
                                         <React.Fragment key={index}>
