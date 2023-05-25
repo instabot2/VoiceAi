@@ -55,6 +55,16 @@ const Chatbot = () => {
     }
   }, [conversation]);
 
+  const formatOutput = (item) => {
+    if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
+      return (
+        <code dangerouslySetInnerHTML={{ __html: Prism.highlight(item.output, Prism.languages.javascript, 'javascript') }} />
+      );
+    } else {
+      return item.output;
+    }
+  };
+
   return (
     <>
       <div className="flex justify-center items-center mx-auto">
@@ -74,11 +84,7 @@ const Chatbot = () => {
                       <li className="flex justify-end">
                         <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
                           <span className="block text-justify">
-                            {programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase())) ? (
-                              <code dangerouslySetInnerHTML={{ __html: Prism.highlight(item.output, Prism.languages.javascript, 'javascript') }} />
-                            ) : (
-                              item.output
-                            )}
+                            {formatOutput(item)}
                           </span>
                         </div>
                       </li>
