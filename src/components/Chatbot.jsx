@@ -48,12 +48,6 @@ const Chatbot = () => {
 
     setInput("");
   };
-
-  //useEffect(() => {
-  //  if (conversationRef.current) {
-  //    conversationRef.current.scrollTop = conversationRef.current.scrollHeight;
-  //  }
-  //}, [conversation]);
   
   useEffect(() => {
     if (conversationRef.current) {
