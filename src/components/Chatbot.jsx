@@ -56,7 +56,7 @@ const Chatbot = () => {
                 <div className="w-11/12 border rounded ">
                     <div>
                         <div className="w-full">
-                            <Navbar name="Shruti" logo="https://i.postimg.cc/BQ8m1tq3/5cb480cd5f1b6d3fbadece79.png" />        
+                            <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />        
                             <div className="relative w-full p-6 h-[40rem]">
                                 <ul className="space-y-2">
                                     {conversation.map((item, index) => (
