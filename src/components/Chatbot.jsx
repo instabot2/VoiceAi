@@ -4,6 +4,8 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
+import './index.css';
+
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
