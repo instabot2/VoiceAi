@@ -6,7 +6,7 @@ import Footer from './Footer'
 const Services = () => {
     return (
         <>
-            <Navbar1 name="Shruti" logo="https://i.postimg.cc/vBd2MN55/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
+            <Navbar1 name="VoicwAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
             <div className="flex items-center justify-center py-12">
                 <div className="bg-white dark:bg-gray-800 dark:border-gray-900 rounded-md flex items-center justify-center mx-4 md:w-2/3">
                     <div className="flex flex-col items-center py-16">
