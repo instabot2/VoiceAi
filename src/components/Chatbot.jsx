@@ -58,9 +58,9 @@ const Chatbot = () => {
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
-      return <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
+      return <pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
     } else {
-      return item.output;
+      return <pre>{item.output}</pre>;
     }
   };
 
