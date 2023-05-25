@@ -49,6 +49,12 @@ const Chatbot = () => {
     setInput("");
   };
 
+  useEffect(() => {
+    if (conversationRef.current) {
+      conversationRef.current.scrollTop = conversationRef.current.scrollHeight;
+    }
+  }, [conversation]);
+
   useLayoutEffect(() => {
     const updateConversationContainerWidth = () => {
       if (conversationRef.current) {
