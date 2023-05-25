@@ -55,22 +55,6 @@ const Chatbot = () => {
     }
   }, [conversation]);
 
-  useLayoutEffect(() => {
-    const updateConversationContainerWidth = () => {
-      if (conversationRef.current) {
-        conversationRef.current.style.width = `${conversationRef.current.parentNode.offsetWidth}px`;
-      }
-    };
-
-    window.addEventListener("resize", updateConversationContainerWidth);
-    updateConversationContainerWidth();
-
-    return () => {
-      window.removeEventListener("resize", updateConversationContainerWidth);
-    };
-  }, []);
-  
-
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
@@ -83,9 +67,7 @@ const Chatbot = () => {
   return (
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
-
-      <div className="flex-1 p-6 overflow-y-auto" ref={conversationRef}>
-        
+      <div className="flex-1 p-6 overflow-y-auto" style={{ width: "100%", maxWidth: "100vw" }}>
         <ul className="space-y-2">
           {conversation.map((item, index) => (
             <React.Fragment key={index}>
