@@ -49,12 +49,29 @@ const Chatbot = () => {
     setInput("");
   };
 
+  //useEffect(() => {
+  //  if (conversationRef.current) {
+  //    conversationRef.current.scrollTop = conversationRef.current.scrollHeight;
+  //  }
+  //}, [conversation]);
+  
   useEffect(() => {
     if (conversationRef.current) {
-      conversationRef.current.scrollTop = conversationRef.current.scrollHeight;
+      const conversationContainer = conversationRef.current;
+      conversationContainer.scrollTop = conversationContainer.scrollHeight;
+      // Scroll the conversation container to the bottom on window resize
+      const handleResize = () => {
+        conversationContainer.scrollTop = conversationContainer.scrollHeight;
+      };
+      window.addEventListener("resize", handleResize);
+      // Cleanup the event listener
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
     }
   }, [conversation]);
 
+  
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
