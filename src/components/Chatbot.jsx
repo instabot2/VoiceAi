@@ -67,7 +67,7 @@ const Chatbot = () => {
   return (
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
-      <div className="flex-1 p-6 overflow-y-auto" ref={conversationRef}>
+      <div className="flex-1 p-6 overflow-y-auto">
         <ul className="space-y-2">
           {conversation.map((item, index) => (
             <React.Fragment key={index}>
