@@ -24,7 +24,7 @@ const Home = () => {
                   <img
                     alt="content"
                     className="object-cover object-center h-full w-full"
-                    src="https://i.postimg.cc/vBd2MN55/5cb480cd5f1b6d3fbadece79.png"
+                    src="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png"
                   />
                 </div>
                 <div className="flex flex-col items-center text-center justify-center">
