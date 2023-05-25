@@ -4,7 +4,7 @@ import Footer from './Footer'
 const Contact = () => {
   return (
     <>
-      <Navbar1 name="Shruti" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
+      <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
       <div className="py-4 lg:py-8 relative">
         <img
           src="https://cdn.tuk.dev/assets/templates/radian/Back_Image.png"
