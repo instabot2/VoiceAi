@@ -15,7 +15,7 @@ const Home = () => {
               <img
                 alt="content"
                 className="object-cover object-center h-full w-full"
-                src="https://i.postimg.cc/nz3k5f35/hero.jpg"
+                src="https://i.postimg.cc/HnTVj72T/hero.png"
               />
             </div>
             <div className="flex flex-col sm:flex-row mt-10">
