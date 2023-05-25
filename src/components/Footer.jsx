@@ -11,7 +11,7 @@ const Footer = () => {
                             <img
                                 alt="content"
                                 className="w-10 h-10 text-white p-2  rounded-full"
-                                src="https://i.postimg.cc/vBd2MN55/5cb480cd5f1b6d3fbadece79.png"
+                                src="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png"
                             />
                             <span className="ml-3 text-xl">VoiceAI</span>
                         </a>
