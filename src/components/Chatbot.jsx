@@ -67,7 +67,7 @@ const Chatbot = () => {
   return (
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
-      <div className="flex-1 p-6 overflow-y-auto">
+      <div className="flex-1 p-6 overflow-x-auto" style={{ maxWidth: "100vw" }}>
         <ul className="space-y-2">
           {conversation.map((item, index) => (
             <React.Fragment key={index}>
@@ -87,23 +87,21 @@ const Chatbot = () => {
           ))}
         </ul>
       </div>
-      <div className="sticky bottom-0 z-10">
-        <form onSubmit={handleSubmit}>
-          <div className="flex items-center">
-            <input
-              type="text"
-              placeholder="Ask something..."
-              value={input}
-              onChange={handleInput}
-              className="w-full px-4 py-2 mr-2 text-gray-700 border rounded focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
-            >
-              Send
-            </button>
-          </div>
+      <div className="sticky bottom-0 z-10 bg-white">
+        <form onSubmit={handleSubmit} className="flex items-center">
+          <input
+            type="text"
+            placeholder="Ask something..."
+            value={input}
+            onChange={handleInput}
+            className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            Send
+          </button>
         </form>
       </div>
     </div>
