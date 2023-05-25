@@ -7,7 +7,7 @@ import Footer from './Footer';
 const Home = () => {
   return (
     <>
-        <Navbar1 logo="https://i.postimg.cc/vBd2MN55/5cb480cd5f1b6d3fbadece79.png" name="VoiceAi" button5="Get Started"/>
+        <Navbar1 logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" name="VoiceAi" button5="Get Started"/>
       <section className="text-gray-600  body-font ">
         <div className="container px-5 py-24 mx-auto flex flex-col">
           <div className="lg:w-4/6 mx-auto">
