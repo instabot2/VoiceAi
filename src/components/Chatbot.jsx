@@ -93,8 +93,8 @@ const Chatbot = () => {
 
 
 
-                <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow h-auto">
-                  <div className="block text-justify">
+                <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+                  <div className="block text-justify overflow-y-auto max-h-full">
                     <div className="whitespace-pre-wrap">
                       {formatOutput(item)}
                     </div>
