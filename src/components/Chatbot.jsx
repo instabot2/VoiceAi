@@ -111,16 +111,6 @@ const Chatbot = () => {
     }
   };
 
-  const formatOutput = (item) => {
-    if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
-      const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
-      return <pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
-    } else {
-      return <pre>{item.output}</pre>;
-    }
-  };
-
-
   const handleResetMemory = () => {
     setMemory([]);
   };
