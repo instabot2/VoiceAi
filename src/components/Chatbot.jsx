@@ -56,7 +56,7 @@ const Chatbot = () => {
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "YOUR_RAPIDAPI_KEY",
+        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
         "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
       },
       data: `{"query":"${inputWithMemory}"}`,
