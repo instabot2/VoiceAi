@@ -125,24 +125,6 @@ const programmingKeywords = [
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
 
-    
-    <div className="flex justify-end">
-        <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
-          {isProcessing ? (
-            <div className="block text-center py-2 text-sm text-gray-500">
-              AI is processing...
-            </div>
-          ) : (
-            <div className="block text-justify">
-              <div className="whitespace-pre-wrap break-words">
-                {formatOutput(item)}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-
-    
       <div className="flex-1 p-6 overflow-y-auto" ref={conversationRef} style={{ width: "100%", maxWidth: "100vw" }}>
         <ul className="space-y-2">
           {conversation.map((item, index) => (
@@ -152,20 +134,29 @@ const programmingKeywords = [
                   <span className="block">{item.input}</span>
                 </div>
               </li>
-              <li className="flex justify-end">
+              <li className="flex justify-end">            
                 <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
-                  
-                 {isProcessing ? (
-                  <div className="block text-center py-2 text-sm text-gray-500">
-                    AI is processing...
-                  </div>
-                ) : (
-                  <div className="block text-justify">              
-                    <div className="whitespace-pre-wrap break-words">
-                      {item.output}
+
+
+
+                  <div className="flex justify-end">
+                    <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
+                      {isProcessing ? (
+                        <div className="block text-center py-2 text-sm text-gray-500">
+                          AI is processing...
+                        </div>
+                      ) : (
+                        <div className="block text-justify">
+                          <div className="whitespace-pre-wrap break-words">
+                            {item.output}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                )}    
+
+
+
 
                 </div>
               </li>
