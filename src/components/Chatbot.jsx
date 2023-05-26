@@ -79,7 +79,12 @@ const programmingKeywords = [
 
       // Store output in memory
       setMemory(prevMemory => [...prevMemory, output]);
-      
+
+      // Update conversation state with new message
+      setConversation([...conversation, { input, output }]);
+      // Scroll conversation container to display new message
+      handleNewMessage();
+
     } catch (error) {
       console.error(error);
     }
@@ -87,10 +92,10 @@ const programmingKeywords = [
     setInput("");
   };
   
-  useEffect(() => {
-    if (conversationRef.current) {
-      const conversationContainer = conversationRef.current;
-      conversationContainer.scrollTop = conversationContainer.scrollHeight;
+  //useEffect(() => {
+    //if (conversationRef.current) {
+      //const conversationContainer = conversationRef.current;
+      //conversationContainer.scrollTop = conversationContainer.scrollHeight;
       // Scroll the conversation container to the bottom on window resize
       //const handleResize = () => {
       //  conversationContainer.scrollTop = conversationContainer.scrollHeight;
@@ -100,9 +105,23 @@ const programmingKeywords = [
       //return () => {
       //  window.removeEventListener("resize", handleResize);
       //};
+    //}
+  //}, [conversation]);
+  
+  useEffect(() => {
+    if (conversationRef.current) {
+      const conversationContainer = conversationRef.current;
+      conversationContainer.scrollTop = conversationContainer.scrollHeight;
     }
   }, [conversation]);
-  
+
+  const handleNewMessage = () => {
+    if (conversationRef.current) {
+      const conversationContainer = conversationRef.current;
+      conversationContainer.scrollTop = conversationContainer.scrollHeight;
+    }
+  };
+
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
