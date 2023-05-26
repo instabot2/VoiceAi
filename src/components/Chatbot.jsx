@@ -43,7 +43,7 @@ const programmingKeywords = [
     const memoryData = memory.join(" ");
     const inputWithMemory = `${memoryData} ${input}`;
     // Display alert with captured memory data
-    //window.alert(`Captured Memory Data: ${memoryData}`);
+    window.alert(`Captured Memory Data: ${inputWithMemory}`);
 
     if (input.toLowerCase() === "reset session") {
       handleResetMemory();
@@ -102,7 +102,6 @@ const programmingKeywords = [
       };
     }
   }, [conversation]);
-
   
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
@@ -116,8 +115,6 @@ const programmingKeywords = [
   const handleResetMemory = () => {
     setMemory([]); // Reset memory by setting it to an empty array
   };
-
-
 
   return (
     <div className="h-screen flex flex-col">
