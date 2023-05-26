@@ -43,7 +43,7 @@ const programmingKeywords = [
     const memoryData = memory.join(" ");
     const inputWithMemory = `${memoryData} ${input}`;
     // Display alert with captured memory data
-    window.alert(`Captured Memory Data: ${inputWithMemory}`);
+    //window.alert(`Captured Memory Data: ${inputWithMemory}`);
 
     if (input.toLowerCase() === "reset session") {
       handleResetMemory();
