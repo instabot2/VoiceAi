@@ -92,14 +92,14 @@ const programmingKeywords = [
       const conversationContainer = conversationRef.current;
       conversationContainer.scrollTop = conversationContainer.scrollHeight;
       // Scroll the conversation container to the bottom on window resize
-      const handleResize = () => {
-        conversationContainer.scrollTop = conversationContainer.scrollHeight;
-      };
-      window.addEventListener("resize", handleResize);
+      //const handleResize = () => {
+      //  conversationContainer.scrollTop = conversationContainer.scrollHeight;
+      //};
+      //window.addEventListener("resize", handleResize);
       // Cleanup the event listener
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
+      //return () => {
+      //  window.removeEventListener("resize", handleResize);
+      //};
     }
   }, [conversation]);
   
@@ -121,7 +121,6 @@ const programmingKeywords = [
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
 
       <div className="flex-1 p-6 overflow-y-auto" style={{ width: "100%", maxWidth: "100vw" }}>
-
         <ul className="space-y-2">
           {conversation.map((item, index) => (
             <React.Fragment key={index}>
@@ -143,6 +142,7 @@ const programmingKeywords = [
           ))}
         </ul>
       </div>
+
       <div className="sticky bottom-0 z-10 bg-white">
         <form onSubmit={handleSubmit} className="flex items-center">
           <input
