@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
+  const [memory, setMemory] = useState([]); // New state for memory
   const conversationRef = useRef(null);
 
 const programmingKeywords = [
@@ -62,6 +63,10 @@ const programmingKeywords = [
       const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(botResponse);
       synth.speak(utterance);
+
+      // Store output in memory
+      setMemory(prevMemory => [...prevMemory, output]);
+      
     } catch (error) {
       console.error(error);
     }
