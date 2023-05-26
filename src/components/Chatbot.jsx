@@ -3,6 +3,8 @@ import axios from "axios";
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
+import { SpeechRecognition, SpeechSynthesis } from "react-speech";
+
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
