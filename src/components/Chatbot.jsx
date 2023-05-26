@@ -8,6 +8,7 @@ const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]); // New state for memory
+  const [isProcessing, setIsProcessing] = useState(false); // New state for processing status
   const conversationRef = useRef(null);
 
 const programmingKeywords = [
@@ -64,6 +65,10 @@ const programmingKeywords = [
     };
 
     try {
+      
+      setIsProcessing(true); // Set processing status to true
+      const response = await axios.request(options);
+     
       const response = await axios.request(options);
       const { conversation_id, response: botResponse } = response.data;
 
@@ -84,6 +89,8 @@ const programmingKeywords = [
       setConversation([...conversation, { input, output }]);
       // Scroll conversation container to display new message
       handleNewMessage();
+      
+      setIsProcessing(false); // Set processing status back to false
 
     } catch (error) {
       console.error(error);
@@ -118,6 +125,24 @@ const programmingKeywords = [
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
 
+    
+    <div className="flex justify-end">
+        <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
+          {isProcessing ? (
+            <div className="block text-center py-2 text-sm text-gray-500">
+              AI is processing...
+            </div>
+          ) : (
+            <div className="block text-justify">
+              <div className="whitespace-pre-wrap break-words">
+                {formatOutput(item)}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+    
       <div className="flex-1 p-6 overflow-y-auto" ref={conversationRef} style={{ width: "100%", maxWidth: "100vw" }}>
         <ul className="space-y-2">
           {conversation.map((item, index) => (
@@ -129,11 +154,19 @@ const programmingKeywords = [
               </li>
               <li className="flex justify-end">
                 <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
-                  <div className="block text-justify">
+                  
+                 {isProcessing ? (
+                  <div className="block text-center py-2 text-sm text-gray-500">
+                    AI is processing...
+                  </div>
+                ) : (
+                  <div className="block text-justify">              
                     <div className="whitespace-pre-wrap break-words">
                       {item.output}
                     </div>
                   </div>
+                )}    
+
                 </div>
               </li>
             </React.Fragment>
