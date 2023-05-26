@@ -9,8 +9,10 @@ const Chatbot = () => {
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]); // New state for memory
   const conversationRef = useRef(null);
+  const synth = useRef(window.speechSynthesis);
+  const recognition = useRef(null);
 
-const programmingKeywords = [
+  const programmingKeywords = [
     "programming",
     "code",
     "coding",
@@ -59,7 +61,6 @@ const programmingKeywords = [
         "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
         "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
       },
-      //data: `{"query":"${input}"}`,
       data: `{"query":"${inputWithMemory}"}`,
     };
 
@@ -73,20 +74,27 @@ const programmingKeywords = [
       setConversation([...conversation, { input, output }]);
       document.title = input;
 
-      const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(botResponse);
-      synth.speak(utterance);
+      speak(utterance);
 
       // Store output in memory
       setMemory(prevMemory => [...prevMemory, output]);
-      
     } catch (error) {
       console.error(error);
     }
 
     setInput("");
   };
-  
+
+  const speak = (utterance) => {
+    synth.current.cancel();
+    synth.current.speak(utterance);
+  };
+
+  const handleResetMemory = () => {
+    setMemory([]); // Reset memory by setting it to an empty array
+  };
+
   useEffect(() => {
     if (conversationRef.current) {
       const conversationContainer = conversationRef.current;
@@ -103,7 +111,33 @@ const programmingKeywords = [
     }
   }, [conversation]);
 
-  
+  useEffect(() => {
+    if ('SpeechRecognition' in window) {
+      recognition.current = new window.SpeechRecognition();
+      recognition.current.continuous = true;
+      recognition.current.interimResults = false;
+      recognition.current.lang = 'en-US';
+
+      recognition.current.onresult = (event) => {
+        const transcript = Array.from(event.results)
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join('');
+
+        setInput(transcript);
+        recognition.current.stop();
+      };
+
+      recognition.current.onend = () => {
+        recognition.current.stop();
+      };
+
+      recognition.current.onerror = (event) => {
+        console.error(event.error);
+      };
+    }
+  }, []);
+
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
@@ -113,19 +147,18 @@ const programmingKeywords = [
     }
   };
 
-  const handleResetMemory = () => {
-    setMemory([]); // Reset memory by setting it to an empty array
-  };
-
-
+  useEffect(() => {
+    return () => {
+      synth.current.cancel();
+    };
+  }, []);
 
   return (
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
 
       <div className="flex-1 p-6 overflow-y-auto" style={{ width: "100%", maxWidth: "100vw" }}>
-
-        <ul className="space-y-2">
+        <ul className="space-y-2" ref={conversationRef}>
           {conversation.map((item, index) => (
             <React.Fragment key={index}>
               <li className="flex justify-start">
@@ -137,7 +170,7 @@ const programmingKeywords = [
                 <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
                   <div className="block text-justify">
                     <div className="whitespace-pre-wrap break-words">
-                      {item.output}
+                      {formatOutput(item)}
                     </div>
                   </div>
                 </div>
@@ -161,10 +194,17 @@ const programmingKeywords = [
           >
             Send
           </button>
+          <button
+            type="button"
+            onClick={() => recognition.current.start()}
+            className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none"
+          >
+            Voice
+          </button>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default Chatbot;
