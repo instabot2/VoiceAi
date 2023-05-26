@@ -150,7 +150,7 @@ const programmingKeywords = [
         <form onSubmit={handleSubmit} className="flex items-center">
           <input
             type="text"
-            placeholder="Ask something..."
+            placeholder="Ask something... or type 'reset session' to reset new chat."
             value={input}
             onChange={handleInput}
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
