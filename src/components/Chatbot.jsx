@@ -1,9 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+//import React, { useState, useEffect, useRef } from "react";
+
+import React, { useState } from "react";
+import { SpeechRecognition, SpeechSynthesis } from "react-speech";
+
 import axios from "axios";
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
-import { SpeechRecognition, SpeechSynthesis } from "react-speech";
+
 
 
 const Chatbot = () => {
