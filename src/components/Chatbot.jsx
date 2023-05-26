@@ -9,7 +9,27 @@ const Chatbot = () => {
   const [conversation, setConversation] = useState([]);
   const conversationRef = useRef(null);
 
-  const programmingKeywords = ["programming", "code", "coding", "program", "developer", "c", "java", "python", "html", "javascript", "react"];
+const programmingKeywords = [
+    "programming",
+    "code",
+    "coding",
+    "program",
+    "developer",
+    "c",
+    "java",
+    "python",
+    "html",
+    "javascript",
+    "react",
+    "ruby",
+    "php",
+    "swift",
+    "typescript",
+    "sql",
+    "go",
+    "rust",
+    "scala"
+  ];
 
   const handleInput = (e) => {
     setInput(e.target.value);
@@ -90,8 +110,6 @@ const Chatbot = () => {
                 </div>
               </li>
               <li className="flex justify-end">
-
-
                 <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
                   <div className="block text-justify">
                     <div className="whitespace-pre-wrap break-words">
@@ -99,9 +117,6 @@ const Chatbot = () => {
                     </div>
                   </div>
                 </div>
-
-
- 
               </li>
             </React.Fragment>
           ))}
