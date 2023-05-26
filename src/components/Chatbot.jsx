@@ -8,7 +8,7 @@ const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]);
-  const [isProcessing, setIsProcessing] = useState(false); // New state for processing status
+  const [isProcessing, setIsProcessing] = useState(false);
   const conversationRef = useRef(null);
 
   const programmingKeywords = [
@@ -62,7 +62,7 @@ const Chatbot = () => {
     };
 
     try {
-      setIsProcessing(true); // Set processing status to true
+      setIsProcessing(true);
 
       const response = await axios.request(options);
       const { conversation_id, response: botResponse } = response.data;
@@ -80,10 +80,10 @@ const Chatbot = () => {
 
       setConversation([...conversation, { input, output }]);
 
-      setIsProcessing(false); // Set processing status back to false
+      setIsProcessing(false);
     } catch (error) {
       console.error(error);
-      setIsProcessing(false); // Handle error and set processing status back to false
+      setIsProcessing(false);
     }
 
     setInput("");
@@ -98,7 +98,7 @@ const Chatbot = () => {
     handleNewMessage();
   }, [conversation]);
 
-  const formatOutput = (item) => {
+  const formatOutput = (item, index) => {
     if (
       programmingKeywords.some((keyword) =>
         item.input.toLowerCase().includes(keyword.toLowerCase())
@@ -111,7 +111,15 @@ const Chatbot = () => {
       );
       return <pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
     } else {
-      return <pre>{item.output}</pre>;
+      if (index === conversation.length - 1 && isProcessing) {
+        return <div className="block text-justify">AI is processing...</div>;
+      } else {
+        return (
+          <div className="block text-justify">
+            <div className="whitespace-pre-wrap break-words">{item.output}</div>
+          </div>
+        );
+      }
     }
   };
 
@@ -120,7 +128,6 @@ const Chatbot = () => {
   };
 
   return (
-
     <div className="h-screen flex flex-col">
       <Navbar
         name="VoiceAi"
@@ -141,17 +148,7 @@ const Chatbot = () => {
               </li>
               <li className="flex justify-end">
                 <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
-                  {isProcessing ? ( // Render "AI is processing" message if processing status is true
-                    <div className="block text-justify">
-                      AI is processing...
-                    </div>
-                  ) : (
-                    <div className="block text-justify">
-                      <div className="whitespace-pre-wrap break-words">
-                        {item.output}
-                      </div>
-                    </div>
-                  )}
+                  {formatOutput(item, index)}
                 </div>
               </li>
             </React.Fragment>
@@ -160,10 +157,7 @@ const Chatbot = () => {
       </div>
 
       <div className="sticky bottom-0 z-10 bg-white">
-        <form
-          onSubmit={handleSubmit}
-          className="flex items-center"
-        >
+        <form onSubmit={handleSubmit} className="flex items-center">
           <input
             type="text"
             placeholder="Ask something... or type 'reset session' to reset new chat."
