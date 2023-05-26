@@ -108,20 +108,16 @@ const programmingKeywords = [
     //}
   //}, [conversation]);
   
-  useEffect(() => {
-    if (conversationRef.current) {
-      const conversationContainer = conversationRef.current;
-      conversationContainer.scrollTop = conversationContainer.scrollHeight;
-    }
-  }, [conversation]);
-
   const handleNewMessage = () => {
-    if (conversationRef.current) {
-      const conversationContainer = conversationRef.current;
-      conversationContainer.scrollTop = conversationContainer.scrollHeight;
-    }
+    const conversationContainer = conversationRef.current;
+    conversationContainer.scrollTop = conversationContainer.scrollHeight;
   };
 
+  useEffect(() => {
+    handleNewMessage();
+  }, [conversation]);
+
+  
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
@@ -139,7 +135,7 @@ const programmingKeywords = [
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
 
-      <div className="flex-1 p-6 overflow-y-auto" style={{ width: "100%", maxWidth: "100vw" }}>
+      <div className="flex-1 p-6 overflow-y-auto" ref={conversationRef} style={{ width: "100%", maxWidth: "100vw" }}>
         <ul className="space-y-2">
           {conversation.map((item, index) => (
             <React.Fragment key={index}>
