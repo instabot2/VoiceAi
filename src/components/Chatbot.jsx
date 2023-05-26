@@ -45,6 +45,12 @@ const programmingKeywords = [
     // Display alert with captured memory data
     window.alert(`Captured Memory Data: ${memoryData}`);
 
+    if (input.toLowerCase() === "reset session") {
+      handleResetMemory();
+      setInput("");
+      return;
+    }
+
     const options = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
@@ -106,6 +112,12 @@ const programmingKeywords = [
       return <pre>{item.output}</pre>;
     }
   };
+
+  const handleResetMemory = () => {
+    setMemory([]); // Reset memory by setting it to an empty array
+  };
+
+
 
   return (
     <div className="h-screen flex flex-col">
