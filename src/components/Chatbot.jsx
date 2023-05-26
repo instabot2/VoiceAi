@@ -39,6 +39,12 @@ const programmingKeywords = [
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Get data from memory and concatenate with input
+    const memoryData = memory.join(" ");
+    const inputWithMemory = `${memoryData} ${input}`;
+    // Display alert with captured memory data
+    window.alert(`Captured Memory Data: ${memoryData}`);
+
     const options = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
@@ -47,7 +53,8 @@ const programmingKeywords = [
         "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
         "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
       },
-      data: `{"query":"${input}"}`,
+      //data: `{"query":"${input}"}`,
+      data: `{"query":"${inputWithMemory}"}`,
     };
 
     try {
