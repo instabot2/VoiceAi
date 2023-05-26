@@ -100,6 +100,15 @@ const Chatbot = () => {
                   </div>
                 </div>
 
+                <div className="relative max-w-xl h-auto px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+                  <div className="block text-justify">
+                    <div className="whitespace-pre-wrap">
+                      {formatOutput(item)}
+                    </div>
+                  </div>
+                </div>
+                    
+                       
                      
               </li>
             </React.Fragment>
