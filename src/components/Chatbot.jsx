@@ -7,11 +7,10 @@ import Navbar from "./Navbar";
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
-  const [memory, setMemory] = useState([]);
-  const [isProcessing, setIsProcessing] = useState(false); // New state for processing
+  const [memory, setMemory] = useState([]); // New state for memory
   const conversationRef = useRef(null);
 
-  const programmingKeywords = [
+const programmingKeywords = [
     "programming",
     "code",
     "coding",
@@ -40,16 +39,17 @@ const Chatbot = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Get data from memory and concatenate with input
     const memoryData = memory.join(" ");
     const inputWithMemory = `${memoryData} ${input}`;
+    // Display alert with captured memory data
+    window.alert(`Captured Memory Data: ${inputWithMemory}`);
 
     if (input.toLowerCase() === "reset session") {
       handleResetMemory();
       setInput("");
       return;
     }
-
-    setIsProcessing(true); // Set processing state to true
 
     const options = {
       method: "POST",
@@ -59,6 +59,7 @@ const Chatbot = () => {
         "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
         "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
       },
+      //data: `{"query":"${input}"}`,
       data: `{"query":"${inputWithMemory}"}`,
     };
 
@@ -69,17 +70,23 @@ const Chatbot = () => {
       const containsProgrammingKeyword = programmingKeywords.some(keyword => input.toLowerCase().includes(keyword));
       const output = containsProgrammingKeyword ? `${botResponse}` : botResponse;
 
-      setMemory(prevMemory => [...prevMemory, output]);
       setConversation([...conversation, { input, output }]);
-      setIsProcessing(false); // Set processing state to false
+      document.title = input;
 
       const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(botResponse);
       synth.speak(utterance);
 
+      // Store output in memory
+      setMemory(prevMemory => [...prevMemory, output]);
+
+      // Update conversation state with new message
+      setConversation([...conversation, { input, output }]);
+      // Scroll conversation container to display new message
+      handleNewMessage();
+
     } catch (error) {
       console.error(error);
-      setIsProcessing(false); // Set processing state to false
     }
 
     setInput("");
@@ -104,7 +111,7 @@ const Chatbot = () => {
   };
 
   const handleResetMemory = () => {
-    setMemory([]);
+    setMemory([]); // Reset memory by setting it to an empty array
   };
 
   return (
@@ -124,22 +131,13 @@ const Chatbot = () => {
                 <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
                   <div className="block text-justify">
                     <div className="whitespace-pre-wrap break-words">
-                      {formatOutput(item)}
+                      {item.output}
                     </div>
                   </div>
                 </div>
               </li>
             </React.Fragment>
           ))}
-          {isProcessing && ( // Display processing message if isProcessing is true
-            <li className="flex justify-end">
-              <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
-                <div className="block text-justify">
-                  <div className="whitespace-pre-wrap break-words">Processing...</div>
-                </div>
-              </div>
-            </li>
-          )}
         </ul>
       </div>
 
