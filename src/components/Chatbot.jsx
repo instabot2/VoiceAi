@@ -92,18 +92,15 @@ const Chatbot = () => {
               <li className="flex justify-end">
 
 
-
                 <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
-                  <div className="block text-justify overflow-hidden flex flex-grow">
+                  <div className="block text-justify overflow-hidden max-h-full">
                     <div className="whitespace-pre-wrap">
-                      <div style={{ overflowWrap: 'break-word', wordWrap: 'break-word', whiteSpace: 'pre-line' }}>
-                        {formatOutput(item)}
-                      </div>
+                      {formatOutput(item)}
                     </div>
                   </div>
                 </div>
-             
-                     
+
+               
               </li>
             </React.Fragment>
           ))}
