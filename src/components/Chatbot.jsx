@@ -92,10 +92,9 @@ const Chatbot = () => {
               <li className="flex justify-end">
 
 
-
-                <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
-                  <div className="block text-justify max-h-500">
-                    <div className="whitespace-pre-wrap">
+                <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-hidden">
+                  <div className="block text-justify">
+                    <div className="whitespace-normal break-words">
                       {formatOutput(item)}
                     </div>
                   </div>
