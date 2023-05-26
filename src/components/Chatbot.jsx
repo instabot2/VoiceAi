@@ -111,6 +111,16 @@ const Chatbot = () => {
     }
   };
 
+  const formatOutput = (item) => {
+    if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
+      const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
+      return <pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
+    } else {
+      return <pre>{item.output}</pre>;
+    }
+  };
+
+
   const handleResetMemory = () => {
     setMemory([]);
   };
@@ -132,9 +142,9 @@ const Chatbot = () => {
                 <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
                   <div className="block text-justify">
                     <div className="whitespace-pre-wrap break-words">
-                      {formatOutput(item)}
+                      {item.output}
                     </div>
-                  </div>
+                  </div>                    
                 </div>
               </li>
             </React.Fragment>
