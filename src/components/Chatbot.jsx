@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { SpeechRecognition, SpeechSynthesis } from "react-speech";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import Prism from "prismjs";
-import "prismjs/themes/prism-tomorrow.css";
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
-  const [memory, setMemory] = useState([]);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [memory, setMemory] = useState([]); // New state for memory
+  const [isProcessing, setIsProcessing] = useState(false); // State for processing message
+  const conversationRef = useRef(null);
 
   const programmingKeywords = [
     "programming",
@@ -40,7 +40,11 @@ const Chatbot = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const inputWithMemory = `${memory.join(" ")} ${input}`;
+    // Get data from memory and concatenate with input
+    const memoryData = memory.join(" ");
+    const inputWithMemory = `${memoryData} ${input}`;
+    // Display alert with captured memory data
+    //window.alert(`Captured Memory Data: ${inputWithMemory}`);
 
     if (input.toLowerCase() === "reset session") {
       handleResetMemory();
@@ -48,7 +52,7 @@ const Chatbot = () => {
       return;
     }
 
-    setIsProcessing(true);
+    setIsProcessing(true); // Show processing message
 
     const options = {
       method: "POST",
@@ -56,47 +60,51 @@ const Chatbot = () => {
       headers: {
         "content-type": "application/json",
         "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
-        "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com"
+        "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
       },
-      data: `{"query":"${inputWithMemory}"}`
+      data: `{"query":"${inputWithMemory}"}`,
     };
 
     try {
       const response = await axios.request(options);
       const { conversation_id, response: botResponse } = response.data;
 
-      const containsProgrammingKeyword = programmingKeywords.some((keyword) =>
-        input.toLowerCase().includes(keyword)
-      );
+      const containsProgrammingKeyword = programmingKeywords.some(keyword => input.toLowerCase().includes(keyword));
       const output = containsProgrammingKeyword ? `${botResponse}` : botResponse;
 
-      setMemory((prevMemory) => [...prevMemory, output]);
+      setMemory(prevMemory => [...prevMemory, output]);
 
       setConversation([...conversation, { input, output }]);
       document.title = input;
 
-      SpeechSynthesis.synthesize(output); // Call the speech synthesis function
+      const synth = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(botResponse);
+      synth.speak(utterance);
 
-      setIsProcessing(false);
+      setIsProcessing(false); // Hide processing message
+
+      handleNewMessage();
+
     } catch (error) {
       console.error(error);
-      setIsProcessing(false);
+      setIsProcessing(false); // Hide processing message
     }
 
     setInput("");
   };
+    
+  const handleNewMessage = () => {
+    const conversationContainer = conversationRef.current;
+    conversationContainer.scrollTop = conversationContainer.scrollHeight;
+  };
 
+  useEffect(() => {
+    handleNewMessage();
+  }, [conversation]);
+ 
   const formatOutput = (item) => {
-    if (
-      programmingKeywords.some((keyword) =>
-        item.input.toLowerCase().includes(keyword.toLowerCase())
-      )
-    ) {
-      const highlightedCode = Prism.highlight(
-        item.output,
-        Prism.languages.javascript,
-        "javascript"
-      );
+    if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
+      const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
       return <pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
     } else {
       return <pre>{item.output}</pre>;
@@ -111,7 +119,7 @@ const Chatbot = () => {
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
 
-      <div className="flex-1 p-6 overflow-y-auto" style={{ width: "100%", maxWidth: "100vw" }}>
+      <div className="flex-1 p-6 overflow-y-auto" ref={conversationRef} style={{ width: "100%", maxWidth: "100vw" }}>
         <ul className="space-y-2">
           {conversation.map((item, index) => (
             <React.Fragment key={index}>
@@ -126,7 +134,7 @@ const Chatbot = () => {
                     <div className="whitespace-pre-wrap break-words">
                       {item.output}
                     </div>
-                  </div>
+                  </div>                    
                 </div>
               </li>
             </React.Fragment>
@@ -162,21 +170,8 @@ const Chatbot = () => {
           </button>
         </form>
       </div>
-
-      <SpeechRecognition
-        lang="en-US"
-        continuous={true}
-        onResult={(result) => setInput(result)}
-        style={{ display: "none" }}
-      />
-
-      <SpeechSynthesis
-        lang="en-US"
-        onEnd={() => console.log("Speech synthesis ended")}
-        style={{ display: "none" }}
-      />
     </div>
   );
-};
+}
 
 export default Chatbot;
