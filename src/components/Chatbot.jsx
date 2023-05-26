@@ -90,11 +90,14 @@ const Chatbot = () => {
                 </div>
               </li>
               <li className="flex justify-end">
-                <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+
+                <div className="relative w-96 px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
                   <span className="block text-justify">
                     {formatOutput(item)}
                   </span>
                 </div>
+
+                     
               </li>
             </React.Fragment>
           ))}
