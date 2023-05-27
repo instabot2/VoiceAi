@@ -42,7 +42,7 @@ const About = () => {
                                 />
                                 <div className="flex-grow sm:pl-8">
                                     <h2 className="title-font font-medium text-lg text-white">
-                                        AI 1st
+                                        AI 1st Github
                                     </h2>
                                     <h3 className="text-gray-500 mb-3">Web Developer</h3>
                                     <p className="mb-4 text-justify">
@@ -101,7 +101,7 @@ const About = () => {
                                 />
                                 <div className="flex-grow sm:pl-8">
                                     <h2 className="title-font font-medium text-lg text-white">
-                                        Ai 2nd
+                                        Ai 2nd GPT-3.5 Turbo
                                     </h2>
                                     <h3 className="text-gray-500 mb-3">Web Developer</h3>
                                     <p className="mb-4 text-justify">
