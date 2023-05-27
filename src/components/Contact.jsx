@@ -34,7 +34,7 @@ const Contact = () => {
                         Address
                       </h2>
                       <h2 className="text-gray-800 text-base md:text-lg leading-8 tracking-wider mt-2">
-                        Postmaster, Post Office
+                        Shah Alam, Selangor Malaysia
                       </h2>
                     </div>
                     <div className="mt-4 md:mt-8">
@@ -42,7 +42,7 @@ const Contact = () => {
                         Contact
                       </h2>
                       <h2 className="text-gray-800 text-base md:text-lg leading-8 tracking-wider mt-2">
-                        +00 0000000(Phone)
+                        +60 192393364(Whatsapp)
                       </h2>
                     </div>
                     <div className="mt-4 md:mt-8">
