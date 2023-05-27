@@ -7,7 +7,7 @@ const Contact = () => {
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
       <div className="py-4 lg:py-8 relative">
         <img
-          src="https://cdn.tuk.dev/assets/templates/radian/Back_Image.png"
+          src=""
           className="h-2/5 lg:h-full w-full lg:w-1/2 absolute inset-0 object-cover object-center xl:block hidden"
           alt="map"
         />
