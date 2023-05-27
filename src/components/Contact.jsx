@@ -15,7 +15,7 @@ const Contact = () => {
           <div className="flex flex-wrap xl:mx-auto xl:container">
             <div className="w-full relative lg:w-1/2 xl:mt-10 mb-10 2xl:pr-24 2xl:pl-0 xl:pl-12 pl-0">
               <img
-                src="https://cdn.tuk.dev/assets/templates/radian/Back_Image.png"
+                src=""
                 className="h-full w-full xl:w-1/2 absolute inset-0 bg-cover bg-center xl:hidden"
                 alt="map"
               />
