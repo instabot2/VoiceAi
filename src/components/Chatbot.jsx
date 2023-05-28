@@ -4,6 +4,9 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
+import audioFile from "../components/door.mp3"; // Replace "your-audio-file.mp3" with the actual file name
+
+
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
@@ -85,9 +88,9 @@ const Chatbot = () => {
         const utterance = new SpeechSynthesisUtterance(botResponse);
         synth.speak(utterance);
 
-        // Set the audio source and play the audio
+        // Play the audio from the imported MP3 file
         if (audioRef.current) {
-          audioRef.current.src = './door.mp3';
+          audioRef.current.src = audioFile;
           audioRef.current.play();
         }
       } else if ('speak' in window) {
