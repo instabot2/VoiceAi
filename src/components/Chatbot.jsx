@@ -13,9 +13,15 @@ const Chatbot = () => {
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
+  
   const audioRef = useRef(null); // Add this line to create the audioRef
-
-
+  const handleAudioPlay = () => {
+    if (audioRef.current) {
+      audioRef.current.src = audioFile;
+      audioRef.current.play();
+    }
+  };
+  
   const programmingKeywords = [
     "programming",
     "code",
@@ -188,6 +194,8 @@ const Chatbot = () => {
           </button>
         </form>
       </div>
+
+      <button onClick={handleAudioPlay}>Play Audio</button>
 
       {/* Add the <audio> element and set the ref */}
       <audio ref={audioRef} />
