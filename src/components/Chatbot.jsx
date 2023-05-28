@@ -95,16 +95,15 @@ const Chatbot = () => {
         synth.speak(utterance);
 
         // Play the audio from the imported MP3 file
-        if (audioRef.current) {
-          audioRef.current.src = audioFile;
-          audioRef.current.load(); // Load the audio
-          audioRef.current.play(); // Play the audio
-        }
+        //if (audioRef.current) {
+          //audioRef.current.src = audioFile;
+          //audioRef.current.load(); // Load the audio
+          //audioRef.current.play(); // Play the audio
+        //}
       } else if ('speak' in window) {
         // Android and iOS TTS
         window.speak(botResponse);
       }
-      
       
       setIsProcessing(false); // Hide processing message
 
