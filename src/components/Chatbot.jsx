@@ -18,9 +18,11 @@ const Chatbot = () => {
   const handleAudioPlay = () => {
     if (audioRef.current) {
       audioRef.current.src = audioFile;
-      audioRef.current.play();
+      audioRef.current.load(); // Load the audio
+      audioRef.current.play(); // Play the audio
     }
   };
+  
   
   const programmingKeywords = [
     "programming",
@@ -97,7 +99,8 @@ const Chatbot = () => {
         // Play the audio from the imported MP3 file
         if (audioRef.current) {
           audioRef.current.src = audioFile;
-          audioRef.current.play();
+          audioRef.current.load(); // Load the audio
+          audioRef.current.play(); // Play the audio
         }
       } else if ('speak' in window) {
         // Android and iOS TTS
