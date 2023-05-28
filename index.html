@@ -32,9 +32,10 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     
+    
     <textarea id="text" cols="45" rows="3">Hello world</textarea>
     <select id="voiceselection"></select> 
-    <input 
+    <button 
       onclick="responsiveVoice.speak($('#text').val(),$('#voiceselection').val());" 
       type="button" 
       value="Play" 
