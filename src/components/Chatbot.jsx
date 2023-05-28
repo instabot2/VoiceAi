@@ -7,14 +7,20 @@ import Navbar from "./Navbar";
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
-  const [memory, setMemory] = useState([]); // New state for memory
-  const [isProcessing, setIsProcessing] = useState(false); // State for processing message
+  const [memory, setMemory] = useState([]);
+  const [isProcessing, setIsProcessing] = useState(false);
   const conversationRef = useRef(null);
 
   const handleTextToSpeech = () => {
     const text = input;
-    const voiceSelection = $('#voiceselection').val();
-    responsiveVoice.speak(text, voiceSelection);
+    const voiceSelection = document.getElementById('voiceselection').value;
+    if ('speechSynthesis' in window) {
+      const synth = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(text);
+      synth.speak(utterance);
+    } else {
+      responsiveVoice.speak(text, voiceSelection);
+    }
   };
   
   const programmingKeywords = [
@@ -46,11 +52,8 @@ const Chatbot = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Get data from memory and concatenate with input
     const memoryData = memory.join(" ");
     const inputWithMemory = `${memoryData} ${input}`;
-    // Display alert with captured memory data
-    //window.alert(`Captured Memory Data: ${inputWithMemory}`);
 
     if (input.toLowerCase() === "reset session") {
       handleResetMemory();
@@ -58,7 +61,7 @@ const Chatbot = () => {
       return;
     }
 
-    setIsProcessing(true); // Show processing message
+    setIsProcessing(true);
 
     const options = {
       method: "POST",
@@ -83,27 +86,21 @@ const Chatbot = () => {
       setConversation([...conversation, { input, output }]);
       document.title = input;
 
-      //const synth = window.speechSynthesis;
-      //const utterance = new SpeechSynthesisUtterance(botResponse);
-      //synth.speak(utterance);
-      
-      // Speech synthesis
       if ('speechSynthesis' in window) {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
         synth.speak(utterance);
       } else if ('speak' in window) {
-        // Android and iOS TTS
         window.speak(botResponse);
       }
-      
-      setIsProcessing(false); // Hide processing message
+
+      setIsProcessing(false);
 
       handleNewMessage();
 
     } catch (error) {
       console.error(error);
-      setIsProcessing(false); // Hide processing message
+      setIsProcessing(false);
     }
 
     setInput("");
