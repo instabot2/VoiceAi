@@ -118,6 +118,12 @@ const Chatbot = () => {
     setInput("");
   };
     
+  const handleTextToSpeech = () => {
+    const text = input;
+    const voiceSelection = $('#voiceselection').val();
+    responsiveVoice.speak(text, voiceSelection);
+  };
+
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
     conversationContainer.scrollTop = conversationContainer.scrollHeight;
@@ -126,12 +132,13 @@ const Chatbot = () => {
   useEffect(() => {
     handleNewMessage();
   }, [conversation]);
- 
-  const handleTextToSpeech = () => {
-    const text = $('#text').val();
-    const voiceSelection = $('#voiceselection').val();
-    responsiveVoice.speak(text, voiceSelection);
-  };
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.src = audioFile;
+      audioRef.current.load();
+    }
+  }, []);
   
   
   const formatOutput = (item) => {
