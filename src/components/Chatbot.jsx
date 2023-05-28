@@ -87,7 +87,7 @@ const Chatbot = () => {
 
         // Set the audio source and play the audio
         if (audioRef.current) {
-          audioRef.current.src = 'path/to/audio/file.mp3';
+          audioRef.current.src = './audio/file.mp3';
           audioRef.current.play();
         }
       } else if ('speak' in window) {
