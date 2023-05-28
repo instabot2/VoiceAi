@@ -6,7 +6,6 @@ import Navbar from "./Navbar";
 
 import audioFile from "../components/door.mp3"; // Replace "your-audio-file.mp3" with the actual file name
 import { speak, getVoices } from 'responsivevoice';
-import $ from 'jquery';
 
 
 const Chatbot = () => {
