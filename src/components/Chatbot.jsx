@@ -22,7 +22,6 @@ const Chatbot = () => {
     }
   };
   
-  
   const programmingKeywords = [
     "programming",
     "code",
@@ -128,6 +127,13 @@ const Chatbot = () => {
     handleNewMessage();
   }, [conversation]);
  
+  const handleTextToSpeech = () => {
+    const text = $('#text').val();
+    const voiceSelection = $('#voiceselection').val();
+    responsiveVoice.speak(text, voiceSelection);
+  };
+  
+  
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
@@ -201,7 +207,16 @@ const Chatbot = () => {
 
       {/* Add the <audio> element and set the ref */}
       <audio ref={audioRef} />
-
+        
+      <div>
+        <textarea id="text" cols="45" rows="3" value={input}></textarea>
+        <select id="voiceselection"></select>
+        <input
+          onClick={handleTextToSpeech}
+          type="button"
+          value="Play"
+        />
+      </div>
         
 
 
