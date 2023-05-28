@@ -7,29 +7,10 @@ import Navbar from "./Navbar";
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
-  const [memory, setMemory] = useState([]);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [memory, setMemory] = useState([]); // New state for memory
+  const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
-  const handleTextToSpeech = () => {
-    const text = input;
-    const voiceSelection = document.getElementById('voiceselection').value;
-
-    if ('speechSynthesis' in window) {
-      const synth = window.speechSynthesis;
-
-      synth.addEventListener('voiceschanged', () => {
-        const voices = synth.getVoices();
-        console.log(voices); // Log the voices array
-        const selectedVoice = voices.find(voice => voice.name === voiceSelection);
-        // Rest of the code...
-      });
-    } else {
-      responsiveVoice.speak(text, voiceSelection);
-    }
-  };
-
-  
   const programmingKeywords = [
     "programming",
     "code",
@@ -59,8 +40,11 @@ const Chatbot = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Get data from memory and concatenate with input
     const memoryData = memory.join(" ");
     const inputWithMemory = `${memoryData} ${input}`;
+    // Display alert with captured memory data
+    //window.alert(`Captured Memory Data: ${inputWithMemory}`);
 
     if (input.toLowerCase() === "reset session") {
       handleResetMemory();
@@ -68,7 +52,7 @@ const Chatbot = () => {
       return;
     }
 
-    setIsProcessing(true);
+    setIsProcessing(true); // Show processing message
 
     const options = {
       method: "POST",
@@ -93,21 +77,27 @@ const Chatbot = () => {
       setConversation([...conversation, { input, output }]);
       document.title = input;
 
+      //const synth = window.speechSynthesis;
+      //const utterance = new SpeechSynthesisUtterance(botResponse);
+      //synth.speak(utterance);
+      
+      // Speech synthesis
       if ('speechSynthesis' in window) {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
         synth.speak(utterance);
       } else if ('speak' in window) {
+        // Android and iOS TTS
         window.speak(botResponse);
       }
-
-      setIsProcessing(false);
+      
+      setIsProcessing(false); // Hide processing message
 
       handleNewMessage();
 
     } catch (error) {
       console.error(error);
-      setIsProcessing(false);
+      setIsProcessing(false); // Hide processing message
     }
 
     setInput("");
@@ -188,11 +178,6 @@ const Chatbot = () => {
           >
             Send
           </button>
-
-          <button onClick={handleTextToSpeech} className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none">
-            Text to Speech
-          </button>
-
         </form>
       </div>
     </div>
