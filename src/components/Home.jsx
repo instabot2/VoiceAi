@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
@@ -6,12 +6,37 @@ import Footer from './Footer';
 const Home = () => {
   const [inputText, setInputText] = useState('');
 
+  useEffect(() => {
+    const script1 = document.createElement('script');
+    script1.src = 'https://code.responsivevoice.org/responsivevoice.js';
+    script1.async = true;
+    document.body.appendChild(script1);
+
+    const script2 = document.createElement('script');
+    script2.src = 'https://code.jquery.com/jquery-2.1.4.min.js';
+    script2.async = true;
+    document.body.appendChild(script2);
+
+    return () => {
+      document.body.removeChild(script1);
+      document.body.removeChild(script2);
+    };
+  }, []);
+
+  useEffect(() => {
+    const voicelist = responsiveVoice.getVoices();
+    const vselect = $("#voiceselection");
+    $.each(voicelist, function () {
+      vselect.append($("<option />").val(this.name).text(this.name));
+    });
+  }, []);
+
   const handleInputChange = (e) => {
     setInputText(e.target.value);
   };
 
   const handleButtonClick = () => {
-    responsiveVoice.speak(inputText); // Use the input text as the speech content
+    responsiveVoice.speak(inputText, $('#voiceselection').val());
   };
 
   return (
@@ -51,20 +76,21 @@ const Home = () => {
                   A chatbot powered by the GPT-3.5 architecture. I am capable of communicating with you using natural language processing and machine learning algorithms.
                 </p>
                 <div>
-                  <input
-                    type="text"
+                  <textarea
+                    id="text"
+                    cols="45"
+                    rows="3"
                     value={inputText}
                     onChange={handleInputChange}
                     className="border border-gray-300 px-4 py-2 rounded-md mr-2"
                     placeholder="Enter your text"
-                  />
-                  <button
-                    type="button"
+                  ></textarea>
+                  <select id="voiceselection"></select>
+                  <input
                     onClick={handleButtonClick}
-                    className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                  >
-                    Submit
-                  </button>
+                    type="button"
+                    value="Play"
+                  />
                 </div>
                 <Link to="./Chatbot">
                   <button
@@ -80,7 +106,6 @@ const Home = () => {
         </div>
       </section>
       <Footer />
-      <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
     </>
   );
 };
