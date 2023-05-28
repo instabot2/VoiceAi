@@ -14,14 +14,24 @@ const Chatbot = () => {
   const handleTextToSpeech = () => {
     const text = input;
     const voiceSelection = document.getElementById('voiceselection').value;
+
     if ('speechSynthesis' in window) {
       const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(text);
+
+      // Set the selected voice
+      const voices = synth.getVoices();
+      const selectedVoice = voices.find(voice => voice.name === voiceSelection);
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      }
+
       synth.speak(utterance);
     } else {
       responsiveVoice.speak(text, voiceSelection);
     }
   };
+
   
   const programmingKeywords = [
     "programming",
