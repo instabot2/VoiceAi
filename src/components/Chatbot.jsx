@@ -10,6 +10,8 @@ const Chatbot = () => {
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
+  const audioRef = useRef(null); // Add this line to create the audioRef
+
 
   const programmingKeywords = [
     "programming",
