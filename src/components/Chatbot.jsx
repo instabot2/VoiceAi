@@ -79,19 +79,22 @@ const Chatbot = () => {
       setConversation([...conversation, { input, output }]);
       document.title = input;
 
-      //const synth = window.speechSynthesis;
-      //const utterance = new SpeechSynthesisUtterance(botResponse);
-      //synth.speak(utterance);
-      
       // Speech synthesis
       if ('speechSynthesis' in window) {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
         synth.speak(utterance);
+
+        // Set the audio source and play the audio
+        if (audioRef.current) {
+          audioRef.current.src = 'path/to/audio/file.mp3';
+          audioRef.current.play();
+        }
       } else if ('speak' in window) {
         // Android and iOS TTS
         window.speak(botResponse);
       }
+      
       
       setIsProcessing(false); // Hide processing message
 
@@ -182,6 +185,10 @@ const Chatbot = () => {
           </button>
         </form>
       </div>
+
+      {/* Add the <audio> element and set the ref */}
+      <audio ref={audioRef} />
+
     </div>
   );
 }
