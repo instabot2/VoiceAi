@@ -4,22 +4,17 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
-import audioFile from "../components/door.mp3"; // Replace "your-audio-file.mp3" with the actual file name
-
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
-  
-  const audioRef = useRef(null); // Add this line to create the audioRef
-  const handleAudioPlay = () => {
-    if (audioRef.current) {
-      audioRef.current.src = audioFile;
-      audioRef.current.load(); // Load the audio
-      audioRef.current.play(); // Play the audio
-    }
+
+  const handleTextToSpeech = () => {
+    const text = input;
+    const voiceSelection = $('#voiceselection').val();
+    responsiveVoice.speak(text, voiceSelection);
   };
   
   const programmingKeywords = [
@@ -88,18 +83,15 @@ const Chatbot = () => {
       setConversation([...conversation, { input, output }]);
       document.title = input;
 
+      //const synth = window.speechSynthesis;
+      //const utterance = new SpeechSynthesisUtterance(botResponse);
+      //synth.speak(utterance);
+      
       // Speech synthesis
       if ('speechSynthesis' in window) {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
         synth.speak(utterance);
-
-        // Play the audio from the imported MP3 file
-        //if (audioRef.current) {
-          //audioRef.current.src = audioFile;
-          //audioRef.current.load(); // Load the audio
-          //audioRef.current.play(); // Play the audio
-        //}
       } else if ('speak' in window) {
         // Android and iOS TTS
         window.speak(botResponse);
@@ -117,12 +109,6 @@ const Chatbot = () => {
     setInput("");
   };
     
-  const handleTextToSpeech = () => {
-    const text = input;
-    const voiceSelection = $('#voiceselection').val();
-    responsiveVoice.speak(text, voiceSelection);
-  };
-
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
     conversationContainer.scrollTop = conversationContainer.scrollHeight;
@@ -131,15 +117,7 @@ const Chatbot = () => {
   useEffect(() => {
     handleNewMessage();
   }, [conversation]);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.src = audioFile;
-      audioRef.current.load();
-    }
-  }, []);
-  
-  
+ 
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
@@ -206,27 +184,13 @@ const Chatbot = () => {
           >
             Send
           </button>
+
+          <button onClick={handleTextToSpeech} className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none">
+            Text to Speech
+          </button>
+
         </form>
       </div>
-
-      <button onClick={handleAudioPlay}>Play Audio</button>
-
-      {/* Add the <audio> element and set the ref */}
-      <audio ref={audioRef} />
-        
-      <div>
-        <textarea id="text" cols="45" rows="3" value={input}></textarea>
-        <select id="voiceselection"></select>
-        <input
-          onClick={handleTextToSpeech}
-          type="button"
-          value="Play"
-        />
-      </div>
-        
-
-
-
     </div>
   );
 }
