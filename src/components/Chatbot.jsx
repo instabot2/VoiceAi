@@ -18,16 +18,11 @@ const Chatbot = () => {
     if ('speechSynthesis' in window) {
       const synth = window.speechSynthesis;
 
-      // Wait for voices to be loaded
       synth.addEventListener('voiceschanged', () => {
         const voices = synth.getVoices();
+        console.log(voices); // Log the voices array
         const selectedVoice = voices.find(voice => voice.name === voiceSelection);
-
-        if (selectedVoice) {
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.voice = selectedVoice;
-          synth.speak(utterance);
-        }
+        // Rest of the code...
       });
     } else {
       responsiveVoice.speak(text, voiceSelection);
