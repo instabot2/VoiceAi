@@ -17,16 +17,18 @@ const Chatbot = () => {
 
     if ('speechSynthesis' in window) {
       const synth = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance(text);
 
-      // Set the selected voice
-      const voices = synth.getVoices();
-      const selectedVoice = voices.find(voice => voice.name === voiceSelection);
-      if (selectedVoice) {
-        utterance.voice = selectedVoice;
-      }
+      // Wait for voices to be loaded
+      synth.addEventListener('voiceschanged', () => {
+        const voices = synth.getVoices();
+        const selectedVoice = voices.find(voice => voice.name === voiceSelection);
 
-      synth.speak(utterance);
+        if (selectedVoice) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.voice = selectedVoice;
+          synth.speak(utterance);
+        }
+      });
     } else {
       responsiveVoice.speak(text, voiceSelection);
     }
