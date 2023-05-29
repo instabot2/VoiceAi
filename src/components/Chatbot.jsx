@@ -80,7 +80,7 @@ const Chatbot = () => {
 
       if ('speechSynthesis' in window) {
         alert('speechSynthesis.');
-        
+
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
 
@@ -91,6 +91,7 @@ const Chatbot = () => {
           synth.addEventListener('voiceschanged', function () {
             // Get the available voices
             const voices = synth.getVoices();
+            alert('Available voices: ' + voices.length);
 
             // Set the voice to the desired TTS engine (if available)
             const desiredVoice = voices.find(voice => voice.name === 'MyTTS');
@@ -117,7 +118,7 @@ const Chatbot = () => {
         if ('speak' in window) {
           // Android and iOS TTS
           window.speak(text);
-          alert('success.');
+          alert('Success.');
         } else {
           // Handle case where TTS is not supported
           console.log('Text-to-speech is not supported on this device.');
