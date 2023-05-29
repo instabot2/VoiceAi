@@ -79,6 +79,8 @@ const Chatbot = () => {
 
 
       if ('speechSynthesis' in window) {
+        alert('speechSynthesis.');
+        
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
 
