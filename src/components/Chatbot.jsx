@@ -84,16 +84,20 @@ const Chatbot = () => {
         synth.speak(utterance);
         alert("in window.");
       } else if ('speak' in window) {
-        // Check if the browser is on Android
-        if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
-          // Android TTS
+        // Check if the browser is on Android or running in standalone mode
+        if (
+          navigator.userAgent.toLowerCase().indexOf("android") > -1 ||
+          (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
+        ) {
+          // Android TTS or standalone mode TTS
           window.speak(botResponse);
-          alert("in Android.");
+          alert("in Android or standalone mode.");
         } else {
           // iOS TTS or other platforms
           alert("Text-to-speech is not supported on this device.");
         }
       }
+
       alert("User Agent: " + navigator.userAgent);
 
 
