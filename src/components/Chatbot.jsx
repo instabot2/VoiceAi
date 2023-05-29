@@ -77,20 +77,24 @@ const Chatbot = () => {
       setConversation([...conversation, { input, output }]);
       document.title = input;
 
-      //const synth = window.speechSynthesis;
-      //const utterance = new SpeechSynthesisUtterance(botResponse);
-      //synth.speak(utterance);
-      
+
       // Speech synthesis
       if ('speechSynthesis' in window) {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
+
+        // Configure additional properties of the utterance (optional)
+        utterance.lang = 'en-US'; // Set the language
+        utterance.volume = 1.0; // Set the volume (0.0 to 1.0)
+        utterance.rate = 1.0; // Set the rate (0.1 to 10.0)
+
         synth.speak(utterance);
       } else if ('speak' in window) {
         // Android and iOS TTS
         window.speak(botResponse);
       }
-      
+
+
       setIsProcessing(false); // Hide processing message
 
       handleNewMessage();
