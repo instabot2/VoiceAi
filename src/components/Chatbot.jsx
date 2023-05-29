@@ -78,7 +78,6 @@ const Chatbot = () => {
       document.title = input;
 
 
-      // Speech synthesis
       if ('speechSynthesis' in window) {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
@@ -107,7 +106,6 @@ const Chatbot = () => {
         // Android and iOS TTS
         window.speak(botResponse);
       }
-     
 
 
       
