@@ -94,9 +94,9 @@ const Chatbot = () => {
           alert("Text-to-speech is not supported on this device.");
         }
       }
+      alert("User Agent: " + navigator.userAgent);
 
-      
-      
+
       
       
       
