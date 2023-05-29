@@ -78,14 +78,20 @@ const Chatbot = () => {
       document.title = input;
 
 
-      // Speech synthesis
       if ('speechSynthesis' in window) {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
         synth.speak(utterance);
       } else if ('speak' in window) {
-        // Android and iOS TTS
-        window.speak(botResponse);
+        // Check if the browser is on Android
+        if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+          // Android TTS
+          window.speak(botResponse);
+          alert("Android.");
+        } else {
+          // iOS TTS or other platforms
+          alert("Text-to-speech is not supported on this device.");
+        }
       }
 
       
