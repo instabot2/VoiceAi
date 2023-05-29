@@ -107,6 +107,7 @@ const Chatbot = () => {
       } else {
         // Fallback for Android and iOS TTS
         speakUsingFallbackTTS(botResponse);
+        alert('speakUsingFallbackTTS.');
       }
 
       function speakUsingFallbackTTS(text) {
