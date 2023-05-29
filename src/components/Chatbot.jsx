@@ -86,6 +86,7 @@ const Chatbot = () => {
 
         // Check if voices are available
         if ('getVoices' in synth) {
+          alert('getVoices.');
           // Wait for voices to be loaded before setting the voice
           synth.addEventListener('voiceschanged', function () {
             // Get the available voices
