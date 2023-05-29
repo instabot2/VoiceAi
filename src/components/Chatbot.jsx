@@ -111,6 +111,7 @@ const Chatbot = () => {
         if ('speak' in window) {
           // Android and iOS TTS
           window.speak(text);
+          alert('success.');
         } else {
           // Handle case where TTS is not supported
           console.log('Text-to-speech is not supported on this device.');
