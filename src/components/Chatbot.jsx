@@ -102,6 +102,7 @@ const Chatbot = () => {
         } else {
           // Speak the utterance without specifying the voice
           synth.speak(utterance);
+          alert('Speak the utterance without specifying the voice.');
         }
       } else {
         // Fallback for Android and iOS TTS
