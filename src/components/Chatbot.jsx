@@ -78,52 +78,14 @@ const Chatbot = () => {
       document.title = input;
 
 
+      // Speech synthesis
       if ('speechSynthesis' in window) {
-        alert('speechSynthesis.');
-
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
-
-        // Check if voices are available
-        if ('getVoices' in synth) {
-          alert('getVoices.');
-          // Wait for voices to be loaded before setting the voice
-          synth.addEventListener('voiceschanged', function () {
-            // Get the available voices
-            const voices = synth.getVoices();
-            alert('Available voices: ' + voices.length);
-
-            // Set the voice to the desired TTS engine (if available)
-            const desiredVoice = voices.find(voice => voice.name === 'MyTTS');
-            if (desiredVoice) {
-              utterance.voice = desiredVoice;
-            }
-
-            // Speak the utterance
-            synth.speak(utterance);
-            alert('Speak the utterance.');
-          });
-        } else {
-          // Speak the utterance without specifying the voice
-          synth.speak(utterance);
-          alert('Speak the utterance without specifying the voice.');
-        }
-      } else {
-        // Fallback for Android and iOS TTS
-        speakUsingFallbackTTS(botResponse);
-        alert('speakUsingFallbackTTS.');
-      }
-
-      function speakUsingFallbackTTS(text) {
-        if ('speak' in window) {
-          // Android and iOS TTS
-          window.speak(text);
-          alert('Success.');
-        } else {
-          // Handle case where TTS is not supported
-          console.log('Text-to-speech is not supported on this device.');
-          alert('Text-to-speech is not supported on this device.');
-        }
+        synth.speak(utterance);
+      } else if ('speak' in window) {
+        // Android and iOS TTS
+        window.speak(botResponse);
       }
 
       
