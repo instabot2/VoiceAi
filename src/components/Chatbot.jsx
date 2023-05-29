@@ -84,14 +84,11 @@ const Chatbot = () => {
         synth.speak(utterance);
         alert("in window.");
       } else if ('speak' in window) {
-        // Check if the browser is on Android or running in standalone mode
-        if (
-          navigator.userAgent.toLowerCase().indexOf("android") > -1 ||
-          (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
-        ) {
-          // Android TTS or standalone mode TTS
+        // Check if the browser is on Android or running in an Android app
+        if (isAndroid() || isAndroidApp()) {
+          // Android TTS or Android app TTS
           window.speak(botResponse);
-          alert("in Android or standalone mode.");
+          alert("in Android or Android app.");
         } else {
           // iOS TTS or other platforms
           alert("Text-to-speech is not supported on this device.");
@@ -99,6 +96,26 @@ const Chatbot = () => {
       }
 
       alert("User Agent: " + navigator.userAgent);
+
+      function isAndroid() {
+        // Check if the user agent contains "Android"
+        return navigator.userAgent.toLowerCase().indexOf("android") > -1;
+      }
+
+      function isAndroidApp() {
+        // Check for specific features or behaviors of Android apps
+        // Add your custom detection logic here
+
+        // For example, you can check for the presence of a custom JavaScript object or API
+        // Replace 'MyCustomObject' with the actual object or API unique to your Android app
+        if (typeof MyCustomObject !== 'undefined') {
+          return true;
+        }
+
+        // If the custom object or API is not present, return false
+        return false;
+      }
+
 
 
       
