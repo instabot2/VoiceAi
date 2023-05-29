@@ -82,27 +82,38 @@ const Chatbot = () => {
         // Check if the user agent contains "Android" and "wv" (WebView)
         return /Android/i.test(navigator.userAgent) && /wv/i.test(navigator.userAgent);
       }
+
+      function isAndroid() {
+        // Check if the user agent contains "Android"
+        return /Android/i.test(navigator.userAgent);
+      }
+
+      if (isAndroid()) {
+        alert("Device is running on Android.");
+      } else {
+        alert("Device is not running on Android.");
+      }
+
+      // Additional code for text-to-speech or other functionalities
+
       if ('speechSynthesis' in window) {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
         synth.speak(utterance);
-        alert("in window.");
+        alert("Text-to-speech is supported in the browser.");
       } else if ('speak' in window) {
         // Check if the browser is on Android or running in an Android app
         if (isAndroid() || isAndroidApp()) {
           // Android TTS or Android app TTS
           window.speak(botResponse);
-          alert("in Android or Android app.");
+          alert("Text-to-speech is supported in the Android app.");
         } else {
           // iOS TTS or other platforms
           alert("Text-to-speech is not supported on this device.");
         }
       }
+
       alert("User Agent: " + navigator.userAgent);
-      function isAndroid() {
-        // Check if the user agent contains "Android"
-        return /Android/i.test(navigator.userAgent);
-      }
 
 
       
