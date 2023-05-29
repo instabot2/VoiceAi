@@ -83,18 +83,35 @@ const Chatbot = () => {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
 
-        // Configure additional properties of the utterance (optional)
-        utterance.lang = 'en-US'; // Set the language
-        utterance.volume = 1.0; // Set the volume (0.0 to 1.0)
-        utterance.rate = 1.0; // Set the rate (0.1 to 10.0)
+        // Check if voices are available
+        if ('getVoices' in synth) {
+          // Wait for voices to be loaded before setting the voice
+          synth.addEventListener('voiceschanged', function () {
+            // Get the available voices
+            const voices = synth.getVoices();
 
-        synth.speak(utterance);
+            // Set the voice to the desired TTS engine (if available)
+            const desiredVoice = voices.find(voice => voice.name === 'MyTTS');
+            if (desiredVoice) {
+              utterance.voice = desiredVoice;
+            }
+
+            // Speak the utterance
+            synth.speak(utterance);
+          });
+        } else {
+          // Speak the utterance without specifying the voice
+          synth.speak(utterance);
+        }
       } else if ('speak' in window) {
         // Android and iOS TTS
         window.speak(botResponse);
       }
+     
 
 
+      
+      
       setIsProcessing(false); // Hide processing message
 
       handleNewMessage();
