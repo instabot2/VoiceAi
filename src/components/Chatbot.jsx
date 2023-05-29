@@ -80,31 +80,31 @@ const Chatbot = () => {
 
       if ('speechSynthesis' in window) {
         const synth = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(botResponse);
 
-        // Check if voices are available
-        if ('getVoices' in synth) {
-          // Wait for voices to be loaded before setting the voice
-          synth.addEventListener('voiceschanged', function () {
-            // Get the available voices
-            const voices = synth.getVoices();
-
-            // Set the voice to the desired TTS engine (if available)
-            const desiredVoice = voices.find(voice => voice.name === 'MyTTS');
-            if (desiredVoice) {
-              utterance.voice = desiredVoice;
-            }
-
-            // Speak the utterance
-            synth.speak(utterance);
+        if (synth.getVoices().length === 0) {
+          // Wait for voices to be loaded
+          synth.addEventListener('voiceschanged', function() {
+            speakText(botResponse);
           });
         } else {
-          // Speak the utterance without specifying the voice
-          synth.speak(utterance);
+          speakText(botResponse);
         }
       } else if ('speak' in window) {
         // Android and iOS TTS
         window.speak(botResponse);
+      }
+
+      function speakText(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voices = synth.getVoices();
+
+        // Set the desired voice if available
+        const desiredVoice = voices.find(voice => voice.name === 'MyTTS');
+        if (desiredVoice) {
+          utterance.voice = desiredVoice;
+        }
+
+        synth.speak(utterance);
       }
 
 
