@@ -106,6 +106,7 @@ const Chatbot = () => {
         if ('speak' in window) {
           // Android TTS or Android app TTS
           window.speak(text);
+          alert("Text-to-speech is supported in the Android app.");
         } else {
           // TTS is not supported
           alert("Text-to-speech is not supported on this Android device.");
@@ -118,14 +119,14 @@ const Chatbot = () => {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
         synth.speak(utterance);
-        // alert("Text-to-speech is supported in the browser.");
+        alert("Text-to-speech is supported in the browser.");
       } else if ('speak' in window) {
         // Check if the browser is on Android or running in an Android app
         if (isAndroid() || isAndroidApp()) {
           // Android TTS or Android app TTS
           //window.speak(botResponse);
           speakOnAndroid(botResponse);
-          alert("Text-to-speech is supported in the Android app.");
+          //alert("Text-to-speech is supported in the Android app.");
         } else if (isiPhone()) {
           // iOS TTS or iPhone TTS
           // Add code here to handle iOS text-to-speech
