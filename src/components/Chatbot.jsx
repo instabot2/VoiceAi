@@ -102,6 +102,16 @@ const Chatbot = () => {
         alert("Device is not running on Android or iPhone.");
       }
 
+      function speakOnAndroid(text) {
+        if ('speak' in window) {
+          // Android TTS or Android app TTS
+          window.speak(text);
+        } else {
+          // TTS is not supported
+          alert("Text-to-speech is not supported on this Android device.");
+        }
+      }
+      
       // Additional code for text-to-speech or other functionalities
 
       if ('speechSynthesis' in window) {
@@ -113,7 +123,8 @@ const Chatbot = () => {
         // Check if the browser is on Android or running in an Android app
         if (isAndroid() || isAndroidApp()) {
           // Android TTS or Android app TTS
-          window.speak(botResponse);
+          //window.speak(botResponse);
+          speakOnAndroid(botResponse);
           alert("Text-to-speech is supported in the Android app.");
         } else if (isiPhone()) {
           // iOS TTS or iPhone TTS
