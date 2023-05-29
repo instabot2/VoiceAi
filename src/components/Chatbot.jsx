@@ -82,12 +82,13 @@ const Chatbot = () => {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
         synth.speak(utterance);
+        alert("in window.");
       } else if ('speak' in window) {
         // Check if the browser is on Android
         if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
           // Android TTS
           window.speak(botResponse);
-          alert("Android.");
+          alert("in Android.");
         } else {
           // iOS TTS or other platforms
           alert("Text-to-speech is not supported on this device.");
