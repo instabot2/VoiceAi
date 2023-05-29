@@ -78,6 +78,7 @@ const Chatbot = () => {
       document.title = input;
 
 
+      
       function isAndroidApp() {
         // Check if the user agent contains "Android" and "wv" (WebView)
         return /Android/i.test(navigator.userAgent) && /wv/i.test(navigator.userAgent);
@@ -88,10 +89,17 @@ const Chatbot = () => {
         return /Android/i.test(navigator.userAgent);
       }
 
+      function isiPhone() {
+        // Check if the user agent contains "iPhone" or "iPad" (iOS devices)
+        return /iPhone|iPad/i.test(navigator.userAgent);
+      }
+
       if (isAndroid()) {
         alert("Device is running on Android.");
+      } else if (isiPhone()) {
+        alert("Device is running on iPhone.");
       } else {
-        alert("Device is not running on Android.");
+        alert("Device is not running on Android or iPhone.");
       }
 
       // Additional code for text-to-speech or other functionalities
@@ -100,20 +108,22 @@ const Chatbot = () => {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
         synth.speak(utterance);
-        alert("Text-to-speech is supported in the browser.");
+        // alert("Text-to-speech is supported in the browser.");
       } else if ('speak' in window) {
         // Check if the browser is on Android or running in an Android app
         if (isAndroid() || isAndroidApp()) {
           // Android TTS or Android app TTS
           window.speak(botResponse);
           alert("Text-to-speech is supported in the Android app.");
+        } else if (isiPhone()) {
+          // iOS TTS or iPhone TTS
+          // Add code here to handle iOS text-to-speech
+          alert("Text-to-speech is not supported on this iPhone.");
         } else {
-          // iOS TTS or other platforms
+          // Other platforms
           alert("Text-to-speech is not supported on this device.");
         }
       }
-
-      alert("User Agent: " + navigator.userAgent);
 
 
       
