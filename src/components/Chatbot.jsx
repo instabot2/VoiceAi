@@ -97,6 +97,7 @@ const Chatbot = () => {
 
             // Speak the utterance
             synth.speak(utterance);
+            alert('Speak the utterance.');
           });
         } else {
           // Speak the utterance without specifying the voice
