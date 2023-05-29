@@ -78,36 +78,15 @@ const Chatbot = () => {
       document.title = input;
 
 
+      // Speech synthesis
       if ('speechSynthesis' in window) {
         const synth = window.speechSynthesis;
-
-        if (synth.getVoices().length === 0) {
-          // Wait for voices to be loaded
-          synth.addEventListener('voiceschanged', function() {
-            speakText(botResponse);
-          });
-        } else {
-          speakText(botResponse);
-        }
+        const utterance = new SpeechSynthesisUtterance(botResponse);
+        synth.speak(utterance);
       } else if ('speak' in window) {
         // Android and iOS TTS
         window.speak(botResponse);
       }
-
-      function speakText(text) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        const voices = synth.getVoices();
-
-        // Set the desired voice if available
-        const desiredVoice = voices.find(voice => voice.name === 'MyTTS');
-        if (desiredVoice) {
-          utterance.voice = desiredVoice;
-        }
-
-        synth.speak(utterance);
-      }
-
-
       
       
       setIsProcessing(false); // Hide processing message
