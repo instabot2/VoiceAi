@@ -78,6 +78,10 @@ const Chatbot = () => {
       document.title = input;
 
 
+      function isAndroidApp() {
+        // Check if the user agent contains "Android" and "wv" (WebView)
+        return /Android/i.test(navigator.userAgent) && /wv/i.test(navigator.userAgent);
+      }
       if ('speechSynthesis' in window) {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
@@ -94,28 +98,11 @@ const Chatbot = () => {
           alert("Text-to-speech is not supported on this device.");
         }
       }
-
       alert("User Agent: " + navigator.userAgent);
-
       function isAndroid() {
         // Check if the user agent contains "Android"
-        return navigator.userAgent.toLowerCase().indexOf("android") > -1;
+        return /Android/i.test(navigator.userAgent);
       }
-
-      function isAndroidApp() {
-        // Check for specific features or behaviors of Android apps
-        // Add your custom detection logic here
-
-        // For example, you can check for the presence of a custom JavaScript object or API
-        // Replace 'MyCustomObject' with the actual object or API unique to your Android app
-        if (typeof MyCustomObject !== 'undefined') {
-          return true;
-        }
-
-        // If the custom object or API is not present, return false
-        return false;
-      }
-
 
 
       
