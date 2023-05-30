@@ -77,19 +77,24 @@ const Chatbot = () => {
       // Sound functionality
       const soundOptions = {
         method: 'GET',
-        url: 'https://text-to-speech27.p.rapidapi.com/speech',
+        url: 'https://voicerss-text-to-speech.p.rapidapi.com/',
         params: {
-          text: botResponse,
-          lang: 'en-us'
+          key: '4c61b6d8a10143b6ba750516b0062b25',
+          src: botResponse, // Use the botResponse variable here
+          hl: 'en-us',
+          r: '0',
+          c: 'mp3',
+          f: '8khz_8bit_mono'
         },
         headers: {
           'X-RapidAPI-Key': '1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c',
-          'X-RapidAPI-Host': 'text-to-speech27.p.rapidapi.com'
+          'X-RapidAPI-Host': 'voicerss-text-to-speech.p.rapidapi.com'
         }
       };
+
       try {
-        const soundResponse = await axios.request(soundOptions);
-        const audioUrl = soundResponse.data.data.audio_url; // Update the response data access
+        const soundResponse = await axios(soundOptions);
+        const audioUrl = soundResponse.data.audio_url; // Update the response data access
         const audio = new Audio(audioUrl);
         audio.play();
       } catch (error) {
@@ -97,7 +102,6 @@ const Chatbot = () => {
       }
 
 
-      
       
       setIsProcessing(false); // Hide processing message
 
