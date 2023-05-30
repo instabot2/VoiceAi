@@ -73,6 +73,7 @@ const Chatbot = () => {
       setConversation([...conversation, { input, output }]);
       document.title = input;
 
+      
       // Sound functionality
       const soundOptions = {
         method: 'GET',
@@ -86,17 +87,18 @@ const Chatbot = () => {
           'X-RapidAPI-Host': 'text-to-speech27.p.rapidapi.com'
         }
       };
-
       try {
         const soundResponse = await axios.request(soundOptions);
-        const audioUrl = soundResponse.data.audio_url;
-
+        const audioUrl = soundResponse.data.data.audio_url; // Update the response data access
         const audio = new Audio(audioUrl);
         audio.play();
       } catch (error) {
         console.error(error);
       }
 
+
+      
+      
       setIsProcessing(false); // Hide processing message
 
       handleNewMessage();
