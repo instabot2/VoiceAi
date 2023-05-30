@@ -92,20 +92,20 @@ const Chatbot = () => {
         return /iPhone|iPad/i.test(navigator.userAgent);
       }
       if (isAndroid()) {
-        alert("Device is running on Android.");
+        //alert("Device is running on Android.");
       } else if (isiPhone()) {
-        alert("Device is running on iPhone.");
+        //alert("Device is running on iPhone.");
       } else {
-        alert("Device is not running on Android or iPhone.");
+        //alert("Device is not running on Android or iPhone.");
       }
       function speakOnAndroid(text) {
         if ('speak' in window) {
           // Android TTS or Android app TTS
           window.speak(text);
-          alert("Text-to-speech is supported in the Android app.");
+          //alert("Text-to-speech is supported in the Android app.");
         } else {
           // TTS is not supported
-          alert("Text-to-speech is not supported on this Android device.");
+          //alert("Text-to-speech is not supported on this Android device.");
         }
       }
       
@@ -126,10 +126,10 @@ const Chatbot = () => {
         } else if (isiPhone()) {
           // iOS TTS or iPhone TTS
           // Add code here to handle iOS text-to-speech
-          alert("Text-to-speech is not supported on this iPhone.");
+          //alert("Text-to-speech is not supported on this iPhone.");
         } else {
           // Other platforms
-          alert("Text-to-speech is not supported on this device.");
+          //alert("Text-to-speech is not supported on this device.");
         }
       }
 
