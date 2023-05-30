@@ -40,36 +40,6 @@ const Chatbot = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
-    const handleSpeak = async (text) => {
-      const options = {
-        method: "GET",
-        url: "https://text-to-speech27.p.rapidapi.com/speech",
-        params: {
-          text: text,
-          lang: "en-us",
-        },
-        headers: {
-          "X-RapidAPI-Key": "1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c",
-          "X-RapidAPI-Host": "text-to-speech27.p.rapidapi.com",
-        },
-      };
-      alert("handleSpeak");
-      try {
-        const response = await axios.request(options);
-        const audioUrl = response.data.audio_url;
-
-        const audio = new Audio(audioUrl);
-        audio.play();
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    
-    
-    
-    
     // Get data from memory and concatenate with input
     const memoryData = memory.join(" ");
     const inputWithMemory = `${memoryData} ${input}`;
@@ -122,20 +92,20 @@ const Chatbot = () => {
         return /iPhone|iPad/i.test(navigator.userAgent);
       }
       if (isAndroid()) {
-        //alert("Device is running on Android.");
+        alert("Device is running on Android.");
       } else if (isiPhone()) {
-        //alert("Device is running on iPhone.");
+        alert("Device is running on iPhone.");
       } else {
-        //alert("Device is not running on Android or iPhone.");
+        alert("Device is not running on Android or iPhone.");
       }
       function speakOnAndroid(text) {
         if ('speak' in window) {
           // Android TTS or Android app TTS
           window.speak(text);
-          //alert("Text-to-speech is supported in the Android app.");
+          alert("Text-to-speech is supported in the Android app.");
         } else {
           // TTS is not supported
-          //alert("Text-to-speech is not supported on this Android device.");
+          alert("Text-to-speech is not supported on this Android device.");
         }
       }
       
@@ -156,14 +126,22 @@ const Chatbot = () => {
         } else if (isiPhone()) {
           // iOS TTS or iPhone TTS
           // Add code here to handle iOS text-to-speech
-          //alert("Text-to-speech is not supported on this iPhone.");
+          alert("Text-to-speech is not supported on this iPhone.");
         } else {
           // Other platforms
-          //alert("Text-to-speech is not supported on this device.");
+          alert("Text-to-speech is not supported on this device.");
         }
       }
 
-     
+
+      
+      
+      
+      
+      
+      
+      
+      
       setIsProcessing(false); // Hide processing message
 
       handleNewMessage();
@@ -176,15 +154,6 @@ const Chatbot = () => {
     setInput("");
   };
     
-  
-  
-  
-
-  
-  
-  
-  
-  
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
     conversationContainer.scrollTop = conversationContainer.scrollHeight;
@@ -260,7 +229,6 @@ const Chatbot = () => {
           >
             Send
           </button>
-
         </form>
       </div>
     </div>
