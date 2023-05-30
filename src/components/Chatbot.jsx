@@ -133,15 +133,7 @@ const Chatbot = () => {
         }
       }
 
-
-      
-      
-      
-      
-      
-      
-      
-      
+     
       setIsProcessing(false); // Hide processing message
 
       handleNewMessage();
@@ -154,6 +146,38 @@ const Chatbot = () => {
     setInput("");
   };
     
+  
+  
+  
+  const handleSpeak = async (text) => {
+    const options = {
+      method: "GET",
+      url: "https://text-to-speech27.p.rapidapi.com/speech",
+      params: {
+        text: text,
+        lang: "en-us",
+      },
+      headers: {
+        "X-RapidAPI-Key": "1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c",
+        "X-RapidAPI-Host": "text-to-speech27.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      const audioUrl = response.data.audio_url;
+
+      const audio = new Audio(audioUrl);
+      audio.play();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  
+  
+  
+  
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
     conversationContainer.scrollTop = conversationContainer.scrollHeight;
@@ -229,6 +253,16 @@ const Chatbot = () => {
           >
             Send
           </button>
+
+          <button
+            type="button"
+            onClick={() => handleSpeak(input)}
+            className="px-4 py-2 ml-2 text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none"
+          >
+            Speak
+          </button>
+
+
         </form>
       </div>
     </div>
