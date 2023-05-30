@@ -74,7 +74,7 @@ const Chatbot = () => {
       document.title = input;
 
 
-      const botResponse = conversation[conversation.length - 1]?.output;
+      //const botResponse = conversation[conversation.length - 1]?.output;
       if (botResponse) {
         const audio = new Audio(
           `http://api.voicerss.org/?key=4c61b6d8a10143b6ba750516b0062b25&hl=en-us&c=MP3&f=16khz_16bit_stereo&src=${encodeURIComponent(
