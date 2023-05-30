@@ -74,14 +74,30 @@ const Chatbot = () => {
       document.title = input;
 
 
+      function isMobile() {
+        // Check if the user agent contains "Android" or "iPhone" or "iPad"
+        return /Android|iPhone|iPad/i.test(navigator.userAgent);
+      }
       //const botResponse = conversation[conversation.length - 1]?.output;
-      if (botResponse) {
-        const audio = new Audio(
-          `http://api.voicerss.org/?key=4c61b6d8a10143b6ba750516b0062b25&hl=en-us&c=MP3&f=16khz_16bit_stereo&src=${encodeURIComponent(
-            botResponse
-          )}`
-        );
-        audio.play();
+      if (isMobile()) {
+        // Mobile device (Android or iPhone/iPad)
+        if (botResponse) {
+          const audio = new Audio(
+            `http://api.voicerss.org/?key=4c61b6d8a10143b6ba750516b0062b25&hl=en-us&c=MP3&f=16khz_16bit_stereo&src=${encodeURIComponent(
+              botResponse
+            )}`
+          );
+          audio.play();
+        }
+      } else {
+        // Other platforms
+        if ('speechSynthesis' in window) {
+          const synth = window.speechSynthesis;
+          const utterance = new SpeechSynthesisUtterance(botResponse);
+          synth.speak(utterance);
+        } else {
+          alert("Text-to-speech is not supported on this device.");
+        }
       }
 
       
