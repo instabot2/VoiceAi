@@ -154,7 +154,7 @@ const Chatbot = () => {
       method: "GET",
       url: "https://text-to-speech27.p.rapidapi.com/speech",
       params: {
-        text: 'hello world',
+        text: text,
         lang: "en-us",
       },
       headers: {
@@ -254,15 +254,6 @@ const Chatbot = () => {
           >
             Send
           </button>
-
-          <button
-            type="button"
-            onClick={() => handleSpeak(input)}
-            className="px-4 py-2 ml-2 text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none"
-          >
-            Speak
-          </button>
-
 
         </form>
       </div>
