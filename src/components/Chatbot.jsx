@@ -91,6 +91,8 @@ const Chatbot = () => {
   
   
   const playAudio = async () => {
+    window.alert(`Captured sound..`);
+    
     const botResponse = conversation[conversation.length - 1].output;
 
     const soundOptions = {
