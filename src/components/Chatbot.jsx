@@ -163,6 +163,8 @@ const Chatbot = () => {
       },
     };
 
+    alert("handleSpeak");
+    
     try {
       const response = await axios.request(options);
       const audioUrl = response.data.audio_url;
