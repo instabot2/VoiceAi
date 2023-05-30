@@ -91,17 +91,13 @@ const Chatbot = () => {
   
   
   const playAudio = async () => {
-    window.alert(`Captured sound..`);
-    
     const botResponse = conversation[conversation.length - 1].output;
-
     const soundOptions = {
       method: 'GET',
       url: 'https://voicerss-text-to-speech.p.rapidapi.com/',
       params: {
         key: '4c61b6d8a10143b6ba750516b0062b25',
-        //src: botResponse,
-        src: 'hello world',
+        src: botResponse,
         hl: 'en-us',
         r: '0',
         c: 'mp3',
@@ -112,7 +108,6 @@ const Chatbot = () => {
         'X-RapidAPI-Host': 'voicerss-text-to-speech.p.rapidapi.com'
       }
     };
-
     try {
       const soundResponse = await axios(soundOptions);
       const audioUrl = soundResponse.data.audio_url;
@@ -122,7 +117,8 @@ const Chatbot = () => {
       console.error(error);
     }
   };
-
+  
+  
   
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
