@@ -119,7 +119,7 @@ const Chatbot = () => {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(botResponse);
         synth.speak(utterance);
-        alert("Text-to-speech is supported in the browser.");
+        //alert("Text-to-speech is supported in the browser.");
       } else if ('speak' in window) {
         // Check if the browser is on Android or running in an Android app
         if (isAndroid() || isAndroidApp()) {
