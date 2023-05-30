@@ -90,33 +90,11 @@ const Chatbot = () => {
   
   
   
-  const playAudio = async () => {
-    const botResponse = conversation[conversation.length - 1].output;
-    const soundOptions = {
-      method: 'GET',
-      url: 'https://voicerss-text-to-speech.p.rapidapi.com/',
-      params: {
-        key: '4c61b6d8a10143b6ba750516b0062b25',
-        src: 'hello world',
-        hl: 'en-us',
-        r: '0',
-        c: 'mp3',
-        f: '8khz_8bit_mono'
-      },
-      headers: {
-        'X-RapidAPI-Key': '1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c',
-        'X-RapidAPI-Host': 'voicerss-text-to-speech.p.rapidapi.com'
-      }
-    };
-    try {
-      const soundResponse = await axios(soundOptions);
-      const audioUrl = soundResponse.data.audio_url;
-      const audio = new Audio(audioUrl);
-      audio.play();
-    } catch (error) {
-      console.error(error);
-    }
+  const playAudio = () => {
+    var audio = new Audio('http://api.voicerss.org/?key=4c61b6d8a10143b6ba750516b0062b25&hl=en-us&c=MP3&f=16khz_16bit_stereo&src=Hello, world!');
+    audio.play();
   };
+  
   
   
   
