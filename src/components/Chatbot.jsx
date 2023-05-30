@@ -40,6 +40,36 @@ const Chatbot = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    
+    const handleSpeak = async (text) => {
+      const options = {
+        method: "GET",
+        url: "https://text-to-speech27.p.rapidapi.com/speech",
+        params: {
+          text: text,
+          lang: "en-us",
+        },
+        headers: {
+          "X-RapidAPI-Key": "1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c",
+          "X-RapidAPI-Host": "text-to-speech27.p.rapidapi.com",
+        },
+      };
+      alert("handleSpeak");
+      try {
+        const response = await axios.request(options);
+        const audioUrl = response.data.audio_url;
+
+        const audio = new Audio(audioUrl);
+        audio.play();
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    
+    
+    
+    
     // Get data from memory and concatenate with input
     const memoryData = memory.join(" ");
     const inputWithMemory = `${memoryData} ${input}`;
@@ -149,32 +179,7 @@ const Chatbot = () => {
   
   
   
-  const handleSpeak = async (text) => {
-    const options = {
-      method: "GET",
-      url: "https://text-to-speech27.p.rapidapi.com/speech",
-      params: {
-        text: text,
-        lang: "en-us",
-      },
-      headers: {
-        "X-RapidAPI-Key": "1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c",
-        "X-RapidAPI-Host": "text-to-speech27.p.rapidapi.com",
-      },
-    };
 
-    alert("handleSpeak");
-    
-    try {
-      const response = await axios.request(options);
-      const audioUrl = response.data.audio_url;
-
-      const audio = new Audio(audioUrl);
-      audio.play();
-    } catch (error) {
-      console.error(error);
-    }
-  };
   
   
   
@@ -252,7 +257,6 @@ const Chatbot = () => {
           <button
             type="submit"
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
-            onClick={() => handleSpeak(input)}
           >
             Send
           </button>
