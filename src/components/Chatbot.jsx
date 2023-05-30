@@ -83,17 +83,14 @@ const Chatbot = () => {
         // Check if the user agent contains "Android" and "wv" (WebView)
         return /Android/i.test(navigator.userAgent) && /wv/i.test(navigator.userAgent);
       }
-
       function isAndroid() {
         // Check if the user agent contains "Android"
         return /Android/i.test(navigator.userAgent);
       }
-
       function isiPhone() {
         // Check if the user agent contains "iPhone" or "iPad" (iOS devices)
         return /iPhone|iPad/i.test(navigator.userAgent);
       }
-
       if (isAndroid()) {
         alert("Device is running on Android.");
       } else if (isiPhone()) {
@@ -101,7 +98,6 @@ const Chatbot = () => {
       } else {
         alert("Device is not running on Android or iPhone.");
       }
-
       function speakOnAndroid(text) {
         if ('speak' in window) {
           // Android TTS or Android app TTS
@@ -138,6 +134,11 @@ const Chatbot = () => {
       }
 
 
+      
+      
+      
+      
+      
       
       
       
