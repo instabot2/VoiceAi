@@ -74,6 +74,7 @@ const Chatbot = () => {
       document.title = input;
 
 
+      
       function isMobile() {
         // Check if the user agent contains "Android" or "iPhone" or "iPad"
         return /Android|iPhone|iPad/i.test(navigator.userAgent);
@@ -125,7 +126,13 @@ const Chatbot = () => {
   useEffect(() => {
     handleNewMessage();
   }, [conversation]);
- 
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  
+  
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
@@ -180,6 +187,7 @@ const Chatbot = () => {
       <div className="sticky bottom-0 z-10 bg-white">
         <form onSubmit={handleSubmit} className="flex items-center">
           <input
+            ref={inputRef}
             type="text"
             placeholder="Ask something... or type 'reset session' to reset new chat."
             value={input}
