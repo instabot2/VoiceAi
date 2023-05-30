@@ -33,10 +33,6 @@ const Chatbot = () => {
     "scala"
   ];
 
-  const handleInput = (e) => {
-    setInput(e.target.value);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -77,71 +73,30 @@ const Chatbot = () => {
       setConversation([...conversation, { input, output }]);
       document.title = input;
 
-
-      
-      function isAndroidApp() {
-        // Check if the user agent contains "Android" and "wv" (WebView)
-        return /Android/i.test(navigator.userAgent) && /wv/i.test(navigator.userAgent);
-      }
-      function isAndroid() {
-        // Check if the user agent contains "Android"
-        return /Android/i.test(navigator.userAgent);
-      }
-      function isiPhone() {
-        // Check if the user agent contains "iPhone" or "iPad" (iOS devices)
-        return /iPhone|iPad/i.test(navigator.userAgent);
-      }
-      if (isAndroid()) {
-        alert("Device is running on Android.");
-      } else if (isiPhone()) {
-        alert("Device is running on iPhone.");
-      } else {
-        alert("Device is not running on Android or iPhone.");
-      }
-      function speakOnAndroid(text) {
-        if ('speak' in window) {
-          // Android TTS or Android app TTS
-          window.speak(text);
-          alert("Text-to-speech is supported in the Android app.");
-        } else {
-          // TTS is not supported
-          alert("Text-to-speech is not supported on this Android device.");
+      // Sound functionality
+      const soundOptions = {
+        method: 'GET',
+        url: 'https://text-to-speech27.p.rapidapi.com/speech',
+        params: {
+          text: botResponse,
+          lang: 'en-us'
+        },
+        headers: {
+          'X-RapidAPI-Key': '1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c',
+          'X-RapidAPI-Host': 'text-to-speech27.p.rapidapi.com'
         }
-      }
-      
-      // Additional code for text-to-speech or other functionalities
+      };
 
-      if ('speechSynthesis' in window) {
-        const synth = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(botResponse);
-        synth.speak(utterance);
-        //alert("Text-to-speech is supported in the browser.");
-      } else if ('speak' in window) {
-        // Check if the browser is on Android or running in an Android app
-        if (isAndroid() || isAndroidApp()) {
-          // Android TTS or Android app TTS
-          //window.speak(botResponse);
-          speakOnAndroid(botResponse);
-          //alert("Text-to-speech is supported in the Android app.");
-        } else if (isiPhone()) {
-          // iOS TTS or iPhone TTS
-          // Add code here to handle iOS text-to-speech
-          alert("Text-to-speech is not supported on this iPhone.");
-        } else {
-          // Other platforms
-          alert("Text-to-speech is not supported on this device.");
-        }
+      try {
+        const soundResponse = await axios.request(soundOptions);
+        const audioUrl = soundResponse.data.audio_url;
+
+        const audio = new Audio(audioUrl);
+        audio.play();
+      } catch (error) {
+        console.error(error);
       }
 
-
-      
-      
-      
-      
-      
-      
-      
-      
       setIsProcessing(false); // Hide processing message
 
       handleNewMessage();
@@ -220,7 +175,7 @@ const Chatbot = () => {
             type="text"
             placeholder="Ask something... or type 'reset session' to reset new chat."
             value={input}
-            onChange={handleInput}
+            onChange={e => setInput(e.target.value)}
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />
           <button
