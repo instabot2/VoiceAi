@@ -123,6 +123,7 @@ const Chatbot = () => {
     conversationContainer.scrollTop = conversationContainer.scrollHeight;
   };
 
+  const inputRef = useRef(null);
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
