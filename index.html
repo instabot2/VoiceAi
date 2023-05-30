@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
+
+
+
+
+  <script src="https://code.responsivevoice.org/responsivevoice.js?key=YOUR_UNIQUE_KEY"></script>
+
+
+  
+
+
+
+    
+    
+    
+    
+    
     <meta charset="UTF-8" />
     <link
       rel="icon"
@@ -31,6 +48,17 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    
+    
+    <button onclick="speakHello()">Click me to say hello</button>
+
+  <script>
+    function speakHello() {
+      responsiveVoice.speak("hello world", "UK English Male");
+    }
+  </script>
+    
+    
     
   </body>
 </html>
