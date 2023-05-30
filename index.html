@@ -32,7 +32,13 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     
-    <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
+    <button onclick="playAudio()">Generate Sound</button>
+    <script>
+      function playAudio() {
+        var audio = new Audio('http://api.voicerss.org/?key=4c61b6d8a10143b6ba750516b0062b25&hl=en-us&c=MP3&f=16khz_16bit_stereo&src=Hello, world!');
+        audio.play();
+      }
+    </script>
     
   </body>
 </html>
