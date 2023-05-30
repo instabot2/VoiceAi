@@ -125,13 +125,10 @@ const Chatbot = () => {
 
   useEffect(() => {
     handleNewMessage();
+    inputRef.current.focus();
   }, [conversation]);
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
 
-  
   
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
