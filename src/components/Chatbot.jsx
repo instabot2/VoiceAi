@@ -73,35 +73,8 @@ const Chatbot = () => {
       setConversation([...conversation, { input, output }]);
       document.title = input;
 
+
       
-      // Sound functionality
-      const soundOptions = {
-        method: 'GET',
-        url: 'https://voicerss-text-to-speech.p.rapidapi.com/',
-        params: {
-          key: '4c61b6d8a10143b6ba750516b0062b25',
-          src: 'hello world', // Use the botResponse variable here
-          hl: 'en-us',
-          r: '0',
-          c: 'mp3',
-          f: '8khz_8bit_mono'
-        },
-        headers: {
-          'X-RapidAPI-Key': '1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c',
-          'X-RapidAPI-Host': 'voicerss-text-to-speech.p.rapidapi.com'
-        }
-      };
-
-      try {
-        const soundResponse = await axios(soundOptions);
-        const audioUrl = soundResponse.data.audio_url; // Update the response data access
-        const audio = new Audio(audioUrl);
-        audio.play();
-      } catch (error) {
-        console.error(error);
-      }
-
-
       
       setIsProcessing(false); // Hide processing message
 
@@ -114,7 +87,40 @@ const Chatbot = () => {
 
     setInput("");
   };
-    
+  
+  
+  
+  const playAudio = async () => {
+    const botResponse = conversation[conversation.length - 1].output;
+
+    const soundOptions = {
+      method: 'GET',
+      url: 'https://voicerss-text-to-speech.p.rapidapi.com/',
+      params: {
+        key: '4c61b6d8a10143b6ba750516b0062b25',
+        src: botResponse,
+        hl: 'en-us',
+        r: '0',
+        c: 'mp3',
+        f: '8khz_8bit_mono'
+      },
+      headers: {
+        'X-RapidAPI-Key': '1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c',
+        'X-RapidAPI-Host': 'voicerss-text-to-speech.p.rapidapi.com'
+      }
+    };
+
+    try {
+      const soundResponse = await axios(soundOptions);
+      const audioUrl = soundResponse.data.audio_url;
+      const audio = new Audio(audioUrl);
+      audio.play();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
     conversationContainer.scrollTop = conversationContainer.scrollHeight;
@@ -190,6 +196,16 @@ const Chatbot = () => {
           >
             Send
           </button>
+
+          <button
+            type="button"
+            onClick={playAudio}
+            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            Sound
+          </button>
+
+
         </form>
       </div>
     </div>
