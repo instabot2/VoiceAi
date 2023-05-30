@@ -154,7 +154,7 @@ const Chatbot = () => {
       method: "GET",
       url: "https://text-to-speech27.p.rapidapi.com/speech",
       params: {
-        text: text,
+        text: botResponse,
         lang: "en-us",
       },
       headers: {
