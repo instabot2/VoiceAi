@@ -42,30 +42,27 @@ const Chatbot = () => {
     recognition.interimResults = false;
     recognition.lang = 'en-US';
     recognitionRef.current = recognition;
-
     recognition.onresult = (event) => {
       const speechResult = event.results[0][0].transcript;
       setInput(speechResult);
     };
-
     recognition.onerror = (event) => {
       console.error("Voice recognition error:", event.error);
     };
-
     recognition.start();
   };
-
   const stopListening = () => {
     if (recognitionRef.current) {
       recognitionRef.current.stop();
     }
   };
-
   const handleVoiceInput = () => {
     if (isListening) {
-      stopListening();
+      //stopListening();
+      window.alert(`stopListening`);
     } else {
-      startListening();
+      //startListening();
+      window.alert(`startListening`);
     }
   };
 
