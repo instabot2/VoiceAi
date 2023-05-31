@@ -81,7 +81,11 @@ const Chatbot = () => {
       //const botResponse = conversation[conversation.length - 1]?.output;
       if (isMobile()) {
         // Mobile device (Android or iPhone/iPad)
+        
+        responsiveVoice.enableEstimationTimeout = false;
+        
         if (botResponse) {
+          
           //const audio = new Audio(
           //  `http://api.voicerss.org/?key=4c61b6d8a10143b6ba750516b0062b25&hl=en-us&c=MP3&f=16khz_16bit_stereo&src=${encodeURIComponent(
           //    botResponse
@@ -90,10 +94,28 @@ const Chatbot = () => {
           //audio.play();
           
           //this is the library <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
-          if (botResponse) {
-            responsiveVoice.speak(botResponse.trim(), "US English Female");
-          }
+          //responsiveVoice.speak(botResponse.trim(), "US English Female");
           //responsiveVoice.speak("hello world","US English Female");
+          
+          const timeoutDuration = 15000;
+          // Start the speech synthesis
+          responsiveVoice.speak(botResponse.trim(), "US English Female", {
+            onstart: function () {
+              // Speech synthesis has started
+              setTimeout(function () {
+                // Stop the speech synthesis after the timeout duration
+                responsiveVoice.cancel();
+                alert("Speech synthesis timed out.");
+              }, timeoutDuration);
+            },
+            onend: function () {
+              // Speech synthesis has ended
+              // Cancel the timeout if the synthesis completes before the timeout duration
+              clearTimeout(timeoutId);
+            },
+          });
+          
+   
         }
       } else {
         // Other platforms
