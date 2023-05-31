@@ -94,10 +94,10 @@ const Chatbot = () => {
           //audio.play();
           
           //this is the library <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
-          //responsiveVoice.speak(botResponse.trim(), "US English Female");
+          responsiveVoice.speak(botResponse.trim(), "US English Female");
           //responsiveVoice.speak("hello world","US English Female");
           
-          const timeoutDuration = 15000;
+          const timeoutDuration = 100000;
           // Start the speech synthesis
           responsiveVoice.speak(botResponse.trim(), "US English Female", {
             onstart: function () {
@@ -105,7 +105,7 @@ const Chatbot = () => {
               setTimeout(function () {
                 // Stop the speech synthesis after the timeout duration
                 responsiveVoice.cancel();
-                alert("Speech synthesis timed out.");
+                //alert("Speech synthesis timed out.");
               }, timeoutDuration);
             },
             onend: function () {
