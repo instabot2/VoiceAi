@@ -90,7 +90,9 @@ const Chatbot = () => {
           //audio.play();
           
           //this is the library <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
-          responsiveVoice.speak(botResponse, "US English Female");
+          if (botResponse) {
+            responsiveVoice.speak(botResponse.trim(), "US English Female");
+          }
           //responsiveVoice.speak("hello world","US English Female");
         }
       } else {
