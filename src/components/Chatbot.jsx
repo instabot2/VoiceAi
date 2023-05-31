@@ -168,13 +168,13 @@ const Chatbot = () => {
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
 
-      <div className="sticky top-0 right-10 z-10 bg-white"> {/* Add right-4 for a 4-pixel space */}
+      <div className="sticky top-0 z-10 bg-white">
         {isProcessing && (
-          <div className="flex justify-end">
+          <div className="flex justify-end pr-4"> {/* Add pr-4 for right padding */}
             <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
               <div className="block text-justify">
                 <div className="whitespace-pre-wrap break-words">
-                  Ai is processing...
+                  Ai processing...
                 </div>
               </div>
             </div>
