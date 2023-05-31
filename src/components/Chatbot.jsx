@@ -72,6 +72,8 @@ const Chatbot = () => {
 
       setConversation([...conversation, { input, output }]);
       document.title = input;
+      
+      handleNewMessage();
 
       
       function isMobile() {
@@ -125,7 +127,7 @@ const Chatbot = () => {
  
       setIsProcessing(false); // Hide processing message
 
-      handleNewMessage();
+      //handleNewMessage();
 
     } catch (error) {
       console.error(error);
@@ -137,8 +139,10 @@ const Chatbot = () => {
 
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
-    conversationContainer.scrollTop = conversationContainer.scrollHeight;
+    //conversationContainer.scrollTop = conversationContainer.scrollHeight;
+    conversationContainer.scrollTop = 0;
   };
+
 
   const inputRef = useRef(null);
   useEffect(() => {
