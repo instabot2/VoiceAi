@@ -35,18 +35,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    
-    <script>
-      var voicePlayed = false;
-      function playVoiceMessage() {
-        if (!voicePlayed) {
-          responsiveVoice.speak("Welcome! Click 'Get Started' to start Voice AI.");
-          voicePlayed = true;
-        }
-      }
-      window.onload = function() {
-        setTimeout(playVoiceMessage, 1500);
-      };
-    </script>
   </body>
 </html>
