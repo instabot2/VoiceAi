@@ -97,7 +97,7 @@ const Chatbot = () => {
           //synth.speak(utterance);
           
           //this is the library <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
-          responsiveVoice.speak(encodeURIComponent(botResponse), "US English Female");
+          responsiveVoice.speak(botResponse, "US English Female");
 
         } else {
           alert("Text-to-speech is not supported on this device.");
