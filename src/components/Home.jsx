@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
+import responsiveVoice from 'responsive-voice';
+const Home = () => {
+  const handleClick = () => {
+    responsiveVoice.speak("Welcome! Click 'Get Started' to start Voice AI.");
+  };
 
 const Home = () => {
   return (
