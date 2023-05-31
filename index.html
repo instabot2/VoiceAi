@@ -37,7 +37,11 @@
     <script type="module" src="/src/main.jsx"></script>
     
     <script>
-      setTimeout(responsiveVoice.speak("Welcome! Click 'Get Started' to start Voice AI."), 1500);
+      window.onload = function() {
+        setTimeout(function() {
+          responsiveVoice.speak("Welcome! Click 'Get Started' to start Voice AI.");
+        }, 1500);
+      };
     </script>
   </body>
 </html>
