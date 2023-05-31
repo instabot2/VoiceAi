@@ -9,8 +9,8 @@ const Chatbot = () => {
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
-  const [isListening, setIsListening] = useState(false); // listening
   const conversationRef = useRef(null);
+  const recognitionRef = useRef(null);
 
   const programmingKeywords = [
     "programming",
@@ -36,27 +36,28 @@ const Chatbot = () => {
 
 
   const startListening = () => {
-    setIsListening(true);
-    if ('webkitSpeechRecognition' in window) {
-      const recognition = new window.webkitSpeechRecognition();
-      recognition.continuous = true;
-      recognition.interimResults = false;
-      recognition.lang = 'en-US';
-      recognition.start();
-      recognition.onresult = (event) => {
-        const speechResult = event.results[0][0].transcript;
-        setInput(speechResult);
-      };
-      recognition.onerror = (event) => {
-        console.error("Voice recognition error:", event.error);
-      };
-    } else {
-      alert("Speech recognition is not supported on this device.");
-    }
+    const recognition = new window.SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+    recognitionRef.current = recognition;
+
+    recognition.onresult = (event) => {
+      const speechResult = event.results[0][0].transcript;
+      setInput(speechResult);
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Voice recognition error:", event.error);
+    };
+
+    recognition.start();
   };
 
   const stopListening = () => {
-    setIsListening(false);
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+    }
   };
 
   const handleVoiceInput = () => {
@@ -66,6 +67,8 @@ const Chatbot = () => {
       startListening();
     }
   };
+  
+  
   
   
   
