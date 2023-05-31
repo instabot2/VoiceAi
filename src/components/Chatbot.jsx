@@ -91,7 +91,7 @@ const Chatbot = () => {
           //audio.play();
           
           //this is the library <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
-          //responsiveVoice.speak(botResponse.trim(), "US English Female");
+          responsiveVoice.speak(botResponse.trim(), "US English Female");
           //responsiveVoice.speak("hello world","US English Female");
           const timeoutDuration = 100000;
           // Start the speech synthesis
