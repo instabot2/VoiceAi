@@ -75,7 +75,7 @@ const Chatbot = () => {
       document.title = input;
       
       handleNewMessage();
-
+      
       
       function isMobile() {
         // Check if the user agent contains "Android" or "iPhone" or "iPad"
@@ -143,7 +143,6 @@ const Chatbot = () => {
     //conversationContainer.scrollTop = conversationContainer.scrollHeight;
     conversationContainer.scrollTop = 0;
   };
-
 
   const inputRef = useRef(null);
   useEffect(() => {
