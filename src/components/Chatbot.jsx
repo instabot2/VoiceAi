@@ -73,7 +73,6 @@ const Chatbot = () => {
       setConversation([...conversation, { input, output }]);
       document.title = input;
 
-
       
       function isMobile() {
         // Check if the user agent contains "Android" or "iPhone" or "iPad"
@@ -101,9 +100,7 @@ const Chatbot = () => {
         }
       }
 
-      
-      
-      
+ 
       setIsProcessing(false); // Hide processing message
 
       handleNewMessage();
@@ -117,7 +114,6 @@ const Chatbot = () => {
   };
   
 
-  
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
     conversationContainer.scrollTop = conversationContainer.scrollHeight;
@@ -130,7 +126,6 @@ const Chatbot = () => {
   }, [conversation]);
 
 
-  
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
