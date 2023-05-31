@@ -168,14 +168,16 @@ const Chatbot = () => {
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
 
-      <div className="sticky top-0 right-0 z-10 bg-white">
+      <div className="sticky top-0 right-4 z-10 bg-white"> {/* Add right-4 for a 4-pixel space */}
         {isProcessing && (
           <div className="flex justify-end">
+            <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
               <div className="block text-justify">
                 <div className="whitespace-pre-wrap break-words">
                   Ai is processing...
                 </div>
               </div>
+            </div>
           </div>
         )}
       </div>
@@ -201,6 +203,7 @@ const Chatbot = () => {
             </React.Fragment>
           ))}
         </ul>
+
         {isProcessing && (
           <div className="flex justify-start"> {/* <div className="flex justify-end"> Change justify-end to justify-start */}
             <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
