@@ -82,23 +82,22 @@ const Chatbot = () => {
       if (isMobile()) {
         // Mobile device (Android or iPhone/iPad)
         if (botResponse) {
-          const audio = new Audio(
-            `http://api.voicerss.org/?key=4c61b6d8a10143b6ba750516b0062b25&hl=en-us&c=MP3&f=16khz_16bit_stereo&src=${encodeURIComponent(
-              botResponse
-            )}`
-          );
-          audio.play();
+          //const audio = new Audio(
+          //  `http://api.voicerss.org/?key=4c61b6d8a10143b6ba750516b0062b25&hl=en-us&c=MP3&f=16khz_16bit_stereo&src=${encodeURIComponent(
+          //    botResponse
+          //  )}`
+          //);
+          //audio.play();
+          
+          //this is the library <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
+          responsiveVoice.speak(botResponse, "US English Female");
         }
       } else {
         // Other platforms
         if ('speechSynthesis' in window) {
-          //const synth = window.speechSynthesis;
-          //const utterance = new SpeechSynthesisUtterance(botResponse);
-          //synth.speak(utterance);
-          
-          //this is the library <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
-          responsiveVoice.speak(botResponse, "US English Female");
-
+          const synth = window.speechSynthesis;
+          const utterance = new SpeechSynthesisUtterance(botResponse);
+          synth.speak(utterance); 
         } else {
           alert("Text-to-speech is not supported on this device.");
         }
