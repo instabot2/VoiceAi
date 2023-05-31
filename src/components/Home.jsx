@@ -3,15 +3,8 @@ import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
-import responsiveVoice from 'responsivevoice';
-
-
 const Home = () => {
-  
-  const handleButton5Click = () => {
-    responsiveVoice.speak("Start using Voice AI, type or voice input.");
-  };
-  
+
   return (
     <>
 
@@ -19,7 +12,9 @@ const Home = () => {
         logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png"
         name="VoiceAi"
         button5="Get Started"
-        onClickButton5={handleButton5Click}
+        onClickButton5={() => {
+          responsiveVoice.speak("Start using Voice AI, type or voice input.");
+        }}
       />
     
       <section className="text-gray-600  body-font ">
