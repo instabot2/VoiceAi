@@ -190,7 +190,7 @@ const Chatbot = () => {
           ))}
         </ul>
         {isProcessing && (
-          <div className="flex justify-end">
+          <div className="flex justify-start"> {/* <div className="flex justify-end"> Change justify-end to justify-start */}
             <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow overflow-y-auto max-h-full w-auto">
               <div className="block text-justify">
                 <div className="whitespace-pre-wrap break-words">
