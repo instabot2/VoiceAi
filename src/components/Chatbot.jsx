@@ -81,11 +81,8 @@ const Chatbot = () => {
       //const botResponse = conversation[conversation.length - 1]?.output;
       if (isMobile()) {
         // Mobile device (Android or iPhone/iPad)
-        
         responsiveVoice.enableEstimationTimeout = false;
-        
         if (botResponse) {
-          
           //const audio = new Audio(
           //  `http://api.voicerss.org/?key=4c61b6d8a10143b6ba750516b0062b25&hl=en-us&c=MP3&f=16khz_16bit_stereo&src=${encodeURIComponent(
           //    botResponse
@@ -94,9 +91,8 @@ const Chatbot = () => {
           //audio.play();
           
           //this is the library <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
-          responsiveVoice.speak(botResponse.trim(), "US English Female");
+          //responsiveVoice.speak(botResponse.trim(), "US English Female");
           //responsiveVoice.speak("hello world","US English Female");
-          
           const timeoutDuration = 100000;
           // Start the speech synthesis
           responsiveVoice.speak(botResponse.trim(), "US English Female", {
@@ -114,8 +110,6 @@ const Chatbot = () => {
               clearTimeout(timeoutId);
             },
           });
-          
-   
         }
       } else {
         // Other platforms
@@ -139,8 +133,7 @@ const Chatbot = () => {
     }
 
     setInput("");
-  };
-  
+  };  
 
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
@@ -152,7 +145,6 @@ const Chatbot = () => {
     handleNewMessage();
     inputRef.current.focus();
   }, [conversation]);
-
 
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
@@ -207,6 +199,7 @@ const Chatbot = () => {
 
       <div className="sticky bottom-0 z-10 bg-white">
         <form onSubmit={handleSubmit} className="flex items-center">
+          
           <input
             ref={inputRef}
             type="text"
