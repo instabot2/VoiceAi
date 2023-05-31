@@ -70,7 +70,8 @@ const Chatbot = () => {
 
       setMemory(prevMemory => [...prevMemory, output]);
 
-      setConversation([...conversation, { input, output }]);
+      //setConversation([...conversation, { input, output }]);
+      setConversation([{ input, output }, ...conversation])
       document.title = input;
       
       handleNewMessage();
