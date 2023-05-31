@@ -33,6 +33,27 @@ const Chatbot = () => {
     "scala"
   ];
 
+  const handleVoiceInput = () => {
+    if ('webkitSpeechRecognition' in window) {
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+      recognition.start();
+      recognition.onresult = (event) => {
+        const speechResult = event.results[0][0].transcript;
+        setInput(speechResult);
+        recognition.stop();
+      };
+      recognition.onerror = (event) => {
+        console.error("Voice recognition error:", event.error);
+      };
+    } else {
+      alert("Speech recognition is not supported on this device.");
+    }
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -216,6 +237,15 @@ const Chatbot = () => {
             onChange={e => setInput(e.target.value)}
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />
+              
+          <button
+            type="button"
+            onClick={handleVoiceInput}
+            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            Voice
+          </button>
+              
           <button
             type="submit"
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
