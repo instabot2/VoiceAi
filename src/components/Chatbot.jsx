@@ -96,7 +96,8 @@ const Chatbot = () => {
           //const utterance = new SpeechSynthesisUtterance(botResponse);
           //synth.speak(utterance);
           
-          responsiveVoice.speak("hello world", "US English Female");
+          responsiveVoice.speak(encodeURIComponent(botResponse), "US English Female");
+
         } else {
           alert("Text-to-speech is not supported on this device.");
         }
