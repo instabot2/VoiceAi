@@ -260,6 +260,7 @@ const Chatbot = () => {
             onClick={handleVoiceInput}
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
             disabled={isProcessing} // Add disabled attribute if needed
+            onMouseDown={(e) => e.preventDefault()} // Prevent button from getting focus
           >
             {isListening ? "Release to Stop" : "Hold to Speak"}
           </button>
