@@ -10,6 +10,7 @@ const Chatbot = () => {
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
+  const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
 
   const programmingKeywords = [
@@ -66,9 +67,10 @@ const Chatbot = () => {
     } else {
       startListening();
     }
+    setIsListening(prevState => !prevState);
   };
-  
-  
+
+
   
   
   
@@ -264,6 +266,7 @@ const Chatbot = () => {
           >
             {isListening ? "Release to Stop" : "Hold to Speak"}
           </button>
+
               
           <button
             type="submit"
