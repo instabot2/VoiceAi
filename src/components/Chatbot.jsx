@@ -96,6 +96,7 @@ const Chatbot = () => {
           //const utterance = new SpeechSynthesisUtterance(botResponse);
           //synth.speak(utterance);
           
+          //this is the library <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
           responsiveVoice.speak(encodeURIComponent(botResponse), "US English Female");
 
         } else {
