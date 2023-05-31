@@ -13,9 +13,11 @@ const Home = () => {
         name="VoiceAi"
         button5="Get Started"
         onClickButton5={() => {
+          alert("dsadsa");
           responsiveVoice.speak("Start using Voice AI, type or voice input.");
         }}
       />
+
     
       <section className="text-gray-600  body-font ">
         <div className="container px-5 py-24 mx-auto flex flex-col">
