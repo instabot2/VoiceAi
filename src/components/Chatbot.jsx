@@ -100,7 +100,7 @@ const Chatbot = () => {
               // Speech synthesis has started
               setTimeout(function () {
                 // Stop the speech synthesis after the timeout duration
-                responsiveVoice.cancel();
+                //responsiveVoice.cancel();
                 //alert("Speech synthesis timed out.");
               }, timeoutDuration);
             },
