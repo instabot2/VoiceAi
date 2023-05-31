@@ -67,13 +67,9 @@ const Chatbot = () => {
     } else {
       startListening();
     }
-    setIsListening(prevState => !prevState);
   };
 
 
-  
-  
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -263,6 +259,7 @@ const Chatbot = () => {
             type="button"
             onClick={handleVoiceInput}
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+            disabled={isProcessing} // Add disabled attribute if needed
           >
             {isListening ? "Release to Stop" : "Hold to Speak"}
           </button>
