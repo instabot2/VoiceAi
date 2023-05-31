@@ -10,9 +10,49 @@ const Chatbot = () => {
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
-  const [isListening, setIsListening] = useState(false);
-  const recognitionRef = useRef(null);
 
+
+  const recognitionRef = useRef(null);
+  const [isListening, setIsListening] = useState(false);
+
+  const startListening = () => {
+    const recognition = new window.SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+    recognitionRef.current = recognition;
+    recognition.onresult = (event) => {
+      const speechResult = event.results[0][0].transcript;
+      window.alert(speechResult);
+      setInput(speechResult);
+    };
+    recognition.onerror = (event) => {
+      console.error("Voice recognition error:", event.error);
+    };
+    recognition.start();
+    setIsListening(true);
+  };
+
+  const stopListening = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+    }
+    setIsListening(false);
+  };
+
+  const handleVoiceInput = () => {
+    if (isListening) {
+      stopListening();
+      window.alert("stopListening");
+    } else {
+      startListening();
+      window.alert("startListening");
+    }
+  };
+
+  
+  
+  
   const programmingKeywords = [
     "programming",
     "code",
@@ -34,38 +74,6 @@ const Chatbot = () => {
     "rust",
     "scala"
   ];
-
-
-  const startListening = () => {
-    const recognition = new window.SpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = false;
-    recognition.lang = 'en-US';
-    recognitionRef.current = recognition;
-    recognition.onresult = (event) => {
-      const speechResult = event.results[0][0].transcript;
-      setInput(speechResult);
-    };
-    recognition.onerror = (event) => {
-      console.error("Voice recognition error:", event.error);
-    };
-    recognition.start();
-  };
-  const stopListening = () => {
-    if (recognitionRef.current) {
-      recognitionRef.current.stop();
-    }
-  };
-  const handleVoiceInput = () => {
-    if (isListening) {
-      //stopListening();
-      window.alert(`stopListening`);
-    } else {
-      //startListening();
-      window.alert(`startListening`);
-    }
-  };
-
 
 
   const handleSubmit = async (e) => {
