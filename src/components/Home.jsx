@@ -17,7 +17,6 @@ const Home = () => {
         logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png"
         name="VoiceAi"
         button5="Get Started"
-        onClickButton5={() => responsiveVoice.speak("Start using Voice AI, type or voice input.")}
       />
 
       <section className="text-gray-600  body-font ">
