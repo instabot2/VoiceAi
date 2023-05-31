@@ -17,8 +17,8 @@ const Home = () => {
       <Navbar1
         logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png"
         name="VoiceAi"
-        button5="Get Started"
-        onClickButton5={handleButton5Click}
+        button="Get Started"
+        onClick={handleButton5Click}
       />
 
     
