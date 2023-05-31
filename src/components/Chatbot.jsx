@@ -92,9 +92,11 @@ const Chatbot = () => {
       } else {
         // Other platforms
         if ('speechSynthesis' in window) {
-          const synth = window.speechSynthesis;
-          const utterance = new SpeechSynthesisUtterance(botResponse);
-          synth.speak(utterance);
+          //const synth = window.speechSynthesis;
+          //const utterance = new SpeechSynthesisUtterance(botResponse);
+          //synth.speak(utterance);
+          
+          responsiveVoice.speak("hello world", "US English Female");
         } else {
           alert("Text-to-speech is not supported on this device.");
         }
