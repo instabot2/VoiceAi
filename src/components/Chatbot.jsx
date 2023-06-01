@@ -4,8 +4,9 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
-import React from 'react';
+//import React from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
