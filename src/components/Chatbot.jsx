@@ -10,7 +10,7 @@ const Chatbot = () => {
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
 
-  const [isListening, setIsListening] = useState(false);
+  //const [isListening, setIsListening] = useState(false);
   const conversationRef = useRef(null);
 
 
@@ -169,38 +169,20 @@ const Chatbot = () => {
 
 
 
-  const startSpeechRecognition = () => {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = "en-US";
+ const VoiceToText = () => {
+  const [transcript, setTranscript] = useState('');
+
+  const handleVoiceButtonClick = () => {
+    const recognition = new window.webkitSpeechRecognition();
+    recognition.lang = 'en-US';
+
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      setInput(transcript);
-      handleSubmit(event);
-      stopSpeechRecognition();
+      const { transcript } = event.results[0][0];
+      setTranscript(transcript);
     };
-    recognition.onerror = (event) => {
-      console.error("Speech recognition error:", event.error);
-      stopSpeechRecognition();
-    };
+
     recognition.start();
   };
-
-  const stopSpeechRecognition = () => {
-    recognition.stop();
-  };
-
-  useEffect(() => {
-    // Request permission to use the microphone
-    navigator.permissions.query({ name: 'microphone' }).then((permissionStatus) => {
-      if (permissionStatus.state === 'granted') {
-        setIsListening(true);
-      } else {
-        console.error('Microphone permission denied');
-      }
-    });
-  }, []);
-
-
 
 
 
@@ -261,14 +243,11 @@ const Chatbot = () => {
           />
               
 
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
-            onClick={handleVoiceButtonClick}
-          >
-            {isListening ? 'Stop Listening' : 'Start Listening'}
-          </button>
-            
+          <div>
+            <button onClick={handleVoiceButtonClick}>Start Listening</button>
+            <p>{transcript}</p>
+          </div>
+
 
           <button
             type="submit"
