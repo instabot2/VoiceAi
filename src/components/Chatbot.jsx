@@ -174,17 +174,7 @@ const Chatbot = () => {
 
 
 
-  const InputField = () => {
-    const [input, setInput] = useState('');
-    const inputRef = useRef(null);
-    const { listen, stop } = useSpeechRecognition({
-      onResult: (result) => {
-        setInput(result);
-      }
-    });
-    const handleInputChange = (e) => {
-      setInput(e.target.value);
-    };
+
 
 
 
