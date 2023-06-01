@@ -174,7 +174,7 @@ const Chatbot = () => {
 
 
   const Example = () => {
-    const [value, setValue] = useState('');
+    //const [value, setValue] = useState('');
     const { listen, stop } = useSpeechRecognition({
       onResult: (result) => {
         setValue(result);
