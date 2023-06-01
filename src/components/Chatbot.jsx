@@ -48,19 +48,23 @@ const Chatbot = () => {
       } else {
         const recognition = new webkitSpeechRecognition();
         recognition.lang = 'en-US';
+
         recognition.onstart = () => {
           setListening(true);
         };
+
         recognition.onresult = (event) => {
           const result = event.results[0][0].transcript;
           setInput(result);
           inputRef.current.value = result; // Set the value of the input field using the ref
         };
+
         recognition.onend = () => {
           if (listening) {
             recognition.start(); // Restart recognition if it was stopped unexpectedly
           }
         };
+
         recognitionRef.current = recognition;
         recognition.start();
       }
@@ -69,6 +73,7 @@ const Chatbot = () => {
       alert('Speech recognition is not supported in this browser.');
     }
   };
+
 
   
   
