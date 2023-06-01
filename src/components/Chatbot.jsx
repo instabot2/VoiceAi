@@ -4,8 +4,9 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
-//import React from 'react';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+//import React, { useState } from 'react';
+import { useSpeechRecognition } from 'react-speech-kit';
+
 
 
 const Chatbot = () => {
@@ -173,17 +174,7 @@ const Chatbot = () => {
 
 
 
-  const Dictaphone = () => {
-    const {
-      transcript,
-      listening,
-      resetTranscript,
-      browserSupportsSpeechRecognition
-    } = useSpeechRecognition();
 
-    if (!browserSupportsSpeechRecognition) {
-      return <span>Browser doesn't support speech recognition.</span>;
-    }
 
 
 
