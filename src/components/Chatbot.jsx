@@ -22,9 +22,14 @@ const Chatbot = () => {
   const conversationRef = useRef(null);
 
   const [isListening, setIsListening] = useState(false);
+  useEffect(() => {
+    handleListen();
+  }, [isListening]);
 
 
-
+  
+  
+  
   
   
   const programmingKeywords = [
