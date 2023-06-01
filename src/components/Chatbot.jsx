@@ -5,15 +5,15 @@ import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
 //import React, { useState } from 'react';
-import { useSpeechRecognition } from 'react-speech-kit';
+//import { useSpeechRecognition } from 'react-speech-kit';
 
 const VoiceToText = () => {
   const [transcript, setTranscript] = useState('');
   const handleSpeechRecognition = () => {
-    if ('webkitSpeechRecognition' in window) {
-      const recognition = new window.webkitSpeechRecognition();
-      recognition.continuous = false;
-      recognition.interimResults = false;
+    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
       recognition.lang = 'en-US';
       recognition.onresult = (event) => {
         const result = event.results[0][0].transcript;
