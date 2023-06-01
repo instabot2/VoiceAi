@@ -4,8 +4,13 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
-//import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-//import useClipboard from 'react-use-clipboard';
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+const mic = new SpeechRecognition();
+
+mic.continuous = true;
+mic.interimResults = true;
+mic.lang = 'en-US';
 
 
 const Chatbot = () => {
@@ -15,6 +20,48 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
+  const [isListening, setIsListening] = useState(false);
+  
+  useEffect(() => {
+    handleListen();
+  }, [isListening]);
+  
+  const inputRef = useRef(null);
+  useEffect(() => {
+    handleNewMessage();
+    inputRef.current.focus();
+  }, [conversation]);
+
+  const handleListen = () => {
+    if (isListening) {
+      mic.start();
+      mic.onend = () => {
+        console.log('continue..');
+        mic.start();
+      };
+    } else {
+      mic.stop();
+      mic.onend = () => {
+        console.log('Stopped Mic on Click');
+      };
+    }
+    mic.onstart = () => {
+      console.log('Mics on');
+    };
+
+    mic.onresult = (event) => {
+      const transcript = Array.from(event.results)
+        .map((result) => result[0])
+        .map((result) => result.transcript)
+        .join('');
+      console.log(transcript);
+      mic.onerror = (event) => {
+        console.log(event.error);
+      };
+    };
+  
+  
+  
   
   const programmingKeywords = [
     "programming",
@@ -38,11 +85,6 @@ const Chatbot = () => {
     "scala"
   ];
 
-  
-
-
-  
-  
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -156,14 +198,8 @@ const Chatbot = () => {
     conversationContainer.scrollTop = 0;
   };
 
-  const inputRef = useRef(null);
-  useEffect(() => {
-    handleNewMessage();
-    inputRef.current.focus();
-  }, [conversation]);
 
 
-  
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
@@ -246,7 +282,9 @@ const Chatbot = () => {
             Send
           </button>
 
-
+          <button onClick={() => setIsListening((prevState) => !prevState)}>
+            {isListening ? 'Stop Listening' : 'Start Listening'}
+          </button>
 
 
         </form>
