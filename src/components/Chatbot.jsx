@@ -248,6 +248,11 @@ const Chatbot = () => {
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />
               
+          <button
+            type="button"
+            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+          >
+          </button>
 
               
               
