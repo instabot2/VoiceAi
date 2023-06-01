@@ -21,7 +21,7 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
-  //const [isListening, setIsListening] = useState(false);
+
   const [isListening, setIsListening] = useState(false);
 
   useEffect(() => {
@@ -286,7 +286,7 @@ const Chatbot = () => {
             onClick={() => setIsListening((prevState) => !prevState)}>
             {isListening ? <span>🛑🎙️</span> : <span>🎙️</span>}
           </button>
-          <p>{note}</p>
+
 
 
         </form>
