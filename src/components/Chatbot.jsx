@@ -21,43 +21,9 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
-  //const [isListening, setIsListening] = useState(false);
-  
-  useEffect(() => {
-    handleListen();
-  }, [isListening]);
-  
 
 
-  const handleListen = () => {
-    if (isListening) {
-      mic.start();
-      mic.onend = () => {
-        console.log('continue..');
-        mic.start();
-      };
-    } else {
-      mic.stop();
-      mic.onend = () => {
-        console.log('Stopped Mic on Click');
-      };
-    }
-    mic.onstart = () => {
-      console.log('Mics on');
-    };
 
-    mic.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .map((result) => result[0])
-        .map((result) => result.transcript)
-        .join('');
-      console.log(transcript);
-      mic.onerror = (event) => {
-        console.log(event.error);
-      };
-    };
-  
-  
   
   
   const programmingKeywords = [
@@ -281,9 +247,7 @@ const Chatbot = () => {
             Send
           </button>
 
-          <button onClick={() => setIsListening((prevState) => !prevState)}>
-            {isListening ? 'Stop Listening' : 'Start Listening'}
-          </button>
+
 
 
         </form>
