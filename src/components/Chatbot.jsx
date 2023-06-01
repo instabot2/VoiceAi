@@ -172,6 +172,25 @@ const Chatbot = () => {
   };
 
 
+  const Dictaphone = () => {
+    const {
+      transcript,
+      listening,
+      resetTranscript,
+      browserSupportsSpeechRecognition
+    } = useSpeechRecognition();
+    const startListening = () => {
+      SpeechRecognition.startListening({ continuous: true });
+    };
+    const stopListening = () => {
+      SpeechRecognition.stopListening();
+    };
+    const handleReset = () => {
+      resetTranscript();
+    };
+    if (!browserSupportsSpeechRecognition) {
+      return <span>Browser doesn't support speech recognition.</span>;
+    }
 
 
 
