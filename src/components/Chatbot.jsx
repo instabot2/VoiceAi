@@ -169,24 +169,35 @@ const Chatbot = () => {
 
 
 
-  const startSpeechRecognition = () => {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = "en-US";
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      setInput(transcript);
-      handleSubmit(event);
-      stopSpeechRecognition();
+  const [recognition, setRecognition] = useState(null);
+  useEffect(() => {
+    const initializeRecognition = () => {
+      const newRecognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      newRecognition.lang = "en-US";
+      newRecognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setInput(transcript);
+        handleSubmit(event);
+        stopSpeechRecognition();
+      };
+      newRecognition.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+        stopSpeechRecognition();
+      };
+      setRecognition(newRecognition);
     };
-    recognition.onerror = (event) => {
-      console.error("Speech recognition error:", event.error);
-      stopSpeechRecognition();
-    };
-    recognition.start();
-  };
+    initializeRecognition();
+  }, []);
 
+  const startSpeechRecognition = () => {
+    if (recognition) {
+      recognition.start();
+    }
+  };
   const stopSpeechRecognition = () => {
-    recognition.stop();
+    if (recognition) {
+      recognition.stop();
+    }
   };
   const handleVoiceButtonClick = () => {
     if (isListening) {
@@ -195,7 +206,6 @@ const Chatbot = () => {
       startSpeechRecognition();
     }
   };
-
 
 
 
@@ -264,7 +274,7 @@ const Chatbot = () => {
           >
             {isListening ? 'Stop Listening' : 'Start Listening'}
           </button>
-              
+
               
           <button
             type="submit"
