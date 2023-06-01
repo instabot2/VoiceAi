@@ -67,6 +67,7 @@ const Chatbot = () => {
 
         recognitionRef.current = recognition;
         recognition.start();
+        alert('Speech recognition is supported in this browser.'); // Show success alert when recognition starts
       }
     } else {
       console.log('Speech recognition not supported in this browser.');
