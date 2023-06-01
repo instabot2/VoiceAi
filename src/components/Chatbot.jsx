@@ -81,7 +81,8 @@ const Chatbot = () => {
 
     // Get data from memory and concatenate with input
     const memoryData = memory.join(" ");
-    const inputWithMemory = `${memoryData} ${input}`;
+    //const inputWithMemory = `${memoryData} ${input}`;
+    const inputWithMemory = `${input} ${memoryData}`;
     // Display alert with captured memory data
     //window.alert(`Captured Memory Data: ${inputWithMemory}`);
 
