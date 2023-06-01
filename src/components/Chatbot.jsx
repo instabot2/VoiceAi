@@ -24,6 +24,10 @@ const Chatbot = () => {
   //const [isListening, setIsListening] = useState(false);
   const [isListening, setIsListening] = useState(false);
 
+  useEffect(() => {
+    handleListen();
+  }, [isListening]);
+  
   const handleListen = () => {
     if (isListening) {
       mic.start();
