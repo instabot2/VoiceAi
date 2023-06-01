@@ -4,19 +4,18 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import useClipboard from 'react-use-clipboard';
+
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
-
-  const [listening, setListening] = useState(false);
-  //const inputRef = useRef(null);
-  const recognitionRef = useRef(null);
-  
   const conversationRef = useRef(null);
 
+  
   const programmingKeywords = [
     "programming",
     "code",
@@ -40,40 +39,6 @@ const Chatbot = () => {
   ];
 
   
-  const handleSpeechRecognition = () => {
-    if ('webkitSpeechRecognition' in window) {
-      if (listening) {
-        recognitionRef.current.stop();
-        setListening(false);
-      } else {
-        const recognition = new webkitSpeechRecognition();
-        recognition.lang = 'en-US';
-
-        recognition.onstart = () => {
-          setListening(true);
-        };
-
-        recognition.onresult = (event) => {
-          const result = event.results[0][0].transcript;
-          setInput(result);
-          inputRef.current.value = result; // Set the value of the input field using the ref
-        };
-
-        recognition.onend = () => {
-          if (listening) {
-            recognition.start(); // Restart recognition if it was stopped unexpectedly
-          }
-        };
-
-        recognitionRef.current = recognition;
-        recognition.start();
-        alert('Speech recognition is supported in this browser.'); // Show success alert when recognition starts
-      }
-    } else {
-      console.log('Speech recognition not supported in this browser.');
-      alert('Speech recognition is not supported in this browser.');
-    }
-  };
 
 
   
@@ -195,7 +160,6 @@ const Chatbot = () => {
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
-    handleSpeechRecognition(); // Add this line to trigger speech recognition automatically
   }, [conversation]);
 
 
@@ -282,13 +246,7 @@ const Chatbot = () => {
             Send
           </button>
 
-          <button
-            type="button"
-            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
-            onClick={handleSpeechRecognition}
-          >
-            {listening ? 'Listening...' : 'Start Listening'}
-          </button>
+
 
 
         </form>
