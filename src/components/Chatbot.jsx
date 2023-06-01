@@ -234,9 +234,6 @@ const Chatbot = () => {
           />
               
 
-          <button onMouseDown={} onMouseUp={}>
-            🎤
-          </button>
 
 
           <button
