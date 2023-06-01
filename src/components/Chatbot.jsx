@@ -10,7 +10,7 @@ const Chatbot = () => {
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
 
-  //const [isListening, setIsListening] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const conversationRef = useRef(null);
 
 
@@ -248,13 +248,6 @@ const Chatbot = () => {
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />
               
-          <button
-            type="button"
-            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
-            onClick={isListening ? stopSpeechRecognition : startSpeechRecognition}
-          >
-            {isListening ? 'Stop Listening' : 'Start Listening'}
-          </button>
 
               
               
