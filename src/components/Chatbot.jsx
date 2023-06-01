@@ -37,27 +37,28 @@ const Chatbot = () => {
   ];
 
   
-  const [listening, setListening] = useState(false);
   const handleSpeechRecognition = () => {
     if ('webkitSpeechRecognition' in window) {
-      alert('Speech recognition supported in this browser.');
-      
-      const recognition = new webkitSpeechRecognition();
-      recognition.lang = 'en-US';
-      recognition.onstart = () => {
-        setListening(true);
-      };
-      recognition.onresult = (event) => {
-        const result = event.results[0][0].transcript;
-        setInput(result);
-        inputRef.current.value = result; // Set the value of the input field using the ref
-      };
-      recognition.onend = () => {
-        setListening(false);
-      };
       if (listening) {
-        recognition.stop();
+        recognitionRef.current.stop();
+        setListening(false);
       } else {
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.onstart = () => {
+          setListening(true);
+        };
+        recognition.onresult = (event) => {
+          const result = event.results[0][0].transcript;
+          setInput(result);
+          inputRef.current.value = result; // Set the value of the input field using the ref
+        };
+        recognition.onend = () => {
+          if (listening) {
+            recognition.start(); // Restart recognition if it was stopped unexpectedly
+          }
+        };
+        recognitionRef.current = recognition;
         recognition.start();
       }
     } else {
@@ -66,8 +67,6 @@ const Chatbot = () => {
     }
   };
 
-
-  
   
   
   
