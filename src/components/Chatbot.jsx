@@ -212,6 +212,7 @@ const Chatbot = () => {
               <div className="block text-justify">
                 <div className="whitespace-pre-wrap break-words">
                   Ai processing...
+                  {responsiveVoice.speak("hello world", "US English Female")}
                 </div>
               </div>
             </div>
