@@ -7,25 +7,6 @@ import Navbar from "./Navbar";
 //import React, { useState } from 'react';
 //import { useSpeechRecognition } from 'react-speech-kit';
 
-const VoiceToText = () => {
-  const [transcript, setTranscript] = useState('');
-  const handleSpeechRecognition = () => {
-    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-      const SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
-      const recognition = new SpeechRecognition();
-      recognition.lang = 'en-US';
-      recognition.onresult = (event) => {
-        const result = event.results[0][0].transcript;
-        setTranscript(result);
-      };
-      recognition.start();
-    } else {
-      console.log('Speech recognition not supported in this browser.');
-    }
-  };
-
-
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
@@ -35,7 +16,6 @@ const Chatbot = () => {
 
   //const [isListening, setIsListening] = useState(false);
   const conversationRef = useRef(null);
-
 
   const programmingKeywords = [
     "programming",
@@ -59,6 +39,22 @@ const Chatbot = () => {
     "scala"
   ];
 
+  
+  const handleSpeechRecognition = () => {
+    if ('webkitSpeechRecognition' in window) {
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.onresult = (event) => {
+        const result = event.results[0][0].transcript;
+        setInput(result);
+      };
+      recognition.start();
+    } else {
+      console.log('Speech recognition not supported in this browser.');
+    }
+  };
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -251,15 +247,14 @@ const Chatbot = () => {
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />
               
-
-
-
           <button
             type="submit"
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
           >
             Send
           </button>
+
+          <button onClick={handleSpeechRecognition}>Start Listening</button>
 
         </form>
       </div>
