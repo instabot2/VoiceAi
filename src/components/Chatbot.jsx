@@ -13,7 +13,6 @@ const Chatbot = () => {
   const [isListening, setIsListening] = useState(false);
   const conversationRef = useRef(null);
 
-  
 
   const programmingKeywords = [
     "programming",
@@ -36,7 +35,6 @@ const Chatbot = () => {
     "rust",
     "scala"
   ];
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -144,9 +142,6 @@ const Chatbot = () => {
     setInput("");
   };  
 
-  
-  
-  
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
     //conversationContainer.scrollTop = conversationContainer.scrollHeight;
@@ -171,6 +166,40 @@ const Chatbot = () => {
   const handleResetMemory = () => {
     setMemory([]);
   };
+
+  const startSpeechRecognition = () => {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "en-US";
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(transcript);
+      handleSubmit(event);
+      stopSpeechRecognition();
+    };
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+      stopSpeechRecognition();
+    };
+    recognition.start();
+  };
+  const stopSpeechRecognition = () => {
+    recognition.stop();
+  };
+
+  useEffect(() => {
+    // Request permission to use the microphone
+    navigator.permissions
+      .query({ name: 'microphone' })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === 'granted') {
+          // User has granted permission, enable the button
+          setIsListening(true);
+        } else {
+          console.error('Microphone permission denied');
+        }
+      });
+  }, []);
+
 
   return (
     <div className="h-screen flex flex-col">
