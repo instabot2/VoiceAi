@@ -12,6 +12,7 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
 
   const [listening, setListening] = useState(false);
+  const inputRef = useRef(null);
   const recognitionRef = useRef(null);
   
   const conversationRef = useRef(null);
@@ -276,11 +277,11 @@ const Chatbot = () => {
           </button>
 
           <button
-            type="submit"
+            type="button"
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
             onClick={handleSpeechRecognition}
           >
-            {listening ? 'Stop Listening' : 'Start Listening'}
+            {listening ? 'Listening...' : 'Start Listening'}
           </button>
 
 
