@@ -40,7 +40,17 @@ const Chatbot = () => {
     mic.onstart = () => {
       console.log('Mics on');
     };
-
+    mic.onresult = (event) => {
+      const transcript = Array.from(event.results)
+        .map((result) => result[0])
+        .map((result) => result.transcript)
+        .join('');
+      console.log(transcript);
+      mic.onerror = (event) => {
+        console.log(event.error);
+      };
+    };
+  };
   
   
   
