@@ -4,9 +4,6 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
-//import React, { useState } from 'react';
-//import { useSpeechRecognition } from 'react-speech-kit';
-
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
@@ -194,6 +191,7 @@ const Chatbot = () => {
 
 
   return (
+    
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
 
@@ -254,7 +252,12 @@ const Chatbot = () => {
             Send
           </button>
 
-          <button onClick={handleSpeechRecognition}>Start Listening</button>
+          <button 
+            type="submit"
+            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+            onClick={handleSpeechRecognition}>
+              Listening
+          </button>
 
         </form>
       </div>
