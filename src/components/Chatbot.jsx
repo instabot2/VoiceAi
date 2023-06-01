@@ -37,26 +37,37 @@ const Chatbot = () => {
   ];
 
   
+  const [listening, setListening] = useState(false);
   const handleSpeechRecognition = () => {
     if ('webkitSpeechRecognition' in window) {
- 
       const recognition = new webkitSpeechRecognition();
       recognition.lang = 'en-US';
-
+      recognition.onstart = () => {
+        setListening(true);
+      };
       recognition.onresult = (event) => {
         const result = event.results[0][0].transcript;
         setInput(result);
         inputRef.current.value = result; // Set the value of the input field using the ref
-        alert('Speech recognition inputRef.');
       };
-
-      recognition.start();
+      recognition.onend = () => {
+        setListening(false);
+      };
+      if (listening) {
+        recognition.stop();
+      } else {
+        recognition.start();
+      }
     } else {
       console.log('Speech recognition not supported in this browser.');
       alert('Speech recognition is not supported in this browser.');
     }
   };
 
+
+  
+  
+  
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -261,12 +272,14 @@ const Chatbot = () => {
             Send
           </button>
 
-          <button 
+          <button
             type="submit"
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
-            onClick={handleSpeechRecognition}>
-              Listening
+            onClick={handleSpeechRecognition}
+          >
+            {listening ? 'Stop Listening' : 'Start Listening'}
           </button>
+
 
         </form>
       </div>
