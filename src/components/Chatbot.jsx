@@ -11,9 +11,6 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
   
-  const [isListening, setIsListening] = useState(false);
-
-
 
   const programmingKeywords = [
     "programming",
@@ -146,23 +143,6 @@ const Chatbot = () => {
 
   
   
-
-  
-  useEffect(() => {
-    // Request permission to use the microphone
-    navigator.permissions
-      .query({ name: 'microphone' })
-      .then((permissionStatus) => {
-        if (permissionStatus.state === 'granted') {
-          // User has granted permission, enable the button
-          setIsListening(true);
-        } else {
-          console.error('Microphone permission denied');
-        }
-      });
-  }, []);
-  
-  
   
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
@@ -243,17 +223,6 @@ const Chatbot = () => {
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />
               
-
-
-          <button
-            id="startButton"
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            
-          >
-            {isListening ? 'Stop Listening' : 'Start Listening'}
-          </button>
-
 
               
           <button
