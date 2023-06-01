@@ -21,6 +21,7 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
+  const [isListening, setIsListening] = useState(false);
 
 
 
