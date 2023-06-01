@@ -243,10 +243,6 @@ const Chatbot = () => {
           />
               
 
-          <div>
-            <button onClick={handleVoiceButtonClick}>Start Listening</button>
-            <p>{transcript}</p>
-          </div>
 
 
           <button
