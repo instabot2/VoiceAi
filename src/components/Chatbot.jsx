@@ -281,11 +281,7 @@ const Chatbot = () => {
             Send
           </button>
 
-          <button 
-            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
-            onClick={() => setIsListening((prevState) => !prevState)}>
-            {isListening ? <span>🛑🎙️</span> : <span>🎙️</span>}
-          </button>
+
 
 
 
