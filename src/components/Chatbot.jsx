@@ -9,9 +9,10 @@ const Chatbot = () => {
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
-
-  const [isListening, setIsListening] = useState(false);
   const conversationRef = useRef(null);
+  
+  const [isListening, setIsListening] = useState(false);
+
 
 
   const programmingKeywords = [
@@ -145,28 +146,7 @@ const Chatbot = () => {
 
   
   
-  const startSpeechRecognition = () => {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = "en-US";
 
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      setInput(transcript);
-      handleSubmit(event);
-      stopSpeechRecognition();
-    };
-
-    recognition.onerror = (event) => {
-      console.error("Speech recognition error:", event.error);
-      stopSpeechRecognition();
-    };
-
-    recognition.start();
-  };
-
-  const stopSpeechRecognition = () => {
-    recognition.stop();
-  };
   
   useEffect(() => {
     // Request permission to use the microphone
@@ -269,7 +249,7 @@ const Chatbot = () => {
             id="startButton"
             type="button"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={isListening ? stopSpeechRecognition : startSpeechRecognition}
+            
           >
             {isListening ? 'Stop Listening' : 'Start Listening'}
           </button>
