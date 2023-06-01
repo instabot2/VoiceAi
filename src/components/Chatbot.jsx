@@ -167,6 +167,8 @@ const Chatbot = () => {
     setMemory([]);
   };
 
+
+
   const startSpeechRecognition = () => {
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = "en-US";
@@ -183,8 +185,12 @@ const Chatbot = () => {
     recognition.start();
   };
   const stopSpeechRecognition = () => {
+    // Declare the recognition variable here
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.stop();
   };
+
+
 
   useEffect(() => {
     // Request permission to use the microphone
