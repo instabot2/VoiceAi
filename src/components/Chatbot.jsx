@@ -5,7 +5,7 @@ import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import useClipboard from 'react-use-clipboard';
+//import useClipboard from 'react-use-clipboard';
 
 
 const Chatbot = () => {
