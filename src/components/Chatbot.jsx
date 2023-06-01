@@ -169,44 +169,37 @@ const Chatbot = () => {
 
 
 
-  const [recognition, setRecognition] = useState(null);
-  useEffect(() => {
-    const initializeRecognition = () => {
-      const newRecognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      newRecognition.lang = "en-US";
-      newRecognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        setInput(transcript);
-        handleSubmit(event);
-        stopSpeechRecognition();
-      };
-      newRecognition.onerror = (event) => {
-        console.error("Speech recognition error:", event.error);
-        stopSpeechRecognition();
-      };
-      setRecognition(newRecognition);
-    };
-    initializeRecognition();
-  }, []);
   const startSpeechRecognition = () => {
-    if (recognition) {
-      recognition.start();
-    }
-  };
-  const stopSpeechRecognition = () => {
-    if (recognition) {
-      recognition.stop();
-    }
-  };
-  const handleVoiceButtonClick = () => {
-    if (isListening) {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "en-US";
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(transcript);
+      handleSubmit(event);
       stopSpeechRecognition();
-      alert('Stopped listening');
-    } else {
-      startSpeechRecognition();
-      alert('Started listening');
-    }
+    };
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+      stopSpeechRecognition();
+    };
+    recognition.start();
   };
+
+  const stopSpeechRecognition = () => {
+    recognition.stop();
+  };
+
+  useEffect(() => {
+    // Request permission to use the microphone
+    navigator.permissions.query({ name: 'microphone' }).then((permissionStatus) => {
+      if (permissionStatus.state === 'granted') {
+        setIsListening(true);
+      } else {
+        console.error('Microphone permission denied');
+      }
+    });
+  }, []);
+
 
 
 
@@ -277,7 +270,8 @@ const Chatbot = () => {
           >
             {isListening ? 'Stop Listening' : 'Start Listening'}
           </button>
-              
+            
+
           <button
             type="submit"
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
