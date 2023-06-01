@@ -39,6 +39,7 @@ const Chatbot = () => {
   
   const handleSpeechRecognition = () => {
     if ('webkitSpeechRecognition' in window) {
+      alert('Speech recognition supported in this browser.');
       const recognition = new webkitSpeechRecognition();
       recognition.lang = 'en-US';
       recognition.onresult = (event) => {
