@@ -184,11 +184,19 @@ const Chatbot = () => {
     };
     recognition.start();
   };
+
   const stopSpeechRecognition = () => {
-    // Declare the recognition variable here
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.stop();
   };
+  const handleVoiceButtonClick = () => {
+    if (isListening) {
+      stopSpeechRecognition();
+    } else {
+      startSpeechRecognition();
+    }
+  };
+
+
 
 
 
@@ -248,12 +256,14 @@ const Chatbot = () => {
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />
               
+
           <button
             type="button"
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+            onClick={handleVoiceButtonClick}
           >
+            {isListening ? 'Stop Listening' : 'Start Listening'}
           </button>
-
               
               
           <button
