@@ -9,50 +9,11 @@ const Chatbot = () => {
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
+
+  const [isListening, setIsListening] = useState(false);
   const conversationRef = useRef(null);
 
 
-  const recognitionRef = useRef(null);
-  const [isListening, setIsListening] = useState(false);
-
-  const startListening = () => {
-    const recognition = new window.SpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = false;
-    recognition.lang = 'en-US';
-    recognitionRef.current = recognition;
-    recognition.onresult = (event) => {
-      const speechResult = event.results[0][0].transcript;
-      window.alert(speechResult);
-      setInput(speechResult);
-    };
-    recognition.onerror = (event) => {
-      console.error("Voice recognition error:", event.error);
-    };
-    recognition.start();
-    setIsListening(true);
-  };
-
-  const stopListening = () => {
-    if (recognitionRef.current) {
-      recognitionRef.current.stop();
-    }
-    setIsListening(false);
-  };
-
-  const handleVoiceInput = () => {
-    if (isListening) {
-      stopListening();
-      window.alert("stopListening");
-    } else {
-      startListening();
-      window.alert("startListening");
-    }
-  };
-
-  
-  
-  
   const programmingKeywords = [
     "programming",
     "code",
@@ -182,6 +143,47 @@ const Chatbot = () => {
     setInput("");
   };  
 
+  
+  
+  const startSpeechRecognition = () => {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "en-US";
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(transcript);
+      handleSubmit(event);
+      stopSpeechRecognition();
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+      stopSpeechRecognition();
+    };
+
+    recognition.start();
+  };
+
+  const stopSpeechRecognition = () => {
+    recognition.stop();
+  };
+  
+  useEffect(() => {
+    // Request permission to use the microphone
+    navigator.permissions
+      .query({ name: 'microphone' })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === 'granted') {
+          // User has granted permission, enable the button
+          setIsListening(true);
+        } else {
+          console.error('Microphone permission denied');
+        }
+      });
+  }, []);
+  
+  
+  
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
     //conversationContainer.scrollTop = conversationContainer.scrollHeight;
@@ -264,9 +266,10 @@ const Chatbot = () => {
 
 
           <button
+            id="startButton"
             type="button"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={handleVoiceInput}
+            onClick={isListening ? stopSpeechRecognition : startSpeechRecognition}
           >
             {isListening ? 'Stop Listening' : 'Start Listening'}
           </button>
