@@ -4,6 +4,7 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
+
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 const mic = new SpeechRecognition();
@@ -20,17 +21,13 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
-  const [isListening, setIsListening] = useState(false);
+  //const [isListening, setIsListening] = useState(false);
   
   useEffect(() => {
     handleListen();
   }, [isListening]);
   
-  const inputRef = useRef(null);
-  useEffect(() => {
-    handleNewMessage();
-    inputRef.current.focus();
-  }, [conversation]);
+
 
   const handleListen = () => {
     if (isListening) {
@@ -198,8 +195,6 @@ const Chatbot = () => {
     conversationContainer.scrollTop = 0;
   };
 
-
-
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
@@ -213,7 +208,11 @@ const Chatbot = () => {
     setMemory([]);
   };
 
-
+  const inputRef = useRef(null);
+  useEffect(() => {
+    handleNewMessage();
+    inputRef.current.focus();
+  }, [conversation]);
 
 
 
