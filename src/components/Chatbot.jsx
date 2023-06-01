@@ -4,6 +4,9 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
+//import React from 'react';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
@@ -169,20 +172,27 @@ const Chatbot = () => {
 
 
 
- const VoiceToText = () => {
-  const [transcript, setTranscript] = useState('');
 
-  const handleVoiceButtonClick = () => {
-    const recognition = new window.webkitSpeechRecognition();
-    recognition.lang = 'en-US';
 
-    recognition.onresult = (event) => {
-      const { transcript } = event.results[0][0];
-      setTranscript(transcript);
+  const Dictaphone = () => {
+    const {
+      transcript,
+      listening,
+      resetTranscript,
+      browserSupportsSpeechRecognition
+    } = useSpeechRecognition();
+    const startListening = () => {
+      SpeechRecognition.startListening({ continuous: true });
     };
-
-    recognition.start();
-  };
+    const stopListening = () => {
+      SpeechRecognition.stopListening();
+    };
+    const handleReset = () => {
+      resetTranscript();
+    };
+    if (!browserSupportsSpeechRecognition) {
+      return <span>Browser doesn't support speech recognition.</span>;
+    }
 
 
 
