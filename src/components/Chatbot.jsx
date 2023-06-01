@@ -48,6 +48,7 @@ const Chatbot = () => {
       recognition.start();
     } else {
       console.log('Speech recognition not supported in this browser.');
+      alert('Speech recognition is not supported in this browser.');
     }
   };
 
