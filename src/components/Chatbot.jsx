@@ -24,7 +24,22 @@ const Chatbot = () => {
   //const [isListening, setIsListening] = useState(false);
   const [isListening, setIsListening] = useState(false);
 
-
+  const handleListen = () => {
+    if (isListening) {
+      mic.start();
+      mic.onend = () => {
+        console.log('continue..');
+        mic.start();
+      };
+    } else {
+      mic.stop();
+      mic.onend = () => {
+        console.log('Stopped Mic on Click');
+      };
+    }
+    mic.onstart = () => {
+      console.log('Mics on');
+    };
 
   
   
