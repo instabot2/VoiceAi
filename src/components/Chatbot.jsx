@@ -188,7 +188,6 @@ const Chatbot = () => {
     };
     initializeRecognition();
   }, []);
-
   const startSpeechRecognition = () => {
     if (recognition) {
       recognition.start();
@@ -202,8 +201,10 @@ const Chatbot = () => {
   const handleVoiceButtonClick = () => {
     if (isListening) {
       stopSpeechRecognition();
+      alert('Stopped listening');
     } else {
       startSpeechRecognition();
+      alert('Started listening');
     }
   };
 
