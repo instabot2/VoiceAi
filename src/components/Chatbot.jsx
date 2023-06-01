@@ -9,9 +9,21 @@ import { useSpeechRecognition } from 'react-speech-kit';
 
 const VoiceToText = () => {
   const [transcript, setTranscript] = useState('');
-  const { listen, listening, stop } = useSpeechRecognition();
-
-
+  const handleSpeechRecognition = () => {
+    if ('webkitSpeechRecognition' in window) {
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+      recognition.onresult = (event) => {
+        const result = event.results[0][0].transcript;
+        setTranscript(result);
+      };
+      recognition.start();
+    } else {
+      console.log('Speech recognition not supported in this browser.');
+    }
+  };
 
 
 
