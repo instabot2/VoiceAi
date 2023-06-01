@@ -40,19 +40,21 @@ const Chatbot = () => {
   const handleSpeechRecognition = () => {
     if ('webkitSpeechRecognition' in window) {
       alert('Speech recognition supported in this browser.');
+
       const recognition = new webkitSpeechRecognition();
       recognition.lang = 'en-US';
+
       recognition.onresult = (event) => {
         const result = event.results[0][0].transcript;
         setInput(result);
       };
+
       recognition.start();
     } else {
       console.log('Speech recognition not supported in this browser.');
       alert('Speech recognition is not supported in this browser.');
     }
   };
-
 
   
   const handleSubmit = async (e) => {
@@ -171,8 +173,11 @@ const Chatbot = () => {
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
+    handleSpeechRecognition(); // Add this line to trigger speech recognition automatically
   }, [conversation]);
 
+
+  
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
