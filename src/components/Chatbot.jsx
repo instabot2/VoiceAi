@@ -23,9 +23,6 @@ const Chatbot = () => {
 
   //const [isListening, setIsListening] = useState(false);
   
-  useEffect(() => {
-    handleListen();
-  }, [isListening]);
 
 
   
