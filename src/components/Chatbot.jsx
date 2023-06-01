@@ -22,7 +22,8 @@ const Chatbot = () => {
   const conversationRef = useRef(null);
 
   //const [isListening, setIsListening] = useState(false);
-  
+  const [isListening, setIsListening] = useState(false);
+
 
 
   
