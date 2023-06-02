@@ -179,36 +179,30 @@ const Chatbot = () => {
     handleNewMessage();
     inputRef.current.focus();
 
-    const recognition = new window.webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognitionRef.current = recognition;
-
-    const handleSpeechRecognition = (event) => {
-      const lastResult = event.results[event.results.length - 1];
-      const spokenText = lastResult[0].transcript;
-      setInput(spokenText);
-      recognition.stop();
-    };
-
-    recognition.addEventListener('result', handleSpeechRecognition);
-
+    annyang.addCallback('result', handleSpeechRecognition);
     return () => {
-      recognition.removeEventListener('result', handleSpeechRecognition);
+      annyang.removeCallback('result', handleSpeechRecognition);
     };
   }, [conversation]);
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // ...
+  };
+  const handleNewMessage = () => {
+    const conversationContainer = conversationRef.current;
+    conversationContainer.scrollTop = conversationContainer.scrollHeight;
+  };
+  const handleSpeechRecognition = (event) => {
+    const spokenText = event[0];
+    setInput(spokenText);
+    annyang.abort();
+  };
   const startSpeechToText = () => {
-    const recognition = recognitionRef.current;
-    recognition.start();
-    //alert("Initialize the speech recognition.");
+    annyang.start({ autoRestart: false, continuous: true });
   };
   const stopSpeechToText = () => {
-    const recognition = recognitionRef.current;
-    recognition.stop();
+    annyang.abort();
   };
-
-
 
 
   return (
