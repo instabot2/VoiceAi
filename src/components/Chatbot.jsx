@@ -176,18 +176,23 @@ const Chatbot = () => {
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
-    
-    // Initialize the speech recognition
+
     const recognition = new window.webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
     recognitionRef.current = recognition;
-    recognition.onresult = (event) => {
+
+    const handleSpeechRecognition = (event) => {
       const lastResult = event.results[event.results.length - 1];
       const spokenText = lastResult[0].transcript;
       setInput(spokenText);
-      alert(`Spoken Text: ${spokenText}`);
       recognition.stop();
+    };
+
+    recognition.addEventListener('result', handleSpeechRecognition);
+
+    return () => {
+      recognition.removeEventListener('result', handleSpeechRecognition);
     };
   }, [conversation]);
 
