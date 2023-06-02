@@ -14,7 +14,7 @@ const Chatbot = () => {
   const conversationRef = useRef(null);
   
   const inputRef = useRef(null);
-  const recognitionRef = useRef(null);
+  //const recognitionRef = useRef(null);
   
   const programmingKeywords = [
     "programming",
@@ -39,18 +39,7 @@ const Chatbot = () => {
   ];
 
   
-  useEffect(() => {
-    handleNewMessage();
-    inputRef.current.focus();
 
-    annyang.addCallback('result', handleSpeechRecognition);
-    return () => {
-      annyang.removeCallback('result', handleSpeechRecognition);
-    };
-  }, [conversation]);
-  
-  
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -183,10 +172,12 @@ const Chatbot = () => {
   };
 
   //const inputRef = useRef(null);
-  //useEffect(() => {
-  //  handleNewMessage();
-  //  inputRef.current.focus();
-  //}, [conversation]);
+  useEffect(() => {
+    handleNewMessage();
+    inputRef.current.focus();
+  }, [conversation]);
+
+ 
 
 
   const handleNewMessage = () => {
@@ -268,22 +259,6 @@ const Chatbot = () => {
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
           >
             Send
-          </button>
-
-
-          <button
-            type="button"
-            onClick={startSpeechToText}
-            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
-          >
-            Speak
-          </button>
-          <button
-            type="button"
-            onClick={stopSpeechToText}
-            className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700 focus:outline-none"
-          >
-            Stop
           </button>
 
 
