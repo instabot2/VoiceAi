@@ -181,6 +181,7 @@ const Chatbot = () => {
       const lastResult = event.results[event.results.length - 1];
       const spokenText = lastResult[0].transcript;
       setInput(spokenText);
+      alert(`Spoken Text: ${spokenText}`);
       recognition.stop();
     };
   }, [conversation]);
@@ -190,10 +191,6 @@ const Chatbot = () => {
     recognition.start();
     alert("Initialize the speech recognition.");
   };
-
-
-
-
 
 
   return (
