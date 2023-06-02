@@ -172,7 +172,6 @@ const Chatbot = () => {
     handleNewMessage();
     inputRef.current.focus();
     
-    alert("Initialize the speech recognition.");
     // Initialize the speech recognition
     const recognition = new window.webkitSpeechRecognition();
     recognition.continuous = true;
@@ -189,6 +188,7 @@ const Chatbot = () => {
   const startSpeechToText = () => {
     const recognition = recognitionRef.current;
     recognition.start();
+    alert("Initialize the speech recognition.");
   };
 
 
