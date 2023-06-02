@@ -10,7 +10,8 @@ const Chatbot = () => {
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
-
+  
+  const inputRef = useRef(null);
   const recognitionRef = useRef(null);
   
   const programmingKeywords = [
@@ -172,7 +173,6 @@ const Chatbot = () => {
   //  inputRef.current.focus();
   //}, [conversation]);
 
-  const inputRef = useRef(null);
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
@@ -201,6 +201,12 @@ const Chatbot = () => {
     recognition.start();
     //alert("Initialize the speech recognition.");
   };
+  const stopSpeechToText = () => {
+    const recognition = recognitionRef.current;
+    recognition.stop();
+  };
+
+
 
 
   return (
@@ -265,6 +271,7 @@ const Chatbot = () => {
             Send
           </button>
 
+
           <button
             type="button"
             onClick={startSpeechToText}
@@ -272,6 +279,14 @@ const Chatbot = () => {
           >
             Speak
           </button>
+          <button
+            type="button"
+            onClick={stopSpeechToText}
+            className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700 focus:outline-none"
+          >
+            Stop
+          </button>
+
 
         </form>
       </div>
