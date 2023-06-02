@@ -35,7 +35,6 @@ const Chatbot = () => {
     "scala"
   ];
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -129,7 +128,6 @@ const Chatbot = () => {
         }
       }
 
- 
       setIsProcessing(false); // Hide processing message
 
       //handleNewMessage();
@@ -262,8 +260,6 @@ const Chatbot = () => {
           >
             Speak
           </button>
-
-
 
         </form>
       </div>
