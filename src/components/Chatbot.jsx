@@ -42,7 +42,8 @@ const Chatbot = () => {
     const memoryData = memory.join(" ");
     //const inputWithMemory = `${memoryData} ${input}`;
     //const inputWithMemory = `${input} ${memoryData}`;
-    const inputWithMemory = `${input ? input + ' ' : ''}${memoryData}`;
+    //const inputWithMemory = `${input ? input + ' ' : ''}${memoryData}`;
+    const inputWithMemory = `JavaScript arrays ${input ? input + ' ' : ''}${memoryData}`;
     // Display alert with captured memory data
     //window.alert(`Captured Memory Data: ${inputWithMemory}`);
 
