@@ -21,10 +21,15 @@ const Chatbot = () => {
       setTranscript(speechResult);
     };
     recognition.onerror = (event) => {
-      console.error('Speech recognition error occurred:', event.error);
+      // Display success or failure message to the user
+      if (event.error === 'no-speech') {
+        alert('Speech recognition failed: No speech detected');
+      } else {
+        alert('Speech recognition failed: ' + event.error);
+      }
     };
   };
-  
+
   
   
   const programmingKeywords = [
