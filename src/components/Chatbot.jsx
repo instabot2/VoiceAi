@@ -43,10 +43,16 @@ const Chatbot = () => {
     //const inputWithMemory = `${memoryData} ${input}`;
     //const inputWithMemory = `${input} ${memoryData}`;
     //const inputWithMemory = `${input ? input + ' ' : ''}${memoryData}`;
-    const inputWithMemory = `JavaScript arrays ${input ? input + ' ' : ''}${memoryData}`;
     // Display alert with captured memory data
     //window.alert(`Captured Memory Data: ${inputWithMemory}`);
 
+    let inputWithMemory = input;
+    // Check if input contains programming keywords
+    const containsProgrammingKeyword = programmingKeywords.some(keyword => input.toLowerCase().includes(keyword));
+    if (containsProgrammingKeyword) {
+      inputWithMemory += ` ${memoryData}`;
+    }
+   
     if (input.toLowerCase() === "reset session") {
       handleResetMemory();
       setInput("");
