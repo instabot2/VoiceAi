@@ -14,8 +14,15 @@ const Chatbot = () => {
   
   const [transcript, setTranscript] = useState('');
   const recognition = new window.webkitSpeechRecognition();
-  const handleSpeechRecognition = () => {
-    recognition.start();
+  const handleSpeechRecognition = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      recognition.start();
+    } catch (error) {
+      // Handle the error
+      console.error('Failed to access microphone:', error);
+      alert('Speech recognition failed: ' + error);
+    }
     recognition.onresult = (event) => {
       const speechResult = event.results[0][0].transcript;
       setTranscript(speechResult);
@@ -30,7 +37,7 @@ const Chatbot = () => {
     };
   };
 
-  
+
   
   const programmingKeywords = [
     "programming",
