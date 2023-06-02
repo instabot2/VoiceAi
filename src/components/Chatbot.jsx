@@ -11,6 +11,22 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
+  
+  const [transcript, setTranscript] = useState('');
+  const recognition = new window.webkitSpeechRecognition();
+  const handleSpeechRecognition = () => {
+    recognition.start();
+    recognition.onresult = (event) => {
+      const speechResult = event.results[0][0].transcript;
+      setTranscript(speechResult);
+    };
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error occurred:', event.error);
+    };
+  };
+  
+  
+  
   const programmingKeywords = [
     "programming",
     "code",
@@ -229,6 +245,9 @@ const Chatbot = () => {
           >
             Send
           </button>
+
+          <button onClick={handleSpeechRecognition}>Listening</button>
+          <p>{transcript}</p>
 
         </form>
       </div>
