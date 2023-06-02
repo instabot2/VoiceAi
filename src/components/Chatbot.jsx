@@ -171,6 +171,8 @@ const Chatbot = () => {
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
+    
+    alert("Initialize the speech recognition.");
     // Initialize the speech recognition
     const recognition = new window.webkitSpeechRecognition();
     recognition.continuous = true;
