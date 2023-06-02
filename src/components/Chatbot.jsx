@@ -38,6 +38,19 @@ const Chatbot = () => {
     "scala"
   ];
 
+  
+  useEffect(() => {
+    handleNewMessage();
+    inputRef.current.focus();
+
+    annyang.addCallback('result', handleSpeechRecognition);
+    return () => {
+      annyang.removeCallback('result', handleSpeechRecognition);
+    };
+  }, [conversation]);
+  
+  
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -175,19 +188,7 @@ const Chatbot = () => {
   //  inputRef.current.focus();
   //}, [conversation]);
 
-  useEffect(() => {
-    handleNewMessage();
-    inputRef.current.focus();
 
-    annyang.addCallback('result', handleSpeechRecognition);
-    return () => {
-      annyang.removeCallback('result', handleSpeechRecognition);
-    };
-  }, [conversation]);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // ...
-  };
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
     conversationContainer.scrollTop = conversationContainer.scrollHeight;
@@ -203,6 +204,8 @@ const Chatbot = () => {
   const stopSpeechToText = () => {
     annyang.abort();
   };
+
+
 
 
   return (
