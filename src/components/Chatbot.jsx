@@ -189,7 +189,7 @@ const Chatbot = () => {
   const startSpeechToText = () => {
     const recognition = recognitionRef.current;
     recognition.start();
-    alert("Initialize the speech recognition.");
+    //alert("Initialize the speech recognition.");
   };
 
 
