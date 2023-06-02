@@ -4,17 +4,13 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
-
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
-  
-  //const inputRef = useRef(null);
-  //const recognitionRef = useRef(null);
-  
+
   const programmingKeywords = [
     "programming",
     "code",
@@ -37,8 +33,6 @@ const Chatbot = () => {
     "scala"
   ];
 
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -55,7 +49,7 @@ const Chatbot = () => {
     if (containsProgrammingKeyword) {
       inputWithMemory += ` ${memoryData}`;
     }
-   
+
     if (input.toLowerCase() === "reset session") {
       handleResetMemory();
       setInput("");
@@ -157,6 +151,12 @@ const Chatbot = () => {
     conversationContainer.scrollTop = 0;
   };
 
+  const inputRef = useRef(null);
+  useEffect(() => {
+    handleNewMessage();
+    inputRef.current.focus();
+  }, [conversation]);
+
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
@@ -170,34 +170,7 @@ const Chatbot = () => {
     setMemory([]);
   };
 
-  const inputRef = useRef(null);
-  useEffect(() => {
-    handleNewMessage();
-    inputRef.current.focus();
-  }, [conversation]);
-
- 
-  const handleNewMessage = () => {
-    const conversationContainer = conversationRef.current;
-    conversationContainer.scrollTop = conversationContainer.scrollHeight;
-  };
-  const handleSpeechRecognition = (event) => {
-    const spokenText = event[0];
-    setInput(spokenText);
-    annyang.abort();
-  };
-  const startSpeechToText = () => {
-    annyang.start({ autoRestart: false, continuous: true });
-  };
-  const stopSpeechToText = () => {
-    annyang.abort();
-  };
-
-
-
-
   return (
-    
     <div className="h-screen flex flex-col">
       <Navbar name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" />
 
@@ -250,14 +223,12 @@ const Chatbot = () => {
             onChange={e => setInput(e.target.value)}
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />
-              
           <button
             type="submit"
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
           >
             Send
           </button>
-
 
         </form>
       </div>
