@@ -45,7 +45,6 @@ const Chatbot = () => {
     //const inputWithMemory = `${input ? input + ' ' : ''}${memoryData}`;
     // Display alert with captured memory data
     //window.alert(`Captured Memory Data: ${inputWithMemory}`);
-
     let inputWithMemory = input;
     // Check if input contains programming keywords
     const containsProgrammingKeyword = programmingKeywords.some(keyword => input.toLowerCase().includes(keyword));
