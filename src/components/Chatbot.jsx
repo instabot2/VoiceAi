@@ -11,6 +11,7 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
+  const recognitionRef = useRef(null);
   
   const programmingKeywords = [
     "programming",
@@ -160,11 +161,37 @@ const Chatbot = () => {
     setMemory([]);
   };
 
+  //const inputRef = useRef(null);
+  //useEffect(() => {
+  //  handleNewMessage();
+  //  inputRef.current.focus();
+  //}, [conversation]);
+
   const inputRef = useRef(null);
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
+    // Initialize the speech recognition
+    const recognition = new window.webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognitionRef.current = recognition;
+    recognition.onresult = (event) => {
+      const lastResult = event.results[event.results.length - 1];
+      const spokenText = lastResult[0].transcript;
+      setInput(spokenText);
+      recognition.stop();
+    };
   }, [conversation]);
+
+  const startSpeechToText = () => {
+    const recognition = recognitionRef.current;
+    recognition.start();
+  };
+
+
+
+
 
 
   return (
@@ -229,7 +256,13 @@ const Chatbot = () => {
             Send
           </button>
 
-
+          <button
+            type="button"
+            onClick={startSpeechToText}
+            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            Speak
+          </button>
 
 
 
