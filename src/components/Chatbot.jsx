@@ -12,7 +12,7 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
   
-  const inputRef = useRef(null);
+  //const inputRef = useRef(null);
   //const recognitionRef = useRef(null);
   
   const programmingKeywords = [
@@ -170,7 +170,7 @@ const Chatbot = () => {
     setMemory([]);
   };
 
-  //const inputRef = useRef(null);
+  const inputRef = useRef(null);
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
