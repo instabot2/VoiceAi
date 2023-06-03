@@ -206,8 +206,11 @@ const Chatbot = () => {
     }
   };
 
-  
-  
+  if (window.webkitSpeechRecognition && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    //
+  } else {
+    //
+  }
   
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
