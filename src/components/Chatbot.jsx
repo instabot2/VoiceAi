@@ -16,7 +16,20 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
   const conversationRef = useRef(null);
 
   const [isListening, setIsListening] = useState(false);
-
+  
+  const inputRef = useRef(null);
+  useEffect(() => {
+    handleNewMessage();
+    inputRef.current.focus();
+  }, [conversation]);
+  
+  useEffect(() => {
+    if (transcript) {
+      handleSpeechInput(transcript);
+    }
+  }, [transcript]);
+  
+  
   
   
   const programmingKeywords = [
@@ -158,12 +171,7 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
     //conversationContainer.scrollTop = conversationContainer.scrollHeight;
     conversationContainer.scrollTop = 0;
   };
-
-  const inputRef = useRef(null);
-  useEffect(() => {
-    handleNewMessage();
-    inputRef.current.focus();
-  }, [conversation]);
+  
 
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
