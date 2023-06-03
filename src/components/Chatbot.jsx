@@ -24,7 +24,6 @@ const Chatbot = () => {
       recognition.continuous = true;
       recognition.interimResults = true;
       recognition.lang = "en-US";
-
       recognition.onresult = (event) => {
         const transcript = Array.from(event.results)
           .map((result) => result[0])
@@ -33,18 +32,16 @@ const Chatbot = () => {
 
         setInput(transcript);
       };
-
       recognition.onend = () => {
         setInput("");
       };
-
       recognition.start();
-
       return () => {
         recognition.stop();
       };
     }
-  }, []);
+  //}, []);
+  }, [conversation]);
 
 
   
@@ -187,7 +184,6 @@ const Chatbot = () => {
     recognition.continuous = false;
     recognition.interimResults = true;
     recognition.lang = "en-US";
-
     recognition.onresult = (event) => {
       const transcript = Array.from(event.results)
         .map((result) => result[0])
@@ -196,7 +192,6 @@ const Chatbot = () => {
 
       setInput(transcript);
     };
-
     recognition.start();
   };
 
