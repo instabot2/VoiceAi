@@ -11,8 +11,6 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
-  const [transcript, setTranscript] = useState('');
-  const { finalTranscript, resetTranscript, listening } = useSpeechRecognition();
 
   
   const programmingKeywords = [
