@@ -8,6 +8,7 @@ import Navbar from "./Navbar";
 
 //const Chatbot = () => {
 const Chatbot = ({ startListening, stopListening, recognition, transcript }) => {
+  
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]); // New state for memory
@@ -15,17 +16,7 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
   const conversationRef = useRef(null);
 
   const [isListening, setIsListening] = useState(false);
-  useEffect(() => {
-    if (isListening) {
-      startListening();
-    } else {
-      stopListening();
-    }
-  }, [isListening, startListening, stopListening]);
 
-  const handleListening = () => {
-    setIsListening(!isListening);
-  };
   
   
   const programmingKeywords = [
