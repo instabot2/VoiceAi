@@ -3,12 +3,8 @@ import axios from "axios";
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
-//import SpeechRecognition from 'react-speech-recognition';
 
-
-//const Chatbot = () => {
-const Chatbot = ({ startListening, stopListening, recognition, transcript }) => {
-  
+const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]); // New state for memory
@@ -16,7 +12,6 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
   const conversationRef = useRef(null);
 
   
-  const [isListening, setIsListening] = useState(false);
   const inputRef = useRef(null);
   useEffect(() => {
     handleNewMessage();
@@ -24,26 +19,33 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
   }, [conversation]);
   
   useEffect(() => {
-    if (transcript) {
-      handleSpeechInput(transcript);
+    if (inputRef.current && window.webkitSpeechRecognition) {
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = "en-US";
+
+      recognition.onresult = (event) => {
+        const transcript = Array.from(event.results)
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join("");
+
+        setInput(transcript);
+      };
+
+      recognition.onend = () => {
+        setInput("");
+      };
+
+      recognition.start();
+
+      return () => {
+        recognition.stop();
+      };
     }
-  }, [transcript]);
-    const handleListening = () => {
-    setIsListening(!isListening);
-  };
-  
-  const handleSpeechInput = (input) => {
-    // Process the speech input from the transcript
-    console.log('Speech Input:', input);
-    if (input) {
-      // Speech input recognized successfully
-      alert('Speech Input: Success');
-      // Process the recognized input further
-    } else {
-      // Failed to recognize speech input
-      alert('Speech Input: Failed');
-    }
-  };
+  }, []);
+
 
   
   const programmingKeywords = [
@@ -180,12 +182,32 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
     setInput("");
   };  
 
+  const handleVoiceCapture = () => {
+    const recognition = new window.webkitSpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = "en-US";
+
+    recognition.onresult = (event) => {
+      const transcript = Array.from(event.results)
+        .map((result) => result[0])
+        .map((result) => result.transcript)
+        .join("");
+
+      setInput(transcript);
+    };
+
+    recognition.start();
+  };
+
+  
+  
+  
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
     //conversationContainer.scrollTop = conversationContainer.scrollHeight;
     conversationContainer.scrollTop = 0;
   };
-  
 
   const formatOutput = (item) => {
     if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
@@ -251,11 +273,6 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
             placeholder="Ask something... or type 'reset session' to reset new chat."
             value={input}
             onChange={e => setInput(e.target.value)}
-            
-            onFocus={() => {
-              stopListening(); // Stop listening when the input field is focused
-            }}
-            
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />
     
@@ -266,13 +283,13 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
             Send
           </button>
 
-          <div>
-            <button 
-              className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
-              onClick={handleListening}>{isListening ? 'Stop' : 'Listen'}
-            </button>
-            <p>{transcript}</p>
-          </div>
+          <button
+            type="button"
+            onClick={handleVoiceCapture}
+            className="px-4 py-2 ml-2 text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none"
+          >
+            Voice
+          </button>
 
         </form>
       </div>
