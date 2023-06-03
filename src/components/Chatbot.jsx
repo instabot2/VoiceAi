@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-
 import axios from "axios";
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
@@ -15,7 +12,21 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
-  
+  const [transcript, setTranscript] = useState('');
+  const { finalTranscript, resetTranscript, listening } = useSpeechRecognition();
+  useEffect(() => {
+    if (finalTranscript !== '') {
+      setTranscript(finalTranscript);
+      resetTranscript();
+    }
+  }, [finalTranscript, resetTranscript]);
+  const handleListen = () => {
+    if (!listening) {
+      SpeechRecognition.startListening();
+    } else {
+      SpeechRecognition.stopListening();
+    }
+  };
 
 
 
@@ -239,7 +250,10 @@ const Chatbot = () => {
             Send
           </button>
 
-
+          <div>
+            <button onClick={handleListen}>{listening ? 'Stop' : 'Start'}</button>
+            <p>{transcript}</p>
+          </div>
 
         </form>
       </div>
