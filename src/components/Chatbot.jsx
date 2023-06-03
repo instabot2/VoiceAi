@@ -13,30 +13,37 @@ const Chatbot = () => {
 
   
   const [transcript, setTranscript] = useState('');
-  const recognition = new window.webkitSpeechRecognition();
-  const handleSpeechRecognition = async () => {
+  const recognition = useRef(null);
+
+  const handleSpeechRecognition = () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      recognition.start();
+      const recognitionInstance = new window.webkitSpeechRecognition();
+      recognitionInstance.start();
+
+      recognition.current = recognitionInstance;
+      recognition.current.onresult = (event) => {
+        const speechResult = event.results[0][0].transcript;
+        setTranscript(speechResult);
+      };
+      recognition.current.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        // Display an error message to the user
+        alert('Speech recognition failed: ' + event.error);
+      };
+      recognition.current.onend = () => {
+        // Handle end of speech recognition, e.g., stop capturing audio, display a message, etc.
+        console.log('Speech recognition ended');
+      };
+      recognition.current.onnomatch = (event) => {
+        // Handle cases when no recognition results match the speech input
+        console.log('No match found for:', event.results[0][0].transcript);
+      };
     } catch (error) {
       // Handle the error
       console.error('Failed to access microphone:', error);
       alert('Speech recognition failed: ' + error);
     }
-    recognition.onresult = (event) => {
-      const speechResult = event.results[0][0].transcript;
-      setTranscript(speechResult);
-    };
-    recognition.onerror = (event) => {
-      // Display success or failure message to the user
-      if (event.error === 'no-speech') {
-        alert('Speech recognition failed: No speech detected');
-      } else {
-        alert('Speech recognition failed: ' + event.error);
-      }
-    };
   };
-
 
   
   const programmingKeywords = [
@@ -258,8 +265,10 @@ const Chatbot = () => {
             Send
           </button>
 
-          <button onClick={handleSpeechRecognition}>Listening</button>
-          <p>{transcript}</p>
+          <div>
+            <button onClick={handleSpeechRecognition}>Listening</button>
+            <p>{transcript}</p>
+          </div>
 
         </form>
       </div>
