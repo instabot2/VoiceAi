@@ -182,21 +182,28 @@ const Chatbot = () => {
   
 
   const handleVoiceCapture = () => {
-    const recognition = new window.webkitSpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = true;
-    recognition.lang = "en-US";
+    try {
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = true;
+      recognition.lang = "en-US";
+      recognition.onresult = (event) => {
+        const transcript = Array.from(event.results)
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join("");
 
-    recognition.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .map((result) => result[0])
-        .map((result) => result.transcript)
-        .join("");
-
-      setInput(transcript);
-    };
-
-    recognition.start();
+        setInput(transcript);
+      };
+      recognition.onerror = (event) => {
+        console.error("Voice capture error:", event.error);
+        alert("Voice capture error: " + event.error);
+      };
+      recognition.start();
+    } catch (error) {
+      console.error("Voice capture initialization error:", error);
+      alert("Voice capture initialization error: " + error.message);
+    }
   };
 
   
