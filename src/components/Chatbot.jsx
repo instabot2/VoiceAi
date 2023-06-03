@@ -4,6 +4,8 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
@@ -11,29 +13,22 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
-  
-  const [transcript, setTranscript] = useState('');
-
-  const handleSpeechRecognition = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const recognition = new window.webkitSpeechRecognition();
-      recognition.start();
-
-      recognition.onresult = (event) => {
-        const speechResult = event.results[0][0].transcript;
-        setTranscript(speechResult);
-      };
-
-      recognition.onerror = (event) => {
-        console.error('Speech recognition error:', event.error);
-        alert('Speech recognition failed: ' + event.error);
-      };
-    } catch (error) {
-      console.error('Failed to access microphone:', error);
-      alert('Speech recognition failed: ' + error);
+  const [text, setText] = useState('');
+  const { transcript, resetTranscript } = useSpeechRecognition();
+  useEffect(() => {
+    if (transcript !== '') {
+      setText(transcript);
     }
+  }, [transcript]);
+  const handleStart = () => {
+    resetTranscript();
+    SpeechRecognition.startListening({ continuous: true });
   };
+  const handleStop = () => {
+    SpeechRecognition.stopListening();
+  };
+
+
 
   
   const programmingKeywords = [
@@ -256,8 +251,9 @@ const Chatbot = () => {
           </button>
 
           <div>
-            <button onClick={handleSpeechRecognition}>Start Speech Recognition</button>
-            <p>{transcript}</p>
+            <button onClick={handleStart}>Start</button>
+            <button onClick={handleStop}>Stop</button>
+            <p>{text}</p>
           </div>
 
         </form>
