@@ -3,6 +3,7 @@ import axios from "axios";
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
+import { faMicrophone, faStop } from '@fortawesome/free-solid-svg-icons';
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
@@ -293,6 +294,19 @@ const Chatbot = () => {
           >
             Voice
           </button>
+
+          <button
+            type="button"
+            onClick={handleVoiceCapture}
+            className="px-4 py-2 ml-2 text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none"
+          >
+            {isRecording ? (
+              <FontAwesomeIcon icon={faStop} className="mr-2" />
+            ) : (
+              <FontAwesomeIcon icon={faMicrophone} className="mr-2" />
+            )}
+          </button>
+
 
         </form>
       </div>
