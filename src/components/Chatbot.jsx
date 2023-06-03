@@ -29,7 +29,6 @@ const Chatbot = () => {
           .map((result) => result[0])
           .map((result) => result.transcript)
           .join("");
-
         setInput(transcript);
       };
       recognition.onend = () => {
@@ -41,9 +40,6 @@ const Chatbot = () => {
       };
     }
   }, []);
-
-
-
 
   
   const programmingKeywords = [
@@ -192,7 +188,6 @@ const Chatbot = () => {
           .map((result) => result[0])
           .map((result) => result.transcript)
           .join("");
-
         setInput(transcript);
       };
       recognition.onerror = (event) => {
