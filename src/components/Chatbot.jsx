@@ -13,33 +13,23 @@ const Chatbot = () => {
 
   
   const [transcript, setTranscript] = useState('');
-  const recognition = useRef(null);
 
-  const handleSpeechRecognition = () => {
+  const handleSpeechRecognition = async () => {
     try {
-      const recognitionInstance = new window.webkitSpeechRecognition();
-      recognitionInstance.start();
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.start();
 
-      recognition.current = recognitionInstance;
-      recognition.current.onresult = (event) => {
+      recognition.onresult = (event) => {
         const speechResult = event.results[0][0].transcript;
         setTranscript(speechResult);
       };
-      recognition.current.onerror = (event) => {
+
+      recognition.onerror = (event) => {
         console.error('Speech recognition error:', event.error);
-        // Display an error message to the user
         alert('Speech recognition failed: ' + event.error);
       };
-      recognition.current.onend = () => {
-        // Handle end of speech recognition, e.g., stop capturing audio, display a message, etc.
-        console.log('Speech recognition ended');
-      };
-      recognition.current.onnomatch = (event) => {
-        // Handle cases when no recognition results match the speech input
-        console.log('No match found for:', event.results[0][0].transcript);
-      };
     } catch (error) {
-      // Handle the error
       console.error('Failed to access microphone:', error);
       alert('Speech recognition failed: ' + error);
     }
@@ -266,7 +256,7 @@ const Chatbot = () => {
           </button>
 
           <div>
-            <button onClick={handleSpeechRecognition}>Listening</button>
+            <button onClick={handleSpeechRecognition}>Start Speech Recognition</button>
             <p>{transcript}</p>
           </div>
 
