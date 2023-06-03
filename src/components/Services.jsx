@@ -12,7 +12,7 @@ const Services = () => {
                     <div className="flex flex-col items-center py-16">
                         <img
                             className="px-4 hidden md:block"
-                            src="https://i.ibb.co/9Vs73RF/undraw-page-not-found-su7k-1-3.png"
+                            src="https://i.postimg.cc/gjrFJS3m/images-1.jpg"
                         />
                         <img
                             className="md:hidden"
