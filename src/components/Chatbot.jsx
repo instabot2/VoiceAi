@@ -13,20 +13,7 @@ const Chatbot = () => {
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
-  const [text, setText] = useState('');
-  const { transcript, resetTranscript } = useSpeechRecognition();
-  useEffect(() => {
-    if (transcript !== '') {
-      setText(transcript);
-    }
-  }, [transcript]);
-  const handleStart = () => {
-    resetTranscript();
-    SpeechRecognition.startListening({ continuous: true });
-  };
-  const handleStop = () => {
-    SpeechRecognition.stopListening();
-  };
+  
 
 
 
