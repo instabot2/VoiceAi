@@ -237,11 +237,7 @@ const Chatbot = () => {
             Send
           </button>
 
-          <div>
-            <button onClick={handleStart}>Start</button>
-            <button onClick={handleStop}>Stop</button>
-            <p>{text}</p>
-          </div>
+
 
         </form>
       </div>
