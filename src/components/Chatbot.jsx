@@ -28,7 +28,16 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
       handleSpeechInput(transcript);
     }
   }, [transcript]);
+    const handleListening = () => {
+    setIsListening(!isListening);
+  };
   
+  const handleSpeechInput = (input) => {
+    // Process the speech input from the transcript
+    // For example, you can send it to your chatbot logic for further processing
+    console.log('Speech Input:', input);
+    // ...
+  };
   
   
   
@@ -246,7 +255,10 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
             Send
           </button>
 
-
+          <div>
+            <button onClick={handleListening}>{isListening ? 'Stop Listening' : 'Start Listening'}</button>
+            <p>Transcript: {transcript}</p>
+          </div>
 
         </form>
       </div>
