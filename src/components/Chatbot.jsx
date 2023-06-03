@@ -12,7 +12,6 @@ const Chatbot = () => {
   const conversationRef = useRef(null);
   const inputRef = useRef(null);
   
-  
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
