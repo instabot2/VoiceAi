@@ -286,7 +286,6 @@ const Chatbot = () => {
     
          <button
             type="button"
-            onClick={handleSend}
             className="px-4 py-2 ml-2 text-white bg-blue-500 rounded hover:bg-green-700 focus:outline-none"
           >
             <img src={sendImage} alt="Send" className="mr-2" />
