@@ -4,8 +4,6 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
@@ -15,21 +13,6 @@ const Chatbot = () => {
 
   const [transcript, setTranscript] = useState('');
   const { finalTranscript, resetTranscript, listening } = useSpeechRecognition();
-  useEffect(() => {
-    if (finalTranscript !== '') {
-      setTranscript(finalTranscript);
-      resetTranscript();
-    }
-  }, [finalTranscript, resetTranscript]);
-  const handleListen = () => {
-    if (!listening) {
-      SpeechRecognition.startListening();
-    } else {
-      SpeechRecognition.stopListening();
-    }
-  };
-
-
 
   
   const programmingKeywords = [
@@ -251,10 +234,7 @@ const Chatbot = () => {
             Send
           </button>
 
-          <div>
-            <button onClick={handleListen}>{listening ? 'Stop' : 'Start'}</button>
-            <p>{transcript}</p>
-          </div>
+
 
         </form>
       </div>
