@@ -295,6 +295,7 @@ const Chatbot = () => {
             className="px-4 py-2 ml-2 text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none"
           >
             Voice
+            <img src={microphoneImage} alt="Start Voice" className="mr-2" />
           </button>
 
 
