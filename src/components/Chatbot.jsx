@@ -246,8 +246,14 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
             placeholder="Ask something... or type 'reset session' to reset new chat."
             value={input}
             onChange={e => setInput(e.target.value)}
+            
+            onFocus={() => {
+              stopListening(); // Stop listening when the input field is focused
+            }}
+            
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />
+    
           <button
             type="submit"
             className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
@@ -256,7 +262,7 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
           </button>
 
           <div>
-            <button onClick={handleListening}>{isListening ? 'Stop Listening' : 'Start Listening'}</button>
+            <button onClick={handleListening}>{isListening ? 'Stop' : 'Listening'}</button>
             <p>Transcript: {transcript}</p>
           </div>
 
