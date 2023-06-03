@@ -35,8 +35,14 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
   const handleSpeechInput = (input) => {
     // Process the speech input from the transcript
     console.log('Speech Input:', input);
-    alert(`Speech Input: ${input}`);
-    // ...
+    if (input) {
+      // Speech input recognized successfully
+      alert('Speech Input: Success');
+      // Process the recognized input further
+    } else {
+      // Failed to recognize speech input
+      alert('Speech Input: Failed');
+    }
   };
 
   
