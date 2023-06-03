@@ -5,7 +5,7 @@ import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
 import microphoneImage from '/microphone-solid-24.png';
 import microphoneOffImage from '/microphone-off-solid-24.png';
-
+import sendImage from '/send-solid-24.png';
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
@@ -284,11 +284,12 @@ const Chatbot = () => {
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />    
     
-          <button
-            type="submit"
-            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+         <button
+            type="button"
+            onClick={handleSend}
+            className="px-4 py-2 ml-2 text-white bg-blue-500 rounded hover:bg-green-700 focus:outline-none"
           >
-            Send
+            <img src={sendImage} alt="Send" className="mr-2" />
           </button>
 
           <button
