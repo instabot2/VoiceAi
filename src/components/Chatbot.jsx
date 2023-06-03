@@ -6,14 +6,27 @@ import Navbar from "./Navbar";
 //import SpeechRecognition from 'react-speech-recognition';
 
 
-const Chatbot = () => {
+//const Chatbot = () => {
+const Chatbot = ({ startListening, stopListening, recognition, transcript }) => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
+  const [isListening, setIsListening] = useState(false);
+  useEffect(() => {
+    if (isListening) {
+      startListening();
+    } else {
+      stopListening();
+    }
+  }, [isListening, startListening, stopListening]);
 
+  const handleListening = () => {
+    setIsListening(!isListening);
+  };
+  
   
   const programmingKeywords = [
     "programming",
