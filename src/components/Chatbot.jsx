@@ -10,9 +10,9 @@ const Chatbot = () => {
   const [memory, setMemory] = useState([]); // New state for memory
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
-
-  
   const inputRef = useRef(null);
+  
+  
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
@@ -40,8 +40,9 @@ const Chatbot = () => {
         recognition.stop();
       };
     }
-  //}, []);
-  }, [conversation]);
+  }, []);
+
+
 
 
   
@@ -178,12 +179,14 @@ const Chatbot = () => {
 
     setInput("");
   };  
+  
 
   const handleVoiceCapture = () => {
     const recognition = new window.webkitSpeechRecognition();
     recognition.continuous = false;
     recognition.interimResults = true;
     recognition.lang = "en-US";
+
     recognition.onresult = (event) => {
       const transcript = Array.from(event.results)
         .map((result) => result[0])
@@ -192,6 +195,7 @@ const Chatbot = () => {
 
       setInput(transcript);
     };
+
     recognition.start();
   };
 
@@ -267,9 +271,9 @@ const Chatbot = () => {
             type="text"
             placeholder="Ask something... or type 'reset session' to reset new chat."
             value={input}
-            onChange={e => setInput(e.target.value)}
+            onChange={(e) => setInput(e.target.value)}
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
-          />
+          />    
     
           <button
             type="submit"
