@@ -267,7 +267,10 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
           </button>
 
           <div>
-            <button onClick={handleListening}>{isListening ? 'S' : 'L'}</button>
+            <button 
+              className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+              onClick={handleListening}>{isListening ? 'Stop' : 'Listen'}
+            </button>
             <p>{transcript}</p>
           </div>
 
