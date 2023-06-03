@@ -15,8 +15,8 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
   const [isProcessing, setIsProcessing] = useState(false); // State for processing message
   const conversationRef = useRef(null);
 
-  const [isListening, setIsListening] = useState(false);
   
+  const [isListening, setIsListening] = useState(false);
   const inputRef = useRef(null);
   useEffect(() => {
     handleNewMessage();
@@ -34,12 +34,11 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
   
   const handleSpeechInput = (input) => {
     // Process the speech input from the transcript
-    // For example, you can send it to your chatbot logic for further processing
     console.log('Speech Input:', input);
+    alert(`Speech Input: ${input}`);
     // ...
   };
-  
-  
+
   
   const programmingKeywords = [
     "programming",
@@ -262,8 +261,8 @@ const Chatbot = ({ startListening, stopListening, recognition, transcript }) => 
           </button>
 
           <div>
-            <button onClick={handleListening}>{isListening ? 'Stop' : 'Listening'}</button>
-            <p>Transcript: {transcript}</p>
+            <button onClick={handleListening}>{isListening ? 'S' : 'L'}</button>
+            <p>{transcript}</p>
           </div>
 
         </form>
