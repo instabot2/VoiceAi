@@ -46,20 +46,26 @@ const Chatbot = () => {
   }, []);
 
   
-  const microphonePermission = () => {
-    const [microphonePermission, setMicrophonePermission] = useState();
-    useEffect(() => {
-      navigator.mediaDevices.getUserMedia({ audio: true })
-        .then(stream => {
-          setMicrophonePermission(true);
-        })
-        .catch(error => {
-          setMicrophonePermission(false);
-        });
-    }, []);
-    return microphonePermission;
-  }
+  const useMicrophonePermission = () => {
+    const [microphonePermission, setMicrophonePermission] = useState(null);
   
+    useEffect(() => {
+      const getMicrophonePermission = async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          setMicrophonePermission(true);
+          stream.getTracks().forEach(track => track.stop());
+        } catch (error) {
+          setMicrophonePermission(false);
+        }
+      };
+  
+      getMicrophonePermission();
+    }, []);
+  
+    return microphonePermission;
+  };
+
   
   
   const programmingKeywords = [
@@ -236,12 +242,6 @@ const Chatbot = () => {
       errorHandler(errorMessage);
     }
   };
-
-  if (window.webkitSpeechRecognition && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    //
-  } else {
-    //
-  }
   
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
