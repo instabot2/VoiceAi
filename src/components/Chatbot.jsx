@@ -71,12 +71,16 @@ const Chatbot = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!input) {
+      // Stop execution if input is empty
+      window.alert(`Input empty?`);
+      return;
+    }
     // Get data from memory and concatenate with input
     const memoryData = memory.join(" ");
     //const inputWithMemory = `${memoryData} ${input}`;
     //const inputWithMemory = `${input} ${memoryData}`;
     //const inputWithMemory = `${input ? input + ' ' : ''}${memoryData}`;
-    // Display alert with captured memory data
     //window.alert(`Captured Memory Data: ${inputWithMemory}`);
     let inputWithMemory = input;
     // Check if input contains programming keywords
