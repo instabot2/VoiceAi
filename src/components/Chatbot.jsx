@@ -17,12 +17,47 @@ const Chatbot = () => {
   const [isRecording, setIsRecording] = useState(false);
 
   
+  //useEffect(() => {
+  //  handleNewMessage();
+  //  inputRef.current.focus();
+  //}, [conversation]);
+  
+  //useEffect(() => {
+  //  if (inputRef.current && window.webkitSpeechRecognition) {
+  //    const recognition = new window.webkitSpeechRecognition();
+  //    recognition.continuous = true;
+  //    recognition.interimResults = true;
+  //    recognition.lang = "en-US";
+  //    recognition.onresult = (event) => {
+  //      const transcript = Array.from(event.results)
+  //        .map((result) => result[0])
+  //        .map((result) => result.transcript)
+  //        .join("");
+  //      setInput(transcript);
+  //    };
+  //    recognition.onend = () => {
+  //      setInput("");
+  //    };
+  //    recognition.start();
+  //    return () => {
+  //      recognition.stop();
+  //    };
+  //  }
+  //}, []);
+
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
-  }, [conversation]);
-  
-  useEffect(() => {
+
+    const getMicrophonePermission = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        setMicrophonePermission(true);
+      } catch (error) {
+        setMicrophonePermission(false);
+      }
+    };
+
     if (inputRef.current && window.webkitSpeechRecognition) {
       const recognition = new window.webkitSpeechRecognition();
       recognition.continuous = true;
@@ -43,8 +78,14 @@ const Chatbot = () => {
         recognition.stop();
       };
     }
-  }, []);
 
+    getMicrophonePermission();
+  }, [conversation]);
+
+  
+  
+  
+  
   const programmingKeywords = [
     "programming",
     "code",
@@ -330,6 +371,16 @@ const Chatbot = () => {
               <img src={microphoneImage} alt="Start Voice" className="mr-2" />
             )}
           </button>
+
+
+          {/* Rest of the component */}
+          {microphonePermission === false && (
+            <div className="sticky top-0 bg-red-500 text-white text-center py-2">
+              Please grant microphone permissions to use voice input.
+            </div>
+          )}
+          {/* Rest of the component */}
+
 
 
         </form>
