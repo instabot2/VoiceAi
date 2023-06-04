@@ -54,36 +54,45 @@ const Chatbot = () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         setMicrophonePermission(true);
+        startSpeechRecognition();
       } catch (error) {
         setMicrophonePermission(false);
+        // Handle error or display a message to the user
       }
     };
 
-    if (inputRef.current && window.webkitSpeechRecognition) {
-      const recognition = new window.webkitSpeechRecognition();
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      recognition.lang = "en-US";
-      recognition.onresult = (event) => {
-        const transcript = Array.from(event.results)
-          .map((result) => result[0])
-          .map((result) => result.transcript)
-          .join("");
-        setInput(transcript);
-      };
-      recognition.onend = () => {
-        setInput("");
-      };
-      recognition.start();
-      return () => {
-        recognition.stop();
-      };
-    }
+    const startSpeechRecognition = () => {
+      if (inputRef.current && window.webkitSpeechRecognition) {
+        const recognition = new window.webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = "en-US";
+        recognition.onresult = (event) => {
+          const transcript = Array.from(event.results)
+            .map((result) => result[0])
+            .map((result) => result.transcript)
+            .join("");
+          setInput(transcript);
+        };
+        recognition.onend = () => {
+          setInput("");
+        };
+        recognition.start();
+        // Save the recognition object to access it later if needed
+        recognitionRef.current = recognition;
+      }
+    };
+
+    // Stop speech recognition when the component unmounts
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
 
     getMicrophonePermission();
   }, [conversation]);
 
-  
   
   
   
