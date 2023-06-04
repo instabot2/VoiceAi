@@ -233,14 +233,27 @@ const Chatbot = () => {
     conversationContainer.scrollTop = 0;
   };
 
+  //const formatOutput = (item) => {
+  //  if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
+  //    const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
+  //    return <pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
+  //  } else {
+  //    return <pre>{item.output}</pre>;
+  //  }
+  //};
   const formatOutput = (item) => {
-    if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
+    if (item && item.input && item.output && programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
       return <pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
-    } else {
+    } else if (item && item.output) {
       return <pre>{item.output}</pre>;
+    } else {
+      const errorMessage = "Output is undefined or missing.";
+      errorHandler(errorMessage);
+      return null; // Return appropriate JSX or handle the case when result is undefined
     }
   };
+
 
   const handleResetMemory = () => {
     setMemory([]);
