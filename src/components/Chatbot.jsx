@@ -82,7 +82,7 @@ const Chatbot = () => {
       const response = await axios.request(options);
       const { response: botResponse } = response.data;
       // Speak the AI response
-      responsiveVoice.speak("AI response: " + botResponse);
+      responsiveVoice.speak(botResponse);
       setIsProcessing(false);
     } catch (error) {
       console.error(error);
