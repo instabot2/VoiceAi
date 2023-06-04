@@ -74,6 +74,7 @@ const Chatbot = () => {
     if (!input) {
       // Stop execution if input is empty
       //window.alert(`Input empty?`);
+      responsiveVoice.speak("Voice AI response, input empty!.");
       return;
     }
     // Get data from memory and concatenate with input
