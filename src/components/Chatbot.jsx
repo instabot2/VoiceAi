@@ -71,6 +71,9 @@ const Chatbot = () => {
   ];
   const sendWelcomeMessage = async () => {
     setIsProcessing(true);
+    // Generate a random index to select a welcome message
+    const randomIndex = Math.floor(Math.random() * welcomeMessages.length);
+    const welcomeMessage = welcomeMessages[randomIndex];  
     const options = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
@@ -80,7 +83,6 @@ const Chatbot = () => {
         "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
       },
       data: {
-        //query: "Hello, bot!",
         query: welcomeMessage,
       },
     };
