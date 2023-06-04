@@ -294,7 +294,7 @@ const Chatbot = () => {
           <button
             type="button"
             onClick={handleVoiceCapture}
-            className="px-4 py-2 ml-2 text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none"
+            className="px-2 py-1 ml-2 text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none"
           >
             {isRecording ? (
               <img src={microphoneOffImage} alt="Stop Voice" className="mr-2" />
