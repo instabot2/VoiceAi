@@ -15,67 +15,51 @@ const Chatbot = () => {
   const conversationRef = useRef(null);
   const inputRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
+
   
-  const [microphonePermission, setMicrophonePermission] = useState();
-
-  const getMicrophonePermission = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      setMicrophonePermission(true);
-      startSpeechRecognition();
-    } catch (error) {
-      setMicrophonePermission(false);
-      // Handle error or display a message to the user
-    }
-  };
-
-  const startSpeechRecognition = () => {
+  useEffect(() => {
+    handleNewMessage();
+    inputRef.current.focus();
+  }, [conversation]);
+  
+  useEffect(() => {
     if (inputRef.current && window.webkitSpeechRecognition) {
       const recognition = new window.webkitSpeechRecognition();
       recognition.continuous = true;
       recognition.interimResults = true;
-      recognition.lang = 'en-US';
+      recognition.lang = "en-US";
       recognition.onresult = (event) => {
         const transcript = Array.from(event.results)
           .map((result) => result[0])
           .map((result) => result.transcript)
-          .join('');
+          .join("");
         setInput(transcript);
       };
       recognition.onend = () => {
-        setInput('');
+        setInput("");
       };
       recognition.start();
-      // Save the recognition object to access it later if needed
-      recognitionRef.current = recognition;
+      return () => {
+        recognition.stop();
+      };
     }
-  };
+  }, []);
 
-  const handleNewMessage = () => {
-    const conversationContainer = conversationRef.current;
-    //conversationContainer.scrollTop = conversationContainer.scrollHeight;
-    conversationContainer.scrollTop = 0;
-  };
-
-  useEffect(() => {
-    handleNewMessage();
-    inputRef.current.focus();
-    getMicrophonePermission();
-
-    return () => {
-      if (recognitionRef.current) {
-        recognitionRef.current.stop();
-      }
-    };
-  }, [conversation]);
-
-  useEffect(() => {
-    if (microphonePermission === false) {
-      setTimeout(() => {
-        setMicrophonePermission(null);
-      }, 5000); // Adjust the delay as needed (in milliseconds)
-    }
-  }, [microphonePermission]);
+  
+  const microphonePermission = () => {
+    const [microphonePermission, setMicrophonePermission] = useState();
+    useEffect(() => {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => {
+          setMicrophonePermission(true);
+        })
+        .catch(error => {
+          setMicrophonePermission(false);
+        });
+    }, []);
+    return microphonePermission;
+  }
+  
   
   
   const programmingKeywords = [
@@ -259,12 +243,20 @@ const Chatbot = () => {
     //
   }
   
-  //const handleNewMessage = () => {
-  //  const conversationContainer = conversationRef.current;
-  //  //conversationContainer.scrollTop = conversationContainer.scrollHeight;
-  //  conversationContainer.scrollTop = 0;
-  //};
+  const handleNewMessage = () => {
+    const conversationContainer = conversationRef.current;
+    //conversationContainer.scrollTop = conversationContainer.scrollHeight;
+    conversationContainer.scrollTop = 0;
+  };
 
+  //const formatOutput = (item) => {
+  //  if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
+  //    const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
+  //    return <pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
+  //  } else {
+  //    return <pre>{item.output}</pre>;
+  //  }
+  //};
   const formatOutput = (item) => {
     if (item && item.input && item.output && programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
@@ -328,15 +320,6 @@ const Chatbot = () => {
       <div className="sticky bottom-0 z-10 bg-white">
         <form onSubmit={handleSubmit} className="flex items-center">
           
-          
-          {microphonePermission === false && (
-            <div className="sticky top-0 bg-red-500 text-white text-center py-2">
-              Please grant microphone permissions to use voice input.
-            </div>
-          )}
-          <div ref={conversationRef}>{/* Your conversation container */}</div>
-          
-
           <input
             ref={inputRef}
             type="text"
@@ -364,6 +347,13 @@ const Chatbot = () => {
               <img src={microphoneImage} alt="Start Voice" className="mr-2" />
             )}
           </button>
+
+          {!microphonePermission && (
+            <div className="sticky top-0 z-10 bg-red-500 text-white text-center py-2">
+              Please grant microphone permissions to use voice input.
+            </div>
+          )}
+
 
         </form>
       </div>
