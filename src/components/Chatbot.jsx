@@ -20,6 +20,8 @@ const Chatbot = () => {
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
+    //onload message bot
+    sendWelcomeMessage();
   }, [conversation]);
   
   useEffect(() => {
@@ -59,6 +61,34 @@ const Chatbot = () => {
     }, []);
     return microphonePermission;
   }
+  
+  
+  const sendWelcomeMessage = async () => {
+    setIsProcessing(true);
+    const options = {
+      method: "POST",
+      url: "https://chatgpt-api7.p.rapidapi.com/ask",
+      headers: {
+        "content-type": "application/json",
+        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
+        "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
+      },
+      data: {
+        query: "Hello, bot!",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      const { response: botResponse } = response.data;
+      // Speak the AI response
+      responsiveVoice.speak("AI response: " + botResponse);
+      setIsProcessing(false);
+    } catch (error) {
+      console.error(error);
+      setIsProcessing(false);
+    }
+  };
   
   
   const programmingKeywords = [
