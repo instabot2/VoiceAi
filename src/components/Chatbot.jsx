@@ -69,20 +69,8 @@ const Chatbot = () => {
   ];
 
   
-  const errorHandler = (option) => {
-    switch (option) {
-      case 1:
-        responsiveVoice.speak("AI response: Input is empty!");
-        break;
-      case 2:
-        responsiveVoice.speak("AI response: Invalid input!");
-        break;
-      case 3:
-        responsiveVoice.speak("AI response: Error occurred!");
-        break;
-      default:
-        responsiveVoice.speak("AI response: Unknown error!");
-    }
+  const errorHandler = (errorMessage) => {
+    responsiveVoice.speak("AI response: " + errorMessage);
   };
 
   const handleSubmit = async (e) => {
@@ -91,10 +79,10 @@ const Chatbot = () => {
     if (!input) {
       // Stop execution if input is empty
       //window.alert(`Input empty?`);
-      errorHandler(1);
+      errorHandler("Input is empty!");
       return;
     }
-   
+  
     // Get data from memory and concatenate with input
     const memoryData = memory.join(" ");
     //const inputWithMemory = `${memoryData} ${input}`;
@@ -187,10 +175,11 @@ const Chatbot = () => {
           const utterance = new SpeechSynthesisUtterance(botResponse);
           synth.speak(utterance); 
         } else {
-          alert("Text-to-speech is not supported on this device.");
+          //alert("Text-to-speech is not supported on this device.");
+          errorHandler("Text-to-speech is not supported on this device.");
         }
       }
-
+      
       setIsProcessing(false); // Hide processing message
 
       //handleNewMessage();
@@ -217,14 +206,18 @@ const Chatbot = () => {
           .join("");
         setInput(transcript);
       };
-      recognition.onerror = (event) => {
-        console.error("Voice capture error:", event.error);
-        alert("Voice capture error: " + event.error);
+      recognition.onerror = (event) => { 
+        const errorMessage = "Voice capture error: " + event.error;
+        console.error(errorMessage);
+        errorHandler(errorMessage);       
       };
       recognition.start();
     } catch (error) {
-      console.error("Voice capture initialization error:", error);
-      alert("Voice capture initialization error: " + error.message);
+      //console.error("Voice capture initialization error:", error);
+      //alert("Voice capture initialization error: " + error.message);      
+      const errorMessage = "Voice capture initialization error: " + error.message;
+      console.error(errorMessage);
+      errorHandler(errorMessage);
     }
   };
 
