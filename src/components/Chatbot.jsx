@@ -46,6 +46,22 @@ const Chatbot = () => {
   }, []);
 
   
+  const microphonePermission = () => {
+    const [microphonePermission, setMicrophonePermission] = useState();
+    useEffect(() => {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => {
+          setMicrophonePermission(true);
+        })
+        .catch(error => {
+          setMicrophonePermission(false);
+        });
+    }, []);
+    return microphonePermission;
+  }
+  
+  
+  
   const programmingKeywords = [
     "programming",
     "code",
@@ -332,7 +348,11 @@ const Chatbot = () => {
             )}
           </button>
 
-
+          {!microphonePermission && (
+            <div className="sticky top-0 z-10 bg-red-500 text-white text-center py-2">
+              Please grant microphone permissions to use voice input.
+            </div>
+          )}
 
 
         </form>
