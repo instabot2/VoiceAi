@@ -61,7 +61,6 @@ const Chatbot = () => {
   }
   
   
-  
   const programmingKeywords = [
     "programming",
     "code",
@@ -208,7 +207,6 @@ const Chatbot = () => {
     setInput("");
   };  
   
-
   const handleVoiceCapture = () => {
     try {
       const recognition = new window.webkitSpeechRecognition();
@@ -269,7 +267,6 @@ const Chatbot = () => {
       return null; // Return appropriate JSX or handle the case when result is undefined
     }
   };
-
 
   const handleResetMemory = () => {
     setMemory([]);
