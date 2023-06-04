@@ -62,7 +62,13 @@ const Chatbot = () => {
     return microphonePermission;
   }
   
-  
+  const welcomeMessages = [
+    "Hello, AI!",
+    "Hi there!",
+    "Welcome to the chatbot!",
+    "Greetings!",
+    "Nice to see you!",
+  ];
   const sendWelcomeMessage = async () => {
     setIsProcessing(true);
     const options = {
@@ -74,7 +80,8 @@ const Chatbot = () => {
         "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
       },
       data: {
-        query: "Hello, bot!",
+        //query: "Hello, bot!",
+        query: welcomeMessage,
       },
     };
 
