@@ -15,6 +15,7 @@ const Chatbot = () => {
   const conversationRef = useRef(null);
   const inputRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
+  const [microphonePermission, setMicrophonePermission] = useState();
 
   
   //useEffect(() => {
