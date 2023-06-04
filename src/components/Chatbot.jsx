@@ -346,11 +346,6 @@ const Chatbot = () => {
             )}
           </button>
 
-          {!microphonePermission && (
-            <div className="sticky top-0 z-10 bg-red-500 text-white text-center py-2">
-              Please grant microphone permissions to use voice input.
-            </div>
-          )}
 
         </form>
       </div>
