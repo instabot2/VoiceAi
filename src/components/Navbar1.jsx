@@ -7,7 +7,7 @@ import '../App.css';
 const Navbar1 = (props) => {
     
     const handleButton5Click = () => {
-       responsiveVoice.speak("Start using Voice AI, type or voice input.");
+       //responsiveVoice.speak("Start using Voice AI, type or voice input.");
     };
     
     return (
