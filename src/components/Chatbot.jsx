@@ -96,6 +96,7 @@ const Chatbot = () => {
       // Speak the AI response
       responsiveVoice.speak(botResponse);
       setIsProcessing(false);
+      setHasSentWelcomeMessage(true);
     } catch (error) {
       console.error(error);
       setIsProcessing(false);
