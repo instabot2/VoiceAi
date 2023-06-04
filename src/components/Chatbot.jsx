@@ -286,9 +286,9 @@ const Chatbot = () => {
     
           <button
             type="submit"
-            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+            className="px-4 py-2 ml-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
           >
-            Send
+            <img src={sendImage} alt="Send" className="mr-2" />
           </button>
 
           <button
