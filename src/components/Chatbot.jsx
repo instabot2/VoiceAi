@@ -15,6 +15,7 @@ const Chatbot = () => {
   const conversationRef = useRef(null);
   const inputRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
+  
   const [microphonePermission, setMicrophonePermission] = useState();
 
   const getMicrophonePermission = async () => {
@@ -68,6 +69,13 @@ const Chatbot = () => {
     };
   }, [conversation]);
 
+  useEffect(() => {
+    if (microphonePermission === false) {
+      setTimeout(() => {
+        setMicrophonePermission(null);
+      }, 5000); // Adjust the delay as needed (in milliseconds)
+    }
+  }, [microphonePermission]);
   
   
   const programmingKeywords = [
