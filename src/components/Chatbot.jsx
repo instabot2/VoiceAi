@@ -73,7 +73,7 @@ const Chatbot = () => {
 
     if (!input) {
       // Stop execution if input is empty
-      window.alert(`Input empty?`);
+      //window.alert(`Input empty?`);
       return;
     }
     // Get data from memory and concatenate with input
@@ -290,9 +290,9 @@ const Chatbot = () => {
     
           <button
             type="submit"
-            className="px-2 py-1 ml-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
+            className="flex items-center px-2 py-1 ml-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
           >
-            <img src={sendImage} alt="Send" className="mr-2" />
+            <img src={sendImage} alt="Send" className="mr-2" style={{ alignSelf: "center" }} />
           </button>
 
           <button
