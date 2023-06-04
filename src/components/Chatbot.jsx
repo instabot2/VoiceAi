@@ -64,25 +64,7 @@ const Chatbot = () => {
     return microphonePermission;
   };
 
-  const App = () => {
-    const microphonePermission = useMicrophonePermission();
 
-    if (microphonePermission === null) {
-      return <div>Loading...</div>;
-    } else if (microphonePermission === false) {
-      return (
-        <div className="sticky top-0 z-10 bg-red-500 text-white text-center py-2">
-          Please grant microphone permissions to use voice input.
-        </div>
-      );
-    } else {
-      return <div>Microphone permission granted. You can now use voice input.</div>;
-    }
-  };
-
-  export default App;
-  
-  
   
   const programmingKeywords = [
     "programming",
