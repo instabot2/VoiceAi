@@ -15,7 +15,6 @@ const Chatbot = () => {
   const conversationRef = useRef(null);
   const inputRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
-  const microphonePermission = useMicrophonePermission(); // Custom hook for microphone permission
 
   
   useEffect(() => {
@@ -47,24 +46,21 @@ const Chatbot = () => {
   }, []);
 
   
-  const useMicrophonePermission = () => {
-    const [microphonePermission, setMicrophonePermission] = useState(null);
+  const microphonePermission = () => {
+    const [microphonePermission, setMicrophonePermission] = useState();
     useEffect(() => {
-      const getMicrophonePermission = async () => {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => {
           setMicrophonePermission(true);
-          stream.getTracks().forEach(track => track.stop());
-        } catch (error) {
+        })
+        .catch(error => {
           setMicrophonePermission(false);
-        }
-      };
-      getMicrophonePermission();
+        });
     }, []);
     return microphonePermission;
-  };
-
-
+  }
+  
+  
   
   const programmingKeywords = [
     "programming",
@@ -240,6 +236,12 @@ const Chatbot = () => {
       errorHandler(errorMessage);
     }
   };
+
+  if (window.webkitSpeechRecognition && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    //
+  } else {
+    //
+  }
   
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
@@ -345,6 +347,12 @@ const Chatbot = () => {
               <img src={microphoneImage} alt="Start Voice" className="mr-2" />
             )}
           </button>
+
+          {!microphonePermission && (
+            <div className="sticky top-0 z-10 bg-red-500 text-white text-center py-2">
+              Please grant microphone permissions to use voice input.
+            </div>
+          )}
 
 
         </form>
