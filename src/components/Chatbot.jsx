@@ -15,14 +15,17 @@ const Chatbot = () => {
   const conversationRef = useRef(null);
   const inputRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
-
-  
+  const [hasSentWelcomeMessage, setHasSentWelcomeMessage] = useState(false);
+ 
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
-    //onload message bot
-    sendWelcomeMessage();
-  }, [conversation]);
+    // On component load, send the welcome message if it hasn't been sent already
+    if (!hasSentWelcomeMessage) {
+      sendWelcomeMessage();
+    }
+  }, [conversation, hasSentWelcomeMessage]);
+  
   
   useEffect(() => {
     if (inputRef.current && window.webkitSpeechRecognition) {
