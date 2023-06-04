@@ -68,15 +68,33 @@ const Chatbot = () => {
     "scala"
   ];
 
+  
+  const errorHandler = (option) => {
+    switch (option) {
+      case 1:
+        responsiveVoice.speak("AI response: Input is empty!");
+        break;
+      case 2:
+        responsiveVoice.speak("AI response: Invalid input!");
+        break;
+      case 3:
+        responsiveVoice.speak("AI response: Error occurred!");
+        break;
+      default:
+        responsiveVoice.speak("AI response: Unknown error!");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!input) {
       // Stop execution if input is empty
       //window.alert(`Input empty?`);
-      responsiveVoice.speak("AI response, input empty!.");
+      errorHandler(1);
       return;
     }
+   
     // Get data from memory and concatenate with input
     const memoryData = memory.join(" ");
     //const inputWithMemory = `${memoryData} ${input}`;
