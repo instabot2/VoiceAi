@@ -7,9 +7,6 @@ import microphoneImage from '/microphone-solid-24.png';
 import microphoneOffImage from '/microphone-off-solid-24.png';
 import sendImage from '/send-solid-24.png';
 
-//import i18n from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
@@ -217,9 +214,6 @@ const Chatbot = () => {
         
           
 
-
-          
-          
           // Set up the onend event handler - fix bugs
           utterance.onend = function() {
             clearTimeout(speechTimeoutId); // Clear the timeout when speech synthesis ends
