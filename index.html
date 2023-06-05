@@ -36,5 +36,14 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Create an instance of the LanguageDetect class
+      const lngDetector = new LanguageDetect();
+      // Use the detect method to determine the language of a text
+      const detectedLanguages = lngDetector.detect('This is a test.');
+      console.log(detectedLanguages);
+      alert("dfsfdsf");
+    </script>
+    
   </body>
 </html>
