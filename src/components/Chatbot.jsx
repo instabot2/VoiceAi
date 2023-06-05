@@ -9,10 +9,6 @@ import sendImage from '/send-solid-24.png';
 
 import franc from 'franc';
 
-const detectLanguage = (text) => {
-  const detectedLanguage = franc(text);
-  return detectedLanguage;
-};
 
 
 const Chatbot = () => {
