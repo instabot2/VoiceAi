@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import franc from 'franc-min';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
@@ -134,6 +135,13 @@ const Chatbot = () => {
 
     setIsProcessing(true); // Show processing message
 
+    //detect language
+    const detectLanguage = (text) => {
+      const detectedLanguage = franc(text);
+      return detectedLanguage;
+    };
+
+    
     let speechTimeoutId; // Variable to hold the timeout ID
     const timeoutDuration = 20000; // Duration in milliseconds
     
@@ -208,7 +216,14 @@ const Chatbot = () => {
         if ('speechSynthesis' in window) {
           const synth = window.speechSynthesis;
           const utterance = new SpeechSynthesisUtterance(botResponse);     
-          
+        
+          // Detect language of botResponse
+          const detectedLanguage = detectLanguage(botResponse);
+          if (detectedLanguage === 'ms' || detectedLanguage === 'mal') {
+            // Speak in Malay
+            utterance.lang = 'ms-MY'; // Set the language code for Malay
+          }
+
           // Set up the onend event handler - fix bugs
           utterance.onend = function() {
             clearTimeout(speechTimeoutId); // Clear the timeout when speech synthesis ends
