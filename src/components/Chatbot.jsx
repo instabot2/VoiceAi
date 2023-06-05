@@ -218,6 +218,8 @@ const Chatbot = () => {
     } catch (error) {
       console.error(error);
       setIsProcessing(false); // Hide processing message
+      // Call the errorHandler function with the error object
+      errorHandler(error);
     }
 
     setInput("");
