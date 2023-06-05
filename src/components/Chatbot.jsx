@@ -6,7 +6,6 @@ import Navbar from "./Navbar";
 import microphoneImage from '/microphone-solid-24.png';
 import microphoneOffImage from '/microphone-off-solid-24.png';
 import sendImage from '/send-solid-24.png';
-import LanguageDetect from 'languagedetect';
 
 
 const Chatbot = () => {
@@ -226,7 +225,12 @@ const Chatbot = () => {
           //utterance.lang = primaryLanguage;
           //}
 
-
+          const { Language } = require('lingua-rs');
+          const languageDetector = new Language();
+          const detectedLanguage = languageDetector.detect(botResponse);
+          console.log(detectedLanguage);
+          
+          
           // Set up the onend event handler - fix bugs
           utterance.onend = function() {
             clearTimeout(speechTimeoutId); // Clear the timeout when speech synthesis ends
