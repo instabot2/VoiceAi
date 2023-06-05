@@ -135,12 +135,6 @@ const Chatbot = () => {
     setIsProcessing(true); // Show processing message
 
 
-    const LanguageDetect = require('languagedetect');
-    const lngDetector = new LanguageDetect();
-    const text = 'This is a test.';
-    const detectedLanguages = lngDetector.detect(text);
-    console.log(detectedLanguages);
-
 
     
     let speechTimeoutId; // Variable to hold the timeout ID
@@ -218,6 +212,22 @@ const Chatbot = () => {
           const synth = window.speechSynthesis;
           const utterance = new SpeechSynthesisUtterance(botResponse);     
         
+          
+          // Import and initialize the LanguageDetect class
+          const LanguageDetect = require('languagedetect');
+          const lngDetector = new LanguageDetect();
+
+          // Use the detect method to determine the language of botResponse
+          const detectedLanguages = lngDetector.detect(botResponse);
+          console.log(detectedLanguages);
+
+          // Set the appropriate language for the utterance based on detected languages
+          if (detectedLanguages && detectedLanguages.length > 0) {
+            const primaryLanguage = detectedLanguages[0][0]; // Get the primary detected language
+            utterance.lang = primaryLanguage;
+          }
+
+
           // Set up the onend event handler - fix bugs
           utterance.onend = function() {
             clearTimeout(speechTimeoutId); // Clear the timeout when speech synthesis ends
