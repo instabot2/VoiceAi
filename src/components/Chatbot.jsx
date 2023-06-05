@@ -215,17 +215,15 @@ const Chatbot = () => {
         
           
           // Import and initialize the LanguageDetect class
-          const LanguageDetect = require('languagedetect');
-          const lngDetector = new LanguageDetect();
-
+          //const LanguageDetect = require('languagedetect');
+          //const lngDetector = new LanguageDetect();
           // Use the detect method to determine the language of botResponse
-          const detectedLanguages = lngDetector.detect(botResponse);
-          console.log(detectedLanguages);
-
+          //const detectedLanguages = lngDetector.detect(botResponse);
+          //console.log(detectedLanguages);
           // Set the appropriate language for the utterance based on detected languages
           //if (detectedLanguages && detectedLanguages.length > 0) {
-          const primaryLanguage = detectedLanguages[0][0]; // Get the primary detected language
-          utterance.lang = primaryLanguage;
+          //const primaryLanguage = detectedLanguages[0][0]; // Get the primary detected language
+          //utterance.lang = primaryLanguage;
           //}
 
 
