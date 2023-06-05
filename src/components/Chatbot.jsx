@@ -93,7 +93,6 @@ const Chatbot = () => {
     }
   };
   
-  
   const programmingKeywords = [
     "programming","code","coding","program","developer","c","java","python","html","javascript","react","ruby",
     "php","swift","typescript","sql","go","rust","scala"
