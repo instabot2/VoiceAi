@@ -227,9 +227,10 @@ const Chatbot = () => {
 
           const { Language } = require('lingua-rs');
           const languageDetector = new Language();
-          const detectedLanguage = languageDetector.detect(botResponse);
+          //const detectedLanguage = languageDetector.detect(botResponse);
+          const detectedLanguage = langdetect.detect('Hello, world!');
           console.log(detectedLanguage);
-          
+
           
           // Set up the onend event handler - fix bugs
           utterance.onend = function() {
