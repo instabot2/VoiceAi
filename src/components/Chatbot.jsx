@@ -66,8 +66,13 @@ const Chatbot = () => {
   }
   
   const welcomeMessages = [
-    "Hi, AI!","Hello, AI!","Hey, AI!","Good day, AI!","Greetings, AI!","Yo, AI!","Hi there, AI!","Hey, AI!",
+  //  "Hi, AI!", "Hello, AI!", "Hey, AI!", "Good day, AI!", "Greetings, AI!", "Yo, AI!", "Hi there, AI!", "Hey, AI!",
   ];
+  const welcomeMessages = [
+    "Hi, I'm your friendly chatbot!",
+    "Hello! I'm here to assist you.",
+  ];
+
   const sendWelcomeMessage = async () => {
     setIsProcessing(true);
     // Generate a random index to select a welcome message
