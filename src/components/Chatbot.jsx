@@ -8,9 +8,6 @@ import microphoneOffImage from '/microphone-off-solid-24.png';
 import sendImage from '/send-solid-24.png';
 
 
-
-
-
 const Chatbot = () => {
   const [input, setInput] = useState("");
   const [conversation, setConversation] = useState([]);
@@ -137,6 +134,12 @@ const Chatbot = () => {
 
     setIsProcessing(true); // Show processing message
 
+
+    const LanguageDetect = require('languagedetect');
+    const lngDetector = new LanguageDetect();
+    const text = 'This is a test.';
+    const detectedLanguages = lngDetector.detect(text);
+    console.log(detectedLanguages);
 
 
     
