@@ -66,11 +66,7 @@ const Chatbot = () => {
   }
   
   const welcomeMessages = [
-    "Hello, AI!",
-    "Hi there!",
-    "Welcome to the chatbot!",
-    "Greetings!",
-    "Nice to see you!",
+    "Hi, AI!","Hello, AI!","Hey, AI!","Good day, AI!","Greetings, AI!","Yo, AI!","Hi there, AI!","Hey, AI!",
   ];
   const sendWelcomeMessage = async () => {
     setIsProcessing(true);
