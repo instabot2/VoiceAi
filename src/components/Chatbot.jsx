@@ -185,12 +185,14 @@ const Chatbot = () => {
           // Start the speech synthesis
           responsiveVoice.speak(botResponse.trim(), "US English Female", {
             onstart: function () {
-              // Speech synthesis has started
-              setTimeout(function () {
+
+              // Speech synthesis has started - fix bugs
+              speechTimeoutId = setTimeout(function () {
                 // Stop the speech synthesis after the timeout duration
-                //responsiveVoice.cancel();
-                //alert("Speech synthesis timed out.");
+                responsiveVoice.cancel();
+                // alert("Speech synthesis timed out.");
               }, timeoutDuration);
+              
             },
             onend: function () {
               // Speech synthesis has ended
@@ -205,6 +207,14 @@ const Chatbot = () => {
           const synth = window.speechSynthesis;
           const utterance = new SpeechSynthesisUtterance(botResponse);
           synth.speak(utterance); 
+          
+          //fix bugs
+          speechTimeoutId = setTimeout(function () {
+            // Stop the speech synthesis after the timeout duration
+            synth.cancel();
+            // alert("Speech synthesis timed out.");
+          }, timeoutDuration);
+
         } else {
           //alert("Text-to-speech is not supported on this device.");
           errorHandler("Text-to-speech is not supported on this device.");
