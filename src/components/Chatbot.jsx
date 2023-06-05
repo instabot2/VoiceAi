@@ -214,6 +214,15 @@ const Chatbot = () => {
         
           
           const DetectLanguage = require('detectlanguage');
+          const detectLanguage = new DetectLanguage('ac72bccf0519eed312c04082de841563');
+          //const text = 'Hello, world!';
+          detectLanguage.detect(botResponse, function(error, result) {
+            if (error) {
+              console.error('Error:', error);
+            } else {
+              console.log('Detected language:', result[0].language);
+            }
+          });
 
           
           
