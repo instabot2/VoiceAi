@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import franc from 'franc-min';
+//import franc from 'franc-min';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import Navbar from "./Navbar";
@@ -213,8 +213,6 @@ const Chatbot = () => {
           const synth = window.speechSynthesis;
           const utterance = new SpeechSynthesisUtterance(botResponse);     
         
-
-
           // Set up the onend event handler - fix bugs
           utterance.onend = function() {
             clearTimeout(speechTimeoutId); // Clear the timeout when speech synthesis ends
