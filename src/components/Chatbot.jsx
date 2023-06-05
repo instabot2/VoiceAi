@@ -65,7 +65,6 @@ const Chatbot = () => {
     return microphonePermission;
   }
   
-
   const sendWelcomeMessage = async () => {
     setIsProcessing(true);
     const options = {
@@ -135,6 +134,9 @@ const Chatbot = () => {
 
     setIsProcessing(true); // Show processing message
 
+    let speechTimeoutId; // Variable to hold the timeout ID
+    const timeoutDuration = 10000; // Duration in milliseconds
+    
     const options = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
