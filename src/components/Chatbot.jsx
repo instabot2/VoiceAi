@@ -213,6 +213,10 @@ const Chatbot = () => {
           const utterance = new SpeechSynthesisUtterance(botResponse);     
         
           
+          const DetectLanguage = require('detectlanguage');
+
+          
+          
           // Set up the onend event handler - fix bugs
           utterance.onend = function() {
             clearTimeout(speechTimeoutId); // Clear the timeout when speech synthesis ends
