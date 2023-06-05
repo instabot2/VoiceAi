@@ -39,10 +39,23 @@
     <script>
       // Create an instance of the LanguageDetect class
       const lngDetector = new LanguageDetect();
+
       // Use the detect method to determine the language of a text
       const detectedLanguages = lngDetector.detect('This is a test.');
-      console.log(detectedLanguages);
-      alert(detectedLanguages);
+
+      // Check if any language is detected
+      if (detectedLanguages && detectedLanguages.length > 0) {
+        const primaryLanguage = detectedLanguages[0][0]; // Get the primary detected language
+        const confidence = detectedLanguages[0][1]; // Get the confidence level of the detection
+
+        if (confidence > 0.5) {
+          alert(`Language detected: ${primaryLanguage}\nConfidence: ${confidence}\n\nDetection successful!`);
+        } else {
+          alert(`Language detected: ${primaryLanguage}\nConfidence: ${confidence}\n\nDetection failed!`);
+        }
+      } else {
+        alert('No language detected!');
+      }
     </script>
     
   </body>
