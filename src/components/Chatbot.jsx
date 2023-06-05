@@ -217,12 +217,7 @@ const Chatbot = () => {
           const synth = window.speechSynthesis;
           const utterance = new SpeechSynthesisUtterance(botResponse);     
         
-          // Detect language of botResponse
-          const detectedLanguage = detectLanguage(botResponse);
-          if (detectedLanguage === 'ms' || detectedLanguage === 'mal') {
-            // Speak in Malay
-            utterance.lang = 'ms-MY'; // Set the language code for Malay
-          }
+
 
           // Set up the onend event handler - fix bugs
           utterance.onend = function() {
