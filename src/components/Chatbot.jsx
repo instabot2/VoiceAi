@@ -223,10 +223,10 @@ const Chatbot = () => {
           console.log(detectedLanguages);
 
           // Set the appropriate language for the utterance based on detected languages
-          if (detectedLanguages && detectedLanguages.length > 0) {
-            const primaryLanguage = detectedLanguages[0][0]; // Get the primary detected language
-            utterance.lang = primaryLanguage;
-          }
+          //if (detectedLanguages && detectedLanguages.length > 0) {
+          const primaryLanguage = detectedLanguages[0][0]; // Get the primary detected language
+          utterance.lang = primaryLanguage;
+          //}
 
 
           // Set up the onend event handler - fix bugs
