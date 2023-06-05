@@ -69,15 +69,16 @@ const Chatbot = () => {
   //  "Hi, AI!", "Hello, AI!", "Hey, AI!", "Good day, AI!", "Greetings, AI!", "Yo, AI!", "Hi there, AI!", "Hey, AI!",
   //];
   const welcomeMessages = [
-    "Hi, I'm your friendly chatbot!",
-    "Hello! I'm here to assist you.",
+    "I'm AI, how can I help you?",
   ];
 
   const sendWelcomeMessage = async () => {
     setIsProcessing(true);
+    
     // Generate a random index to select a welcome message
     const randomIndex = Math.floor(Math.random() * welcomeMessages.length);
-    const welcomeMessage = welcomeMessages[randomIndex];  
+    //const welcomeMessage = welcomeMessages[randomIndex];
+    const welcomeMessage = welcomeMessages[0];
     const options = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
