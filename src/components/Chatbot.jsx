@@ -218,7 +218,6 @@ const Chatbot = () => {
           
           synth.speak(utterance);
           
-          
           //fix bugs,  Set the timeout to cancel speech synthesis if it exceeds the duration
           speechTimeoutId = setTimeout(function () {
             // Stop the speech synthesis after the timeout duration
@@ -287,14 +286,7 @@ const Chatbot = () => {
     conversationContainer.scrollTop = 0;
   };
 
-  //const formatOutput = (item) => {
-  //  if (programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
-  //    const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
-  //    return <pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
-  //  } else {
-  //    return <pre>{item.output}</pre>;
-  //  }
-  //};
+
   const formatOutput = (item) => {
     if (item && item.input && item.output && programmingKeywords.some((keyword) => item.input.toLowerCase().includes(keyword.toLowerCase()))) {
       const highlightedCode = Prism.highlight(item.output, Prism.languages.javascript, 'javascript');
