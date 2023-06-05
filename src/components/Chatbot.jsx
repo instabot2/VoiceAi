@@ -135,7 +135,7 @@ const Chatbot = () => {
     setIsProcessing(true); // Show processing message
 
     let speechTimeoutId; // Variable to hold the timeout ID
-    const timeoutDuration = 10000; // Duration in milliseconds
+    const timeoutDuration = 20000; // Duration in milliseconds
     
     const options = {
       method: "POST",
@@ -207,16 +207,26 @@ const Chatbot = () => {
         // Other platforms
         if ('speechSynthesis' in window) {
           const synth = window.speechSynthesis;
-          const utterance = new SpeechSynthesisUtterance(botResponse);
-          synth.speak(utterance); 
+          const utterance = new SpeechSynthesisUtterance(botResponse);     
           
-          //fix bugs
+          // Set up the onend event handler - fix bugs
+          utterance.onend = function() {
+            clearTimeout(speechTimeoutId); // Clear the timeout when speech synthesis ends
+            console.log("Speech synthesis has ended");
+            // Perform any desired actions here
+          };
+          
+          synth.speak(utterance);
+          
+          
+          //fix bugs,  Set the timeout to cancel speech synthesis if it exceeds the duration
           speechTimeoutId = setTimeout(function () {
             // Stop the speech synthesis after the timeout duration
             synth.cancel();
             // alert("Speech synthesis timed out.");
           }, timeoutDuration);
-
+      
+          
         } else {
           //alert("Text-to-speech is not supported on this device.");
           errorHandler("Text-to-speech is not supported on this device.");
