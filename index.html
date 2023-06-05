@@ -36,7 +36,9 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script>
+
+   <script>
+    window.onload = function() {
       // Create an instance of the LanguageDetect class
       const lngDetector = new LanguageDetect();
 
@@ -56,7 +58,8 @@
       } else {
         alert('No language detected!');
       }
-    </script>
+    };
+  </script>   
     
   </body>
 </html>
