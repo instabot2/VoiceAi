@@ -71,8 +71,6 @@ const Chatbot = () => {
 
   const sendWelcomeMessage = async () => {
     setIsProcessing(true);
-    const introduction = "Hi, I'm AI! How can I assist you today?";
-  
     // Generate a random index to select a welcome message
     const randomIndex = Math.floor(Math.random() * welcomeMessages.length);
     const welcomeMessage = welcomeMessages[randomIndex];
@@ -86,7 +84,7 @@ const Chatbot = () => {
       },
       data: {
         //query: welcomeMessage,
-        query: introduction,
+        query: "Introduce yourself",
       },
     };
 
