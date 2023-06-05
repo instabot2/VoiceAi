@@ -135,11 +135,7 @@ const Chatbot = () => {
 
     setIsProcessing(true); // Show processing message
 
-    //detect language
-    const detectLanguage = (text) => {
-      const detectedLanguage = franc(text);
-      return detectedLanguage;
-    };
+
 
     
     let speechTimeoutId; // Variable to hold the timeout ID
