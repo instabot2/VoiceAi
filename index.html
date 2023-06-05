@@ -4,7 +4,6 @@
     
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/languagedetect/languagedetect.min.js"></script>
 
     <meta charset="UTF-8" />
     <link
@@ -36,30 +35,6 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-
-   <script>
-    window.onload = function() {
-      // Create an instance of the LanguageDetect class
-      const lngDetector = new LanguageDetect();
-
-      // Use the detect method to determine the language of a text
-      const detectedLanguages = lngDetector.detect('This is a test.');
-
-      // Check if any language is detected
-      if (detectedLanguages && detectedLanguages.length > 0) {
-        const primaryLanguage = detectedLanguages[0][0]; // Get the primary detected language
-        const confidence = detectedLanguages[0][1]; // Get the confidence level of the detection
-
-        if (confidence > 0.5) {
-          alert(`Language detected: ${primaryLanguage}\nConfidence: ${confidence}\n\nDetection successful!`);
-        } else {
-          alert(`Language detected: ${primaryLanguage}\nConfidence: ${confidence}\n\nDetection failed!`);
-        }
-      } else {
-        alert('No language detected!');
-      }
-    };
-  </script>   
-    
+  
   </body>
 </html>
