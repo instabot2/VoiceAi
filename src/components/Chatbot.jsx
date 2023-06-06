@@ -17,6 +17,8 @@ const Chatbot = () => {
   const inputRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
   const [hasSentWelcomeMessage, setHasSentWelcomeMessage] = useState(false);
+  
+  const LanguageDetect = require('language-detect');
 
  
   useEffect(() => {
