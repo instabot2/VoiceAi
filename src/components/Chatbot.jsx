@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import microphoneImage from '/microphone-solid-24.png';
 import microphoneOffImage from '/microphone-off-solid-24.png';
 import sendImage from '/send-solid-24.png';
-import { useTranslation } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 
 
