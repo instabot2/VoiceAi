@@ -25,7 +25,8 @@
     "react-speech-kit": "^3.0.1",
     "react-use-clipboard": "^1.0.9",
     "annyang": "^2.6.1",
-    "speechrecognition": "^6.0.0"
+    "speechrecognition": "^6.0.0",
+    "language-detect": "^0.4.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
