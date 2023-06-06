@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import microphoneImage from '/microphone-solid-24.png';
 import microphoneOffImage from '/microphone-off-solid-24.png';
 import sendImage from '/send-solid-24.png';
-import langdetect from 'langdetect-js';
+//import langdetect from 'langdetect-js';
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
@@ -207,15 +207,15 @@ const Chatbot = () => {
         }
       } else {
         // Other platforms
-        const detectedLanguage = langdetect.detect(botResponse);
-        console.log(detectedLanguage); // Output: 'en' for English
+        //const detectedLanguage = langdetect.detect(botResponse);
+        //console.log(detectedLanguage); // Output: 'en' for English
         
         if ('speechSynthesis' in window) {
           const synth = window.speechSynthesis;
           const utterance = new SpeechSynthesisUtterance(botResponse);     
         
           // Set the language of the utterance based on the detected language
-          utterance.lang = detectedLanguage;
+          //utterance.lang = detectedLanguage;
 
           // Set up the onend event handler - fix bugs
           utterance.onend = function() {
