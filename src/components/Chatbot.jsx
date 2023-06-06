@@ -7,7 +7,8 @@ import microphoneImage from '/microphone-solid-24.png';
 import microphoneOffImage from '/microphone-off-solid-24.png';
 import sendImage from '/send-solid-24.png';
 
-import LanguageDetect from './lib/LanguageDetect';
+import LanguageDetect from '/LanguageDetect.js';
+
 
 
 const Chatbot = () => {
