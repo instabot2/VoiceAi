@@ -17,6 +17,9 @@ const Chatbot = () => {
   const inputRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
   const [hasSentWelcomeMessage, setHasSentWelcomeMessage] = useState(false);
+  const userLanguage = navigator.language || navigator.userLanguage;
+
+  
  
   useEffect(() => {
     handleNewMessage();
@@ -363,6 +366,8 @@ const Chatbot = () => {
             className="flex-1 px-4 py-2 text-gray-700 border rounded focus:outline-none"
           />    
     
+          <p>User Language: {userLanguage}</p>
+
           <button
             type="submit"
             className="flex items-center px-2 py-1 ml-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none"
