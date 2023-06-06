@@ -6,6 +6,8 @@ import Navbar from "./Navbar";
 import microphoneImage from '/microphone-solid-24.png';
 import microphoneOffImage from '/microphone-off-solid-24.png';
 import sendImage from '/send-solid-24.png';
+import LanguageDetect from '../lib/LanguageDetect.js';
+
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
@@ -17,8 +19,6 @@ const Chatbot = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [hasSentWelcomeMessage, setHasSentWelcomeMessage] = useState(false);
   
-  //const LanguageDetect = require('./lib/LanguageDetect');
-
  
   useEffect(() => {
     handleNewMessage();
