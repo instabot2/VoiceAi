@@ -209,7 +209,7 @@ const Chatbot = () => {
         // Other platforms
         //const detectedLanguage = langdetect.detect(botResponse);
         //console.log(detectedLanguage); // Output: 'en' for English
-        const LanguageDetect = require('language-detect');
+        //const LanguageDetect = require('language-detect');
 
         
         if ('speechSynthesis' in window) {
