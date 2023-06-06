@@ -17,9 +17,8 @@ const Chatbot = () => {
   const inputRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
   const [hasSentWelcomeMessage, setHasSentWelcomeMessage] = useState(false);
-  const LanguageDetect = require('languagedetect');
+
  
-  
   useEffect(() => {
     handleNewMessage();
     inputRef.current.focus();
@@ -209,6 +208,7 @@ const Chatbot = () => {
       } else {
         // Other platforms
         //const detectedLanguage = langdetect.detect(botResponse);
+        const LanguageDetect = require('languagedetect');
         //console.log(detectedLanguage); // Output: 'en' for English
         
         if ('speechSynthesis' in window) {
