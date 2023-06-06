@@ -24,7 +24,10 @@
     "react-speech-kit": "^3.0.1",
     "react-use-clipboard": "^1.0.9",
     "annyang": "^2.6.1",
-    "speechrecognition": "^6.0.0"
+    "speechrecognition": "^6.0.0",
+    "i18next": "^22.4.11",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "i18next-http-backend": "^2.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
