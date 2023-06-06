@@ -207,15 +207,16 @@ const Chatbot = () => {
         }
       } else {
         // Other platforms
-        //const detectedLanguage = langdetect.detect(botResponse);
-        //console.log(detectedLanguage); // Output: 'en' for English
+        const detectedLanguage = langdetect.detect(botResponse);
+        console.log(detectedLanguage); // Output: 'en' for English
+
         
         if ('speechSynthesis' in window) {
           const synth = window.speechSynthesis;
           const utterance = new SpeechSynthesisUtterance(botResponse);     
         
           // Set the language of the utterance based on the detected language
-          //utterance.lang = detectedLanguage;
+          utterance.lang = detectedLanguage;
 
           // Set up the onend event handler - fix bugs
           utterance.onend = function() {
