@@ -1,10 +1,42 @@
-import React from 'react'
-import Navbar1 from './Navbar1'
-import Footer from './Footer'
-
-import config from './server/config';
+import React, { useState } from 'react';
+import axios from 'axios';
+import Navbar1 from './Navbar1';
+import Footer from './Footer';
 
 const Contact = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    try {
+      // Send the email using the backend API
+      const response = await axios.post('/api/send-email', {
+        name,
+        email,
+        message,
+      });
+
+      setLoading(false);
+
+      if (response.status === 200) {
+        setSuccessMessage('Email sent successfully.');
+      } else {
+        setErrorMessage('An error occurred while sending the email.');
+      }
+    } catch (error) {
+      setLoading(false);
+      setErrorMessage('An error occurred while sending the email.');
+    }
+  };
+
   return (
     <>
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
