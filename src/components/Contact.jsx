@@ -1,15 +1,7 @@
 import React from 'react'
 import Navbar1 from './Navbar1'
 import Footer from './Footer'
-
-const config = require('./server/config.js');
-const email = config.email;
-const password = config.password;
-
 const Contact = () => {
-  
-  
-  
   return (
     <>
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
