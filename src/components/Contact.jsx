@@ -37,8 +37,12 @@ const Contact = () => {
       const errorMessage = 'An error occurred while sending the email.';
       setErrorMessage(errorMessage);
       //errorHandler(errorMessage); // Call the errorHandler function with the error message
-      errorHandler(errorMessage, error); // Call the errorHandler function with the error message and error object
-      console.error(error); // Log the error to the console for debugging purposes
+      //errorHandler(errorMessage, error); // Call the errorHandler function with the error message and error object
+
+      const errorDetails = error.message; // Capture the error message from the error object
+      errorHandler(errorMessage, errorDetails); // Call the errorHandler function with the error message and error details
+      console.error('Error:', error); // Log the error to the console for debugging purposes
+}
     }
 
     
