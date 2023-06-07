@@ -1,8 +1,14 @@
+import express from 'express';
+import nodemailer from 'nodemailer';
+
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
 app.post('/api/send-email', (req, res) => {
-  // Extract the name, email, and message from the request body
   const { name, email, message } = req.body;
-  
-  // Create a Nodemailer transporter
+
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -11,7 +17,6 @@ app.post('/api/send-email', (req, res) => {
     },
   });
 
-  // Create the email message
   const mailOptions = {
     from: 'your-email@gmail.com', // Replace with the sender email address
     to: 'recipient@example.com', // Replace with the recipient email address
@@ -19,7 +24,6 @@ app.post('/api/send-email', (req, res) => {
     text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
   };
 
-  // Send the email using Nodemailer
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log('Error occurred:', error);
@@ -31,8 +35,6 @@ app.post('/api/send-email', (req, res) => {
   });
 });
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
