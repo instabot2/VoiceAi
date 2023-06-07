@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import sendEmail from './sendEmail';
+import sendEmail from './sendEmail.js';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
