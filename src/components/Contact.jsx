@@ -6,10 +6,6 @@ const config = require('./server/config.js');
 const email = config.email;
 const password = config.password;
 
-// Use the email and password variables in your code
-// ...
-
-
 const Contact = () => {
   
   
