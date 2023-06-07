@@ -21,10 +21,6 @@ const Contact = () => {
     };
 
     try {
-      const name = 'John Doe';
-      const email = 'sampirlintah@gmail.com';
-      const message = 'This is a test email';
-      
       // Send the email using axios or any other library you prefer
       const response = await axios.post('/api/send-email', { name, email, message });
       console.log('Email sent successfully');
