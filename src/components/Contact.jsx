@@ -13,12 +13,43 @@ const Contact = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    // Send the email using Nodemailer
-    // ...
+  // Create a transporter with your email provider settings
+  const transporter = nodemailer.createTransport({
+    service: 'your-email-service',
+    auth: {
+      user: email,
+      pass: password,
+    },
+  });
+
+  // Define the email message
+  const mailOptions = {
+    from: email,
+    to: 'recipient@example.com',
+    subject: 'Contact Form Submission',
+    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
   };
+
+  // Send the email using Nodemailer
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log('Error occurred while sending the email:', error);
+      setErrorMessage('An error occurred while sending the email.');
+      setSuccessMessage('');
+    } else {
+      console.log('Email sent:', info.response);
+      setSuccessMessage('Email sent successfully!');
+      setErrorMessage('');
+      setName('');
+      setEmail('');
+      setMessage('');
+    }
+  });
+};
+
   
   
   return (
