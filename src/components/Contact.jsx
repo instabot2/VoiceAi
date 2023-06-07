@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import sendEmail from './sendEmail';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
