@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import sendEmail from './sendEmail';
 import axios from 'axios';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
-
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -19,22 +17,22 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      // Send the email using the sendEmail function
-      const emailResponse = await sendEmail({ name, email, message });
+      // Send the email using axios or any other library you prefer
+      const emailResponse = await axios.post('/send-email', { name, email, message });
 
       setLoading(false);
 
-      if (emailResponse.success) {
-        setSuccessMessage(emailResponse.message);
+      if (emailResponse.data.success) {
+        setSuccessMessage(emailResponse.data.message);
       } else {
-        setErrorMessage(emailResponse.message);
+        setErrorMessage(emailResponse.data.message);
       }
     } catch (error) {
       setLoading(false);
       setErrorMessage('An error occurred while sending the email.');
     }
   };
-    
+
 
   return (
     <>
