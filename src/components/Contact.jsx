@@ -22,31 +22,25 @@ const Contact = () => {
 
     try {
       // Send the email using axios or any other library you prefer
-      //const emailResponse = await axios.post('/send-email', { name, email, message });
-      await axios.post('/api/send-email', { name, email, message });
+      const response = await axios.post('/api/send-email', { name, email, message });
       console.log('Email sent successfully');
 
       setLoading(false);
 
-      if (emailResponse.data.success) {
-        setSuccessMessage(emailResponse.data.message);
+      if (response.data.success) {
+        setSuccessMessage(response.data.message);
       } else {
-        setErrorMessage(emailResponse.data.message);
-        errorHandler(emailResponse.data.message); // Call the errorHandler function
-      } 
+        setErrorMessage(response.data.message);
+        errorHandler(response.data.message);
+      }
     } catch (error) {
       setLoading(false);
       const errorMessage = 'An error occurred while sending the email.';
       setErrorMessage(errorMessage);
-      //errorHandler(errorMessage); // Call the errorHandler function with the error message
-      //errorHandler(errorMessage, error); // Call the errorHandler function with the error message and error object
-
-      const errorDetails = error.message; // Capture the error message from the error object
-      errorHandler(errorMessage, errorDetails); // Call the errorHandler function with the error message and error details
-      console.error('Error:', error); // Log the error to the console for debugging purposes
-      
+      // Call the errorHandler function with the error message
+      errorHandler(errorMessage);
+      console.error('Error:', error);
     }
-
   };
 
 
