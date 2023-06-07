@@ -30,11 +30,13 @@ const Contact = () => {
         setSuccessMessage(emailResponse.data.message);
       } else {
         setErrorMessage(emailResponse.data.message);
+        errorHandler(emailResponse.data.message); // Call the errorHandler function
       }
     } catch (error) {
       setLoading(false);
       setErrorMessage('An error occurred while sending the email.');
-    }
+      errorHandler('An error occurred while sending the email.'); // Call the errorHandler function
+    }  
   };
 
 
