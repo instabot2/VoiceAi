@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import sendEmail from './server/sendEmail.js';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
@@ -23,7 +22,9 @@ const Contact = () => {
 
     try {
       // Send the email using axios or any other library you prefer
-      const emailResponse = await axios.post('/send-email', { name, email, message });
+      //const emailResponse = await axios.post('/send-email', { name, email, message });
+      await axios.post('/api/send-email', { name, email, message });
+      console.log('Email sent successfully');
 
       setLoading(false);
 
