@@ -1,6 +1,9 @@
 import React from 'react'
 import Navbar1 from './Navbar1'
 import Footer from './Footer'
+
+const config = require('./server/config.js');
+
 const Contact = () => {
   return (
     <>
