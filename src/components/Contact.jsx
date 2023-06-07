@@ -103,27 +103,36 @@ const Contact = () => {
                   <h2 className="text-gray-800 dark:text-white text-base md:text-lg leading-8 tracking-wider">
                     For enquiries, please email us using the form below
                   </h2>
+  
+                <form onSubmit={handleSubmit}>
+  
                   <div className="mt-4 md:mt-8">
                     <p className="text-gray-800 dark:text-white text-base font-medium">
                       Name
                     </p>
+  
                     <input
                       className="mt-3 text-base dark:bg-gray-800 border-2 w-11/12 lg:w-full xl:w-10/12 hover:border-indigo-600 focus:border-indigo-600 focus:outline-none border-black py-5 pl-4 text-gray-800 dark:text-white"
                       type="text"
                       placeholder="Justin Timberlake"
                       aria-label="enter your name input"
-                    />
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />    
+                                       
                   </div>
                   <div className="mt-4 md:mt-8">
                     <p className="text-gray-800 dark:text-white text-base font-medium">
                       Email Address
                     </p>
+  
                     <input
                       className="mt-3 text-base dark:bg-gray-800 border-2 w-11/12 lg:w-full xl:w-10/12 hover:border-indigo-600 focus:border-indigo-600 focus:outline-none border-black py-5 pl-4 text-gray-800 dark:text-white"
                       type="email"
                       placeholder="example@mail.com"
                       aria-label="enter your email input"
                     />
+               
                   </div>
                   <div className="mt-4 md:mt-8">
                     <p className="text-gray-800 dark:text-white text-base font-medium">
@@ -138,10 +147,21 @@ const Contact = () => {
                     />
                   </div>
                   <div className="py-5">
-                    <button className="py-3 md:py-5 dark:bg-white dark:text-gray-800 px-5 md:px-10 bg-gray-900 text-white hover:opacity-90 ease-in duration-150 text-sm md:text-lg tracking-wider font-semibold focus:border-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
-                      Send
-                    </button>
+
+                    <button
+                    className="py-3 md:py-5 dark:bg-white dark:text-gray-800 px-5 md:px-10 bg-gray-900 text-white hover:opacity-90 ease-in duration-150 text-sm md:text-lg tracking-wider font-semibold focus:border-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                    type="submit"
+                    disabled={loading}
+                  >
+                    {loading ? 'Sending...' : 'Send'}
+                  </button>
                   </div>
+  
+                    {/* Display success or error message */}
+                  {successMessage && <p className="text-green-500">{successMessage}</p>}
+                  {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                </form>
+  
                 </div>
               </div>
             </div>
