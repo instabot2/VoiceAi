@@ -7,49 +7,7 @@ const email = config.email;
 const password = config.password;
 
 const Contact = () => {
-  const [name, setName] = useState('');
-  const [emailAddress, setEmailAddress] = useState('');
-  const [message, setMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Create a transporter with your email provider settings
-    const transporter = nodemailer.createTransport({
-      service: 'your-email-service',
-      auth: {
-        user: email,
-        pass: password,
-      },
-    });
-
-    // Define the email message
-    const mailOptions = {
-      from: email,
-      to: 'recipient@example.com',
-      subject: 'Contact Form Submission',
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-    };
-
-    // Send the email using Nodemailer
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log('Error occurred while sending the email:', error);
-        setErrorMessage('An error occurred while sending the email.');
-        setSuccessMessage('');
-      } else {
-        console.log('Email sent:', info.response);
-        setSuccessMessage('Email sent successfully!');
-        setErrorMessage('');
-        setName('');
-        setEmail('');
-        setMessage('');
-      }
-    });
-  };
-
+  
   
   
   return (
@@ -109,7 +67,6 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-  
             <div className="w-full lg:w-1/2 xl:pt-10 lg:pl-24">
               <div className="flex flex-col items-start xl:justify-start 2xl:justify-end xl:px-0 px-4">
                 <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-wider text-indigo-700">
@@ -123,56 +80,40 @@ const Contact = () => {
                     <p className="text-gray-800 dark:text-white text-base font-medium">
                       Name
                     </p>
-  
                     <input
                       className="mt-3 text-base dark:bg-gray-800 border-2 w-11/12 lg:w-full xl:w-10/12 hover:border-indigo-600 focus:border-indigo-600 focus:outline-none border-black py-5 pl-4 text-gray-800 dark:text-white"
                       type="text"
                       placeholder="Justin Timberlake"
                       aria-label="enter your name input"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
                     />
-                        
                   </div>
                   <div className="mt-4 md:mt-8">
                     <p className="text-gray-800 dark:text-white text-base font-medium">
                       Email Address
                     </p>
-
                     <input
                       className="mt-3 text-base dark:bg-gray-800 border-2 w-11/12 lg:w-full xl:w-10/12 hover:border-indigo-600 focus:border-indigo-600 focus:outline-none border-black py-5 pl-4 text-gray-800 dark:text-white"
                       type="email"
                       placeholder="example@mail.com"
                       aria-label="enter your email input"
-                      value={emailAddress}
-                      onChange={(e) => setEmailAddress(e.target.value)}
                     />
-                        
                   </div>
                   <div className="mt-4 md:mt-8">
                     <p className="text-gray-800 dark:text-white text-base font-medium">
                       Message
                     </p>
-
                     <textarea
                       className="mt-3 text-base dark:bg-gray-800 border-2 w-11/12 lg:w-full xl:w-10/12 resize-none hover:border-indigo-600 focus:border-indigo-600 focus:outline-none border-black xl:h-40 py-5 pl-4 text-gray-800 dark:text-white"
                       type="text"
                       placeholder="Write us something..."
                       aria-label="enter your message input"
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
+                      defaultValue={""}
                     />
-                        
                   </div>
                   <div className="py-5">
-
-                    <button
-                      className="py-3 md:py-5 dark:bg-white dark:text-gray-800 px-5 md:px-10 bg-gray-900 text-white hover:opacity-90 ease-in duration-150 text-sm md:text-lg tracking-wider font-semibold focus:border-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-                      onClick={handleSubmit}
-                    >
+                    <button className="py-3 md:py-5 dark:bg-white dark:text-gray-800 px-5 md:px-10 bg-gray-900 text-white hover:opacity-90 ease-in duration-150 text-sm md:text-lg tracking-wider font-semibold focus:border-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
                       Send
                     </button>
-
                   </div>
                 </div>
               </div>
