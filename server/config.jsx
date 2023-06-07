@@ -1,8 +1,5 @@
-// config.js
+// config.jsx
 const email = 'your-email@example.com';
 const password = 'your-password';
 
-module.exports = {
-  email,
-  password,
-};
+export { email, password };
