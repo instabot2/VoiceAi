@@ -35,6 +35,7 @@ const Contact = () => {
     } catch (error) {
       setLoading(false);
       setErrorMessage('An error occurred while sending the email.');
+      setErrorMessage(errorMessage);
       //errorHandler('An error occurred while sending the email.'); // Call the errorHandler function
       errorHandler(errorMessage); // Call the errorHandler function with the error message
     }  
