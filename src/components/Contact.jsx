@@ -31,14 +31,16 @@ const Contact = () => {
       } else {
         setErrorMessage(emailResponse.data.message);
         errorHandler(emailResponse.data.message); // Call the errorHandler function
-      }
+      } 
     } catch (error) {
       setLoading(false);
-      setErrorMessage('An error occurred while sending the email.');
+      const errorMessage = 'An error occurred while sending the email.';
       setErrorMessage(errorMessage);
-      //errorHandler('An error occurred while sending the email.'); // Call the errorHandler function
       errorHandler(errorMessage); // Call the errorHandler function with the error message
-    }  
+      console.error(error); // Log the error to the console for debugging purposes
+    }
+
+    
   };
 
 
