@@ -42,10 +42,9 @@ const Contact = () => {
       const errorDetails = error.message; // Capture the error message from the error object
       errorHandler(errorMessage, errorDetails); // Call the errorHandler function with the error message and error details
       console.error('Error:', error); // Log the error to the console for debugging purposes
-}
+      
     }
 
-    
   };
 
 
