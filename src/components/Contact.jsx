@@ -16,6 +16,10 @@ const Contact = () => {
 
     setLoading(true);
 
+    const errorHandler = (errorMessage) => {
+      responsiveVoice.speak("AI response: " + errorMessage);
+    };
+
     try {
       // Send the email using axios or any other library you prefer
       const emailResponse = await axios.post('/send-email', { name, email, message });
