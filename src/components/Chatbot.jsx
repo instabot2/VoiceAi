@@ -115,12 +115,14 @@ const Chatbot = () => {
     }
   
     // Get data from memory and concatenate with input
-    const memoryData = memory.join(" ");
+    //const memoryData = memory.join(" ");
+    const memoryData = memory.join(" ").trim();
+    let inputWithMemory = input.trim();
     //const inputWithMemory = `${memoryData} ${input}`;
     //const inputWithMemory = `${input} ${memoryData}`;
     //const inputWithMemory = `${input ? input + ' ' : ''}${memoryData}`;
     //window.alert(`Captured Memory Data: ${inputWithMemory}`);
-    let inputWithMemory = input;
+    //let inputWithMemory = input;
     // Check if input contains programming keywords
     const containsProgrammingKeyword = programmingKeywords.some(keyword => input.toLowerCase().includes(keyword));
     if (containsProgrammingKeyword) {
