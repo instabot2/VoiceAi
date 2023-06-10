@@ -168,9 +168,6 @@ const Chatbot = () => {
     try {
       //fix bugs axios error 400
       
-      //responsiveVoice.speak("Processing failed!", "US English Female");
-      //responsiveVoice.speak("Reset request successful", "US English Female");     
-
       const response = await axios.request(options);
       const { conversation_id, response: botResponse } = response.data;
       const containsProgrammingKeyword = programmingKeywords.some(keyword => input.toLowerCase().includes(keyword));
@@ -311,11 +308,6 @@ const Chatbot = () => {
     }
   };
 
-  if (window.webkitSpeechRecognition && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    //
-  } else {
-    //
-  }
   
   const handleNewMessage = () => {
     const conversationContainer = conversationRef.current;
