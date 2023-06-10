@@ -141,6 +141,19 @@ const Chatbot = () => {
     let speechTimeoutId; // Variable to hold the timeout ID
     const timeoutDuration = 20000; // Duration in milliseconds
     
+    const resetOptions = {
+      method: "POST",
+      url: "https://chatgpt-api7.p.rapidapi.com/ask",
+      headers: {
+        "Content-Type": "application/json",
+        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
+        "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
+      },
+      data: {
+        query: "reset",
+      },
+    };
+ 
     const options = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
@@ -153,9 +166,20 @@ const Chatbot = () => {
     };
 
     try {
-      const response = await axios.request(options);
-      const { conversation_id, response: botResponse } = response.data;
+      //fix bugs axios error 400
+      const resetResponse = await axios(resetOptions);
+      if (resetResponse.status === 200) {
+        console.log('Reset request successful');
+        const queryResponse = await axios(Options);
+        // Handle the query request response here
+        const { conversation_id, response: botResponse } = Response.data;
+        console.log('Bot Response:', botResponse);
+      } else {
+        console.log('Reset request failed');
+      }
 
+      //const response = await axios.request(options);
+      //const { conversation_id, response: botResponse } = response.data;
       const containsProgrammingKeyword = programmingKeywords.some(keyword => input.toLowerCase().includes(keyword));
       const output = containsProgrammingKeyword ? `${botResponse}` : botResponse;
 
