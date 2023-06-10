@@ -6,6 +6,8 @@ import Navbar from "./Navbar";
 import microphoneImage from '/microphone-solid-24.png';
 import microphoneOffImage from '/microphone-off-solid-24.png';
 import sendImage from '/send-solid-24.png';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import MicRecorder from 'react-mic';
 
 
 const Chatbot = () => {
