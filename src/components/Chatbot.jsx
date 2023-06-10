@@ -167,47 +167,27 @@ const Chatbot = () => {
 
     try {
       //fix bugs axios error 400
-      const resetResponse = await axios(resetOptions);
-      if (resetResponse.status === 200) {
-        //console.log('Reset request successful');
-        //responsiveVoice.speak("Reset request successful", "US English Female");     
+      
+      const response = await axios.request(options);
+      if (response.status === 200) {
+        const { conversation_id, response: botResponse } = response.data;
+        console.log('Bot Response:', botResponse);
+        // Handle the successful response here
       } else {
-        //console.log('Reset request failed');
-        return; // Halt execution here
+        console.log('Request failed');
+        // Handle the request failure if needed
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        console.log('Error 400: Bad Request');
+        // Handle the 400 error here
+        return; // Halt execution
         responsiveVoice.speak("Processing failed!", "US English Female"); 
       }
 
-      let optionsResponse;
-      try {
-        // Send the options request
-        optionsResponse = await axios(options);
-        if (optionsResponse.status === 200) {
-          // Handle the options request response
-          //const { conversation_id, response: botResponse } = optionsResponse.data;
-          const response = await axios.request(options);
-          const { conversation_id, response: botResponse } = response.data;
-          console.log('Bot Response:', botResponse);
-        } else {
-          console.log('Options request failed');
-          // Handle options request failure if needed
-        }
-      } catch (error) {
-        if (error.response && error.response.status === 400) {
-          console.log('Options request error 400. Proceeding to reset...');
-          const resetResponse = await axios(resetOptions);
-          if (resetResponse.status === 200) {
-            //console.log('Reset request successful');
-            //responsiveVoice.speak("Reset request successful", "US English Female");     
-          } else {
-            //console.log('Reset request failed');
-            responsiveVoice.speak("Reset request failed!", "US English Female");
-            return; // Halt execution here
-          }
-        } else {
-          console.log('Error:', error);
-        }
-      }
-      
+        //responsiveVoice.speak("Reset request successful", "US English Female");     
+
+
       
       //const response = await axios.request(options);
       //const { conversation_id, response: botResponse } = response.data;
