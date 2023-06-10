@@ -271,6 +271,7 @@ const Chatbot = () => {
         // Handle the 400 error here
         await axios.request(resetOptions);
         return; // Halt execution
+        responsiveVoice.speak("Processing error and has been reset!", "US English Female");
       }
 
       console.error(error);
