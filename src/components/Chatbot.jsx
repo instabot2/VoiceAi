@@ -170,13 +170,11 @@ const Chatbot = () => {
       const resetResponse = await axios(resetOptions);
       if (resetResponse.status === 200) {
         //console.log('Reset request successful');
-        responsiveVoice.speak("Reset request successful", "US English Female");
-        // Send the query request after the reset
-        //const queryResponse = await axios(options);
-        //const { conversation_id, response: botResponse } = queryResponse.data;
-        //console.log('Bot Response:', botResponse);      
+        responsiveVoice.speak("Reset request successful", "US English Female");     
       } else {
         //console.log('Reset request failed');
+        return; // Halt execution here
+        responsiveVoice.speak("Processing failed!", "US English Female"); 
       }
 
       const response = await axios.request(options);
