@@ -169,17 +169,17 @@ const Chatbot = () => {
       //fix bugs axios error 400
       const resetResponse = await axios(resetOptions);
       if (resetResponse.status === 200) {
-        console.log('Reset request successful');
+        //console.log('Reset request successful');
         // Send the query request after the reset
-        const queryResponse = await axios(options);
-        const { conversation_id, response: botResponse } = queryResponse.data;
-        console.log('Bot Response:', botResponse);      
+        //const queryResponse = await axios(options);
+        //const { conversation_id, response: botResponse } = queryResponse.data;
+        //console.log('Bot Response:', botResponse);      
       } else {
-        console.log('Reset request failed');
+        //console.log('Reset request failed');
       }
 
-      //const response = await axios.request(options);
-      //const { conversation_id, response: botResponse } = response.data;
+      const response = await axios.request(options);
+      const { conversation_id, response: botResponse } = response.data;
       const containsProgrammingKeyword = programmingKeywords.some(keyword => input.toLowerCase().includes(keyword));
       const output = containsProgrammingKeyword ? `${botResponse}` : botResponse;
 
