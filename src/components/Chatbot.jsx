@@ -170,6 +170,10 @@ const Chatbot = () => {
         // Check if the user agent contains "Android" or "iPhone" or "iPad"
         return /Android|iPhone|iPad/i.test(navigator.userAgent);
       }
+      
+      const timeoutDuration = 100000;
+      let speechTimeoutId; // Declare the variable for the timeout ID
+
       //const botResponse = conversation[conversation.length - 1]?.output;
       if (isMobile()) {
         // Mobile device (Android or iPhone/iPad)
@@ -185,18 +189,15 @@ const Chatbot = () => {
           //this is the library <script src="https://code.responsivevoice.org/responsivevoice.js?key=EEoD2YI1"></script>
           responsiveVoice.speak(botResponse.trim(), "US English Female");
           //responsiveVoice.speak("hello world","US English Female");
-          const timeoutDuration = 100000;
           // Start the speech synthesis
           responsiveVoice.speak(botResponse.trim(), "US English Female", {
             onstart: function () {
-
               // Speech synthesis has started - fix bugs
               speechTimeoutId = setTimeout(function () {
                 // Stop the speech synthesis after the timeout duration
                 responsiveVoice.cancel();
                 // alert("Speech synthesis timed out.");
               }, timeoutDuration);
-              
             },
             onend: function () {
               // Speech synthesis has ended
@@ -211,7 +212,6 @@ const Chatbot = () => {
         //console.log(detectedLanguage); // Output: 'en' for English
         //const LanguageDetect = require('language-detect');
 
-        
         if ('speechSynthesis' in window) {
           const synth = window.speechSynthesis;
           const utterance = new SpeechSynthesisUtterance(botResponse);     
@@ -235,7 +235,6 @@ const Chatbot = () => {
             // alert("Speech synthesis timed out.");
           }, timeoutDuration);
       
-          
         } else {
           //alert("Text-to-speech is not supported on this device.");
           errorHandler("Text-to-speech is not supported on this device.");
