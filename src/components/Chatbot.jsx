@@ -266,8 +266,13 @@ const Chatbot = () => {
       if (error.response && error.response.status === 400) {
         console.log('Error 400: Bad Request');
         // Handle the 400 error here
-        responsiveVoice.speak("Processing error and has been reset!", "US English Female");
-        await axios.request(resetOptions);
+        responsiveVoice.speak("Processing error and has been reset!", "US English Female");     
+        try {
+          await axios.request(resetOptions);
+          console.log('Reset request successful');
+        } catch (resetError) {
+          console.error('Reset request failed:', resetError);
+        }
         return; // Halt execution 
       }
 
