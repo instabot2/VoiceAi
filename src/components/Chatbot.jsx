@@ -169,17 +169,20 @@ const Chatbot = () => {
       //fix bugs axios error 400
       
       const response = await axios.request(options);
-      if (error.response && error.response.status === 400) {
-        console.log('Error 400: Bad Request');
-        // Handle the 400 error here
-        return; // Halt execution
-        responsiveVoice.speak("Processing failed!", "US English Female"); 
-      }
+      const { conversation_id, response: botResponse } = response.data;
+      console.log('Bot Response:', botResponse);
+      
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+          console.log('Error 400: Bad Request');
+          // Handle the 400 error here
+          return; // Halt execution
+          responsiveVoice.speak("Processing failed!", "US English Female");
+        }
 
       //responsiveVoice.speak("Reset request successful", "US English Female");     
 
 
-      
       //const response = await axios.request(options);
       //const { conversation_id, response: botResponse } = response.data;
       const containsProgrammingKeyword = programmingKeywords.some(keyword => input.toLowerCase().includes(keyword));
