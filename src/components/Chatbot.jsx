@@ -177,8 +177,40 @@ const Chatbot = () => {
         responsiveVoice.speak("Processing failed!", "US English Female"); 
       }
 
-      const response = await axios.request(options);
-      const { conversation_id, response: botResponse } = response.data;
+      let optionsResponse;
+      try {
+        // Send the options request
+        optionsResponse = await axios(options);
+        if (optionsResponse.status === 200) {
+          // Handle the options request response
+          //const { conversation_id, response: botResponse } = optionsResponse.data;
+          const response = await axios.request(options);
+          const { conversation_id, response: botResponse } = response.data;
+          console.log('Bot Response:', botResponse);
+        } else {
+          console.log('Options request failed');
+          // Handle options request failure if needed
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+          console.log('Options request error 400. Proceeding to reset...');
+          const resetResponse = await axios(resetOptions);
+          if (resetResponse.status === 200) {
+            //console.log('Reset request successful');
+            //responsiveVoice.speak("Reset request successful", "US English Female");     
+          } else {
+            //console.log('Reset request failed');
+            responsiveVoice.speak("Reset request failed!", "US English Female");
+            return; // Halt execution here
+          }
+        } else {
+          console.log('Error:', error);
+        }
+      }
+      
+      
+      //const response = await axios.request(options);
+      //const { conversation_id, response: botResponse } = response.data;
       const containsProgrammingKeyword = programmingKeywords.some(keyword => input.toLowerCase().includes(keyword));
       const output = containsProgrammingKeyword ? `${botResponse}` : botResponse;
 
