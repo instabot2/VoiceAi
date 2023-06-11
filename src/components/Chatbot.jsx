@@ -140,7 +140,6 @@ const Chatbot = () => {
     
     let speechTimeoutId; // Variable to hold the timeout ID
     const timeoutDuration = 20000; // Duration in milliseconds
-    //const axios = require('axios');
     
     const resetOptions = {
       method: "POST",
@@ -168,6 +167,17 @@ const Chatbot = () => {
       data: `{"query":"${inputWithMemory}"}`,
     };
 
+    try {
+      // Reset the conversation first
+      await axios.request(resetOptions);
+      console.log('Reset request successful');
+      responsiveVoice.speak("Processing error and has been reset!", "US English Female");
+    } catch (resetError) {
+      console.error('Reset request failed:', resetError);
+      responsiveVoice.speak("Processing reset failed!", "US English Female");
+    }
+
+    
     try {
       //fix bugs axios error 400
       
