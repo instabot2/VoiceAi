@@ -167,7 +167,7 @@ const Chatbot = () => {
       // Reset the conversation first
       await axios.request(resetOptions);
       console.log('Reset request successful');
-      responsiveVoice.speak("Processing error and has been reset!", "US English Female");
+      responsiveVoice.speak("Successful reset!", "US English Female");
     } catch (resetError) {
       console.error('Reset request failed:', resetError);
       responsiveVoice.speak("Processing reset failed!", "US English Female");
@@ -278,7 +278,7 @@ const Chatbot = () => {
         try {
           await axios.request(resetOptions);
           console.log('Reset request successful');
-          responsiveVoice.speak("Processing error and has been reset!", "US English Female"); 
+          responsiveVoice.speak("Successful reset!", "US English Female"); 
         } catch (resetError) {
           console.error('Reset request failed:', resetError);
           errorHandler(resetError);
