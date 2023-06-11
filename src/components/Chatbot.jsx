@@ -140,7 +140,7 @@ const Chatbot = () => {
     
      let speechTimeoutId; // Variable to hold the timeout ID
      const timeoutDuration = 20000; // Duration in milliseconds
-     const axios = require('axios');
+     //const axios = require('axios');
     
      const resetOptions = {
       method: "POST",
