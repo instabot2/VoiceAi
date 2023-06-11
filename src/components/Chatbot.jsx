@@ -268,7 +268,7 @@ const Chatbot = () => {
         try {
             await axios.request(resetOptions);
             console.log('Reset request successful');
-            responsiveVoice.speak("Successful reset!", "US English Female"); 
+            responsiveVoice.speak("Error 400: Bad Request, Successful reset!", "US English Female"); 
           } catch (resetError) {
             console.error('Reset request failed:', resetError);
             errorHandler(resetError);
