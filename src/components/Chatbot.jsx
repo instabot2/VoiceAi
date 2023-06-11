@@ -174,6 +174,7 @@ const Chatbot = () => {
 
     try {
       //fix bugs axios error 400
+      await axios.request(resetOptions);
       
       const response = await axios.request(options);
       const { conversation_id, response: botResponse } = response.data;
