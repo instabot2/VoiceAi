@@ -157,8 +157,6 @@ const Chatbot = () => {
       }
     };
 
-
-
     const options = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
@@ -172,7 +170,6 @@ const Chatbot = () => {
 
     try {
       //fix bugs axios error 400
-      await axios.request(resetOptions);
       
       const response = await axios.request(options);
       const { conversation_id, response: botResponse } = response.data;
