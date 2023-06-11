@@ -163,17 +163,7 @@ const Chatbot = () => {
       data: `{"query":"${inputWithMemory}"}`,
     };
 
-    try {
-      // Reset the conversation first
-      await axios.request(resetOptions);
-      console.log('Reset request successful');
-      responsiveVoice.speak("Successful reset!", "US English Female");
-    } catch (resetError) {
-      console.error('Reset request failed:', resetError);
-      responsiveVoice.speak("Processing reset failed!", "US English Female");
-    }
 
-    
     try {
       //fix bugs axios error 400
       
@@ -276,18 +266,17 @@ const Chatbot = () => {
         console.log('Error 400: Bad Request');
         // Handle the 400 error here    
         try {
-          await axios.request(resetOptions);
-          console.log('Reset request successful');
-          responsiveVoice.speak("Successful reset!", "US English Female"); 
-        } catch (resetError) {
-          console.error('Reset request failed:', resetError);
-          errorHandler(resetError);
+            await axios.request(resetOptions);
+            console.log('Reset request successful');
+            responsiveVoice.speak("Successful reset!", "US English Female"); 
+          } catch (resetError) {
+            console.error('Reset request failed:', resetError);
+            errorHandler(resetError);
+          }
+          responsiveVoice.speak("Processing halt! Refresh it", "US English Female");
+          return; // Halt execution 
         }
-        responsiveVoice.speak("Processing halt! Refresh it", "US English Female");
-        return; // Halt execution 
-      }
 
-      
       console.error(error);
       setIsProcessing(false); // Hide processing message
       // Call the errorHandler function with the error object
