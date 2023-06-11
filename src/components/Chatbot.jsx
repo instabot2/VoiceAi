@@ -279,11 +279,13 @@ const Chatbot = () => {
           responsiveVoice.speak("Processing error and has been reset!", "US English Female"); 
         } catch (resetError) {
           console.error('Reset request failed:', resetError);
-          responsiveVoice.speak("Processing reset failed!", "US English Female");
+          errorHandler(resetError);
         }
+        responsiveVoice.speak("Processing halt! Refresh it", "US English Female");
         return; // Halt execution 
       }
 
+      
       console.error(error);
       setIsProcessing(false); // Hide processing message
       // Call the errorHandler function with the error object
