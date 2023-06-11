@@ -138,10 +138,10 @@ const Chatbot = () => {
     setIsProcessing(true); // Show processing message
 
     
-    let speechTimeoutId; // Variable to hold the timeout ID
-    const timeoutDuration = 20000; // Duration in milliseconds
-    
-    const resetOptions = {
+      let speechTimeoutId; // Variable to hold the timeout ID
+      const timeoutDuration = 20000; // Duration in milliseconds
+
+     const resetOptions = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
       headers: {
@@ -150,10 +150,16 @@ const Chatbot = () => {
         "X-RapidAPI-Host": "chatgpt-api7.p.rapidapi.com",
       },
       data: {
-        query: "reset",
+        messages: [
+          {
+            role: "system",
+            content: "reset",
+          },
+        ],
       },
     };
- 
+
+
     const options = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
