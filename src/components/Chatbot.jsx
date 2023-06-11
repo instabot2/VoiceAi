@@ -142,15 +142,20 @@ const Chatbot = () => {
     const timeoutDuration = 20000; // Duration in milliseconds
     
     const resetOptions = {
-      method: 'DELETE',
-      url: 'https://chatgpt-api7.p.rapidapi.com/reset', // Replace with the appropriate reset endpoint URL
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-RapidAPI-Key': '9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb',
         'X-RapidAPI-Host': 'chatgpt-api7.p.rapidapi.com',
       },
+      body: JSON.stringify({
+        messages: [
+          { role: 'system', content: 'reset' }
+        ]
+      })
     };
 
+    
     const options = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
