@@ -138,9 +138,10 @@ const Chatbot = () => {
     setIsProcessing(true); // Show processing message
 
     
-      let speechTimeoutId; // Variable to hold the timeout ID
-      const timeoutDuration = 20000; // Duration in milliseconds
-
+     let speechTimeoutId; // Variable to hold the timeout ID
+     const timeoutDuration = 20000; // Duration in milliseconds
+     const axios = require('axios');
+    
      const resetOptions = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
