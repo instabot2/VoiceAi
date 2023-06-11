@@ -138,11 +138,11 @@ const Chatbot = () => {
     setIsProcessing(true); // Show processing message
 
     
-     let speechTimeoutId; // Variable to hold the timeout ID
-     const timeoutDuration = 20000; // Duration in milliseconds
-     //const axios = require('axios');
+    let speechTimeoutId; // Variable to hold the timeout ID
+    const timeoutDuration = 20000; // Duration in milliseconds
+    //const axios = require('axios');
     
-     const resetOptions = {
+    const resetOptions = {
       method: "POST",
       url: "https://chatgpt-api7.p.rapidapi.com/ask",
       headers: {
@@ -152,13 +152,11 @@ const Chatbot = () => {
       },
       data: {
         messages: [
-          {
-            role: "system",
-            content: "reset",
-          },
-        ],
-      },
+          { role: "system", content: "reset" }
+        ]
+      }
     };
+
 
 
     const options = {
