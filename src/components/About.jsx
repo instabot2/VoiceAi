@@ -49,8 +49,12 @@ const About = () => {
             <section className="text-gray-600 body-font">
         
         
-        <input type="text" id="searchInput" placeholder="Search" />
-        <ul id="searchResults"></ul>
+
+          <input type="text" id="searchInput" placeholder="Search" />
+          <button onClick={handleSearch} className="btn-search">
+            Search
+          </button>
+          <ul id="searchResults"></ul>
 
         
         
