@@ -27,7 +27,8 @@
     "annyang": "^2.6.1",
     "speechrecognition": "^6.0.0",
     "language-detect": "^0.4.3",
-    "nodemailer": "^6.6.3"
+    "nodemailer": "^6.6.3",
+    "fuse.js": "^6.4.6"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
