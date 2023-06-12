@@ -7,9 +7,7 @@ const About = () => {
         <>
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
             <section className="text-gray-600 body-font">
-                <div className="container px-5 py-24 mx-auto">
 
-                </div>
                 <div className="container px-5 py-24 mx-auto">
                     <div className="flex flex-col text-center w-full mb-20">
                         <h1 className="text-2xl font-medium title-font mb-4 text-white tracking-widest">
