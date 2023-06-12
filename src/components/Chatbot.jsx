@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import microphoneImage from '/microphone-solid-24.png';
 import microphoneOffImage from '/microphone-off-solid-24.png';
 import sendImage from '/send-solid-24.png';
-//import google from 'googlethis';
+import google from 'googlethis';
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
