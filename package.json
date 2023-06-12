@@ -27,8 +27,7 @@
     "annyang": "^2.6.1",
     "speechrecognition": "^6.0.0",
     "language-detect": "^0.4.3",
-    "nodemailer": "^6.6.3",
-    "googlethis": "^0.1.0"
+    "nodemailer": "^6.6.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
