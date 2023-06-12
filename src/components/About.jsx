@@ -2,23 +2,55 @@
 //import Navbar1 from './Navbar1';
 //import Footer from './Footer';
 //import { Link } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Fuse from 'fuse.js';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
-
-
 const About = () => {
+  useEffect(() => {
+    document.addEventListener('DOMContentLoaded', function () {
+      const data = [
+        { title: 'Item 1', description: 'Description 1' },
+        { title: 'Item 2', description: 'Description 2' },
+        { title: 'Item 3', description: 'Description 3' },
+      ];
+
+      const options = {
+        keys: ['title', 'description'],
+      };
+
+      const fuse = new Fuse(data, options);
+
+      const searchInput = document.getElementById('searchInput');
+      const searchResults = document.getElementById('searchResults');
+
+      searchInput.addEventListener('input', function (event) {
+        const searchTerm = event.target.value;
+        const result = fuse.search(searchTerm);
+
+        searchResults.innerHTML = '';
+
+        for (const item of result) {
+          const li = document.createElement('li');
+          li.textContent = `${item.title}: ${item.description}`;
+          searchResults.appendChild(li);
+        }
+      });
+    });
+  }, []);    
+    
+    
+    
     return (
         <>
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
             <section className="text-gray-600 body-font">
         
-            <input type="text" id="searchInput" placeholder="Search" />
-            <ul id="searchResults"></ul>
-            <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
+        
+        <input type="text" id="searchInput" placeholder="Search" />
+        <ul id="searchResults"></ul>
 
         
         
