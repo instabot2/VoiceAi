@@ -28,7 +28,7 @@
     "speechrecognition": "^6.0.0",
     "language-detect": "^0.4.3",
     "nodemailer": "^6.6.3",
-    "googlethis": "latest"
+    "googlethis": "^0.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
