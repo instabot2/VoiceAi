@@ -1,7 +1,15 @@
-import React from 'react'
+//import React from 'react'
+//import Navbar1 from './Navbar1';
+//import Footer from './Footer';
+//import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Fuse from 'fuse.js';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
-import { Link } from 'react-router-dom';
+
+
+
 const About = () => {
     return (
         <>
