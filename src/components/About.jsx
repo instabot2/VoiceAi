@@ -47,7 +47,7 @@ const About = () => {
         onChange={handleInputChange}
         placeholder="Search"
       />
-      <button onClick={() => setSearchTerm('')}>Clear</button>
+
 
 
 
