@@ -41,11 +41,7 @@ const About = () => {
             <section className="text-gray-600 body-font">
         
         
-      <ul>
-        {searchResults.map((item, index) => (
-          <li key={index}>{`${item.title}: ${item.description}`}</li>
-        ))}
-      </ul>
+
 
 
 
