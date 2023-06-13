@@ -9,38 +9,30 @@ import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
 const About = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
   useEffect(() => {
-    document.addEventListener('DOMContentLoaded', function () {
-      const data = [
-        { title: 'Item 1', description: 'Description 1' },
-        { title: 'Item 2', description: 'Description 2' },
-        { title: 'Item 3', description: 'Description 3' },
-      ];
+    const data = [
+      { title: 'Item 1', description: 'Description 1' },
+      { title: 'Item 2', description: 'Description 2' },
+      { title: 'Item 3', description: 'Description 3' },
+    ];
 
-      const options = {
-        keys: ['title', 'description'],
-      };
+    const options = {
+      keys: ['title', 'description'],
+    };
 
-      const fuse = new Fuse(data, options);
+    const fuse = new Fuse(data, options);
 
-      const searchInput = document.getElementById('searchInput');
-      const searchResults = document.getElementById('searchResults');
+    const result = fuse.search(searchTerm);
 
-      searchInput.addEventListener('input', function (event) {
-        const searchTerm = event.target.value;
-        const result = fuse.search(searchTerm);
+    setSearchResults(result);
+  }, [searchTerm]);
 
-        searchResults.innerHTML = '';
-
-        for (const item of result) {
-          const li = document.createElement('li');
-          li.textContent = `${item.title}: ${item.description}`;
-          searchResults.appendChild(li);
-        }
-      });
-    });
-  }, []);    
-    
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
     
     
     return (
@@ -50,9 +42,18 @@ const About = () => {
         
         
 
-          <input type="text" id="searchInput" placeholder="Search" />
-
-          <ul id="searchResults"></ul>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleInputChange}
+        placeholder="Search"
+      />
+      <button onClick={() => setSearchTerm('')}>Clear</button>
+      <ul>
+        {searchResults.map((item, index) => (
+          <li key={index}>{`${item.title}: ${item.description}`}</li>
+        ))}
+      </ul>
 
         
         
