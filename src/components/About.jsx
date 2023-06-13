@@ -44,7 +44,6 @@ const About = () => {
       <input
         type="text"
         value={searchTerm}
-        onChange={handleInputChange}
         placeholder="Search"
       />
 
