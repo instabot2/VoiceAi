@@ -42,13 +42,7 @@ const About = () => {
         
         
 
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={handleInputChange}
-        placeholder="Search"
-      />
-      <button onClick={() => setSearchTerm('')}>Clear</button>
+
       <ul>
         {searchResults.map((item, index) => (
           <li key={index}>{`${item.title}: ${item.description}`}</li>
