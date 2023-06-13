@@ -51,9 +51,7 @@ const About = () => {
         
 
           <input type="text" id="searchInput" placeholder="Search" />
-          <button onClick={handleSearch} className="btn-search">
-            Search
-          </button>
+
           <ul id="searchResults"></ul>
 
         
