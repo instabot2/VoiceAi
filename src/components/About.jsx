@@ -9,31 +9,8 @@ import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
 const About = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
 
-  useEffect(() => {
-    const data = [
-      { title: 'Item 1', description: 'Description 1' },
-      { title: 'Item 2', description: 'Description 2' },
-      { title: 'Item 3', description: 'Description 3' },
-    ];
-
-    const options = {
-      keys: ['title', 'description'],
-    };
-
-    const fuse = new Fuse(data, options);
-    const result = fuse.search(searchTerm);
-
-    setSearchResults(result.map((item) => item.item));
-  }, [searchTerm]);
-
-  const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
   
-
     
     return (
         <>
