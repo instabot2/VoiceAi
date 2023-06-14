@@ -27,7 +27,6 @@ const About = () => {
   };
 
 
-
   return (
     <>
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
@@ -35,7 +34,6 @@ const About = () => {
         <div className="container px-5 py-24 mx-auto">
 
           <div className="container px-5 py-4 mx-auto">
-            <div className="flex flex-col items-center">
             <h2 className="text-2xl font-medium mb-4">Search Results</h2>
             {searchResults.length > 0 ? (
               searchResults.map((result, index) => (
@@ -50,19 +48,15 @@ const About = () => {
             )}
           </div>
 
-          <div className="container px-5 py-4 mx-auto flex justify-center">
-            <div>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={handleInputChange}
-                placeholder="Search..."
-                className="mr-2"
-              />
-              <button onClick={handleSearch}>Search</button>
-            </div>
+          <div className="container px-5 py-4 mx-auto">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={handleInputChange}
+              placeholder="Search..."
+            />
+            <button onClick={handleSearch}>Search</button>
           </div>
-
 
 
         </div>
