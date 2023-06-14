@@ -3,13 +3,17 @@
 //import Footer from './Footer';
 //import { Link } from 'react-router-dom';
 
-import React, { useEffect } from 'react';
+//import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
+import { useState } from 'react';
+
 
 const About = () => {
-
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  
 
     
     return (
