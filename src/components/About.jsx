@@ -13,8 +13,6 @@ const About = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = () => {
-    //const data = []; // Replace with your data source
-
     const data = [
       { name: 'John Doe', role: 'Developer', description: 'Experienced web developer specializing in front-end development.', web: 'https://example.com/johndoe' },
       { name: 'Jane Smith', role: 'Designer', description: 'Creative UI/UX designer with a passion for user-centered design.', web: 'https://example.com/janesmith' },
@@ -26,15 +24,22 @@ const About = () => {
       return;
     }
   
-    const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
-    const results = searchQuery ? fuse.search(searchQuery) : [];
-    setSearchResults(results.map((result) => result.item));
+    try {
+      const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
+      const results = searchQuery ? fuse.search(searchQuery) : [];
+      setSearchResults(results.map((result) => result.item));
   
-    console.log('Search query:', searchQuery);
-    console.log('Search results:', results);
+      console.log('Search query:', searchQuery);
+      console.log('Search results:', results);
   
-    // Speak the search query
-    responsiveVoice.speak(`You searched for ${searchQuery}`);
+      // Speak the search query
+      responsiveVoice.speak(`You searched for ${searchQuery}`);
+    } catch (error) {
+      console.error('An error occurred during search:', error);
+      // Perform additional error handling if needed
+      //responsiveVoice.speak(`You searched for ${searchQuery}`);
+      responsiveVoice.speak(`An error occurred during search: ${error}`);
+    }
   };
 
   const handleInputChange = (event) => {
