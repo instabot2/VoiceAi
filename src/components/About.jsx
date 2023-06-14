@@ -28,7 +28,13 @@ const About = () => {
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
             <section className="text-gray-600 body-font">
 
-
+      <input
+        type="text"
+        placeholder="Search team members"
+        value={searchQuery}
+        onChange={handleSearch}
+        className="border border-gray-300 p-2 rounded-md w-full"
+      />
 
                 
                 <div className="container px-5 py-24 mx-auto">
