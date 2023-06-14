@@ -17,11 +17,11 @@ const About = () => {
     const fuse = new Fuse([], { keys: ['name', 'role', 'description', 'web'] });
     const results = searchQuery ? fuse.search(searchQuery) : [];
     setSearchResults(results.map((result) => result.item));
-  
+
     // Speak the search query
     responsiveVoice.speak(`You searched for ${searchQuery}`);
   };
-  
+
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
