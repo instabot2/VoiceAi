@@ -51,6 +51,7 @@ const About = () => {
           </div>
 
           <div className="container px-5 py-4 mx-auto">
+            <div className="flex flex-col items-center">
             <input
               type="text"
               value={searchQuery}
@@ -58,8 +59,8 @@ const About = () => {
               placeholder="Search..."
             />
             <button onClick={handleSearch}>Search</button>
+            </div>
           </div>
-
 
         </div>
 
