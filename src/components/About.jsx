@@ -14,6 +14,13 @@ const About = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   
+  const handleSearch = (event) => {
+    const fuse = new Fuse(teamMembers, { keys: ['name', 'role', 'description'] });
+    const query = event.target.value;
+    const results = fuse.search(query);
+    setSearchResults(results);
+    setSearchQuery(query);
+  };
 
     
     return (
