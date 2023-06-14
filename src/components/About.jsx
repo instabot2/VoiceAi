@@ -38,7 +38,19 @@ const About = () => {
 
                         <div className="flex items-center justify-center">
                           
-
+                          <input
+                            type="text"
+                            placeholder="Search team members"
+                            value={searchQuery}
+                            onChange={handleSearch}
+                            className="border border-gray-300 p-2 rounded-md w-full"
+                          />
+                          <button
+                            onClick={handleSearch}
+                            className="bg-gray-900 text-white rounded-md px-4 ml-2"
+                          >
+                            Search
+                          </button>
                           
                           
                         </div>
