@@ -13,15 +13,16 @@ import { useState } from 'react';
 const About = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  
-  const handleSearch = (event) => {
-    const fuse = new Fuse(teamMembers, { keys: ['name', 'role', 'description'] });
-    const query = event.target.value;
-    const results = fuse.search(query);
-    setSearchResults(results);
-    setSearchQuery(query);
-  };
 
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    const fuse = new Fuse(teamMembers, { keys: ['name', 'role', 'description'] });
+    const results = query ? fuse.search(query) : [];
+    setSearchResults(results);
+  };
+  
     
     return (
         <>
@@ -34,19 +35,43 @@ const About = () => {
                             Welcome to our webApp.
                         </p>
 
-
-      <input
-        type="text"
-        placeholder="Search team members"
-        value={searchQuery}
-        onChange={handleSearch}
-        className="border border-gray-300 p-2 rounded-md w-full"
-      />
-
+                        <div className="flex items-center justify-center">
+                          <input
+                            type="text"
+                            placeholder="Search team members"
+                            value={searchQuery}
+                            onChange={handleSearch}
+                            className="border border-gray-300 p-2 rounded-md w-full"
+                          />
+                          <button
+                            onClick={handleSearch}
+                            className="bg-gray-900 text-white rounded-md px-4 ml-2"
+                          >
+                            Search
+                          </button>
+                        </div>
                       
                     </div>
                 </div>
 
+                <div className="container px-5 py-24 mx-auto">
+                  {searchResults.length > 0 && (
+                    <div className="container px-5 py-4 mx-auto">
+                      <h2 className="text-2xl font-medium mb-4">Search Results</h2>
+                      {searchResults.map((result, index) => (
+                        <div key={index} className="mb-4">
+                          <h3 className="text-lg font-medium">{result.item.name}</h3>
+                          <p className="text-gray-500">{result.item.role}</p>
+                          <p>{result.item.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {/* Rest of the code */}
+                </div>
+
+
+              
                 <div className="container px-5 py-24 mx-auto">
                     <div className="flex flex-col text-center w-full mb-20">
                         <h1 className="text-2xl font-medium title-font mb-4 text-white tracking-widest">
