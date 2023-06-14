@@ -14,12 +14,16 @@ const About = () => {
 
   const handleSearch = () => {
     const data = []; // Replace with your data source
-    const fuse = new Fuse(data, { keys: ['name','description'] });
+    const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
     const results = searchQuery ? fuse.search(searchQuery) : [];
     setSearchResults(results.map((result) => result.item));
   
     // Speak the search query
     responsiveVoice.speak(`You searched for ${searchQuery}`);
+  };
+
+  const handleInputChange = (event) => {
+    setSearchQuery(event.target.value);
   };
 
 
@@ -32,18 +36,18 @@ const About = () => {
 
           <div className="container px-5 py-4 mx-auto">
             <div className="flex flex-col items-center">
-              <h2 className="text-2xl font-medium mb-4">Search Results</h2>
-              {searchResults.length > 0 ? (
-                searchResults.map((result, index) => (
-                  <div key={index} className="mb-4">
-                    <h3 className="text-lg font-medium">{result.name}</h3>
-                    <p>{result.description}</p>
-                  </div>
-                ))
-              ) : (
-                <p>No results found.</p>
-              )}
-            </div>
+            <h2 className="text-2xl font-medium mb-4">Search Results</h2>
+            {searchResults.length > 0 ? (
+              searchResults.map((result, index) => (
+                <div key={index} className="mb-4">
+                  <h3 className="text-lg font-medium">{result.name}</h3>
+                  <p className="text-gray-500">{result.role}</p>
+                  <p>{result.description}</p>
+                </div>
+              ))
+            ) : (
+              <p>No results found.</p>
+            )}
           </div>
 
           <div className="container px-5 py-4 mx-auto flex justify-center">
