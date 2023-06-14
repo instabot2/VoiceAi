@@ -21,9 +21,17 @@ const About = () => {
       // Add more items to the data array
     ];
     
+    if (!data.length) {
+      console.log('Data array is empty');
+      return;
+    }
+  
     const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
     const results = searchQuery ? fuse.search(searchQuery) : [];
     setSearchResults(results.map((result) => result.item));
+  
+    console.log('Search query:', searchQuery);
+    console.log('Search results:', results);
   
     // Speak the search query
     responsiveVoice.speak(`You searched for ${searchQuery}`);
