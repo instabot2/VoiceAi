@@ -9,8 +9,13 @@ import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
 const About = () => {
+  const [inputValue, setInputValue] = useState('');
 
-
+  const handleSubmit = () => {
+    // Handle the button click event
+    // You can access the input value using the inputValue state variable
+    console.log(inputValue);
+  };
 
 
   
@@ -21,12 +26,7 @@ const About = () => {
         
         
 
-        <input
-          type="text"
-          value={}
-          onChange={}
-        />
-        <button onClick={this.handleSubmit}>Submit</button>
+
 
 
 
