@@ -8,21 +8,20 @@ import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 import { useState } from 'react';
-//import Fuse from 'fuse.js';
 
 
 const About = () => {
-  const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = (event) => {
-    const query = event.target.value;
-    setSearchQuery(query);
-
-    const fuse = new Fuse(teamMembers, { keys: ['name', 'role', 'description'] });
-    const results = query ? fuse.search(query) : [];
-    setSearchResults(results);
+  const handleSearch = () => {
+    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+    window.open(searchUrl, '_blank');
   };
+
+  const handleInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   
     
     return (
@@ -39,9 +38,9 @@ const About = () => {
                         <div className="flex items-center justify-center">
                           <input
                             type="text"
-                            placeholder="Search.."
+                            placeholder="Search on Google"
                             value={searchQuery}
-                            onChange={handleSearch}
+                            onChange={handleInputChange}
                             className="border border-gray-300 p-2 rounded-md w-full"
                           />
                           <button
