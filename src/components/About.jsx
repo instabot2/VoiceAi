@@ -8,17 +8,16 @@ import Navbar1 from './Navbar1';
 import Footer from './Footer';
 import { useState } from 'react';
 
-  const handleSearch = () => {
-    const data = [
-      { name: 'John Doe', role: 'Developer', description: 'Experienced web developer specializing in front-end development.', web: 'https://example.com/johndoe' },
-      { name: 'Jane Smith', role: 'Designer', description: 'Creative UI/UX designer with a passion for user-centered design.', web: 'https://example.com/janesmith' },
-      // Add more items to the data array
-    ];
+const About = () => {
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
+  const handleSearch = () => {
+    const data = []; // Replace with your data source
     const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
     const results = searchQuery ? fuse.search(searchQuery) : [];
     setSearchResults(results.map((result) => result.item));
-
+  
     // Speak the search query
     responsiveVoice.speak(`You searched for ${searchQuery}`);
   };
@@ -26,6 +25,7 @@ import { useState } from 'react';
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
+
 
 
   return (
