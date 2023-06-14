@@ -9,20 +9,20 @@ import Navbar1 from './Navbar1';
 import Footer from './Footer';
 import { useState } from 'react';
 
-
 const About = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = (event) => {
-    const query = event.target.value;
-    setSearchQuery(query);
-
-    // Update the keys to search on the web
-    const fuse = new Fuse(searchResults, { keys: ['name', 'role', 'description', 'web'] });
-    const results = query ? fuse.search(query) : [];
+  const handleSearch = () => {
+    const fuse = new Fuse(teamMembers, { keys: ['name', 'role', 'description', 'web'] });
+    const results = searchQuery ? fuse.search(searchQuery) : [];
     setSearchResults(results.map((result) => result.item));
   };
+
+  const handleInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
 
     return (
         <>
@@ -41,7 +41,7 @@ const About = () => {
                             type="text"
                             placeholder="Search on the web"
                             value={searchQuery}
-                            onChange={handleSearch}
+                            onChange={handleInputChange}
                             className="border border-gray-300 p-2 rounded-md w-full"
                           />
                           <button
