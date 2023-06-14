@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 import { useState } from 'react';
-import Fuse from 'fuse.js';
+//import Fuse from 'fuse.js';
 
 
 const About = () => {
