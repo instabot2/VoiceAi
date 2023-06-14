@@ -4,19 +4,22 @@
 //import { Link } from 'react-router-dom';
 
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
 const About = () => {
 
 
+    
     return (
         <>
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
             <section className="text-gray-600 body-font">
 
-              
+
+
+                
                 <div className="container px-5 py-24 mx-auto">
                     <div className="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
                         <p className="leading-relaxed text-lg text-justify">
