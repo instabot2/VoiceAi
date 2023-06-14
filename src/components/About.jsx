@@ -50,15 +50,19 @@ const About = () => {
             </div>
           </div>
 
-          <div className="container px-5 py-4 mx-auto">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={handleInputChange}
-              placeholder="Search..."
-            />
-            <button onClick={handleSearch}>Search</button>
+          <div className="container px-5 py-4 mx-auto flex justify-center">
+            <div>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={handleInputChange}
+                placeholder="Search..."
+                className="mr-2"
+              />
+              <button onClick={handleSearch}>Search</button>
+            </div>
           </div>
+
 
 
         </div>
