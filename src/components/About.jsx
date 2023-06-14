@@ -9,10 +9,6 @@ import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
 const About = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-
-
 
 
 
