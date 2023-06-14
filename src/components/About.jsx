@@ -11,11 +11,16 @@ import { useState } from 'react';
 
 
 const About = () => {
+  const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = () => {
-    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-    window.open(searchUrl, '_blank');
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    const fuse = new Fuse(teamMembers, { keys: ['name', 'role', 'description'] });
+    const results = query ? fuse.search(query) : [];
+    setSearchResults(results.map((result) => result.item));
   };
 
   
