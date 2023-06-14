@@ -13,7 +13,10 @@ import { useState } from 'react';
 const About = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-
+  const handleSearch = () => {
+    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+    window.open(searchUrl, '_blank');
+  };
 
   
     
