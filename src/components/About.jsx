@@ -12,28 +12,12 @@ const About = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  useEffect(() => {
-    const data = [
-      { title: 'Item 1', description: 'Description 1' },
-      { title: 'Item 2', description: 'Description 2' },
-      { title: 'Item 3', description: 'Description 3' },
-    ];
 
-    const options = {
-      keys: ['title', 'description'],
-    };
 
-    const fuse = new Fuse(data, options);
-    const result = fuse.search(searchTerm);
 
-    setSearchResults(result.map((item) => item.item));
-  }, [searchTerm]);
 
-  const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+
   
-    
     return (
         <>
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
