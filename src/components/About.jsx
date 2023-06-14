@@ -62,22 +62,6 @@ const About = () => {
       
                 </div>
 
-                <div className="container px-5 py-24 mx-auto">
-                  {searchResults.length > 0 && (
-                    <div className="container px-5 py-4 mx-auto">
-                      <h2 className="text-2xl font-medium mb-4">Search Results</h2>
-                      {searchResults.map((result, index) => (
-                        <div key={index} className="mb-4">
-                          <h3 className="text-lg font-medium">{result.item.name}</h3>
-                          <p className="text-gray-500">{result.item.role}</p>
-                          <p>{result.item.description}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {/* Rest of the code */}
-                </div>
-
 
               
                 <div className="container px-5 py-24 mx-auto">
