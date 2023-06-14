@@ -27,6 +27,13 @@ const About = () => {
         <>
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
             <section className="text-gray-600 body-font">
+       
+                <div className="container px-5 py-24 mx-auto">
+                    <div className="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
+                        <p className="leading-relaxed text-lg text-justify">
+                            Welcome to our webApp.
+                        </p>
+
 
       <input
         type="text"
@@ -36,12 +43,7 @@ const About = () => {
         className="border border-gray-300 p-2 rounded-md w-full"
       />
 
-                
-                <div className="container px-5 py-24 mx-auto">
-                    <div className="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
-                        <p className="leading-relaxed text-lg text-justify">
-                            Welcome to our webApp.
-                        </p>
+                      
                     </div>
                 </div>
 
