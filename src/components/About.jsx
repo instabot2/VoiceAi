@@ -23,8 +23,8 @@ const About = () => {
 
         <input
           type="text"
-          value={this.state.inputValue}
-          onChange={this.handleInputChange}
+          value={}
+          onChange={}
         />
         <button onClick={this.handleSubmit}>Submit</button>
 
