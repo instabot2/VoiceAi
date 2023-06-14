@@ -13,13 +13,8 @@ const About = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = () => {
-    const data = [
-      { name: 'John Doe', role: 'Developer', description: 'Experienced web developer specializing in front-end development.', web: 'https://example.com/johndoe' },
-      { name: 'Jane Smith', role: 'Designer', description: 'Creative UI/UX designer with a passion for user-centered design.', web: 'https://example.com/janesmith' },
-      // Add more items to the data array
-    ];
-  
-    const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
+    const data = []; // Replace with your data source
+    const fuse = new Fuse(data, { keys: ['name','description'] });
     const results = searchQuery ? fuse.search(searchQuery) : [];
     setSearchResults(results.map((result) => result.item));
   
@@ -42,7 +37,6 @@ const About = () => {
                 searchResults.map((result, index) => (
                   <div key={index} className="mb-4">
                     <h3 className="text-lg font-medium">{result.name}</h3>
-                    <p className="text-gray-500">{result.role}</p>
                     <p>{result.description}</p>
                   </div>
                 ))
