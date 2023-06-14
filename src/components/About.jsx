@@ -14,10 +14,11 @@ const About = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = () => {
-    const fuse = new Fuse([], { keys: ['name', 'role', 'description', 'web'] });
+    const data = []; // Replace with your data source
+    const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
     const results = searchQuery ? fuse.search(searchQuery) : [];
     setSearchResults(results.map((result) => result.item));
-
+  
     // Speak the search query
     responsiveVoice.speak(`You searched for ${searchQuery}`);
   };
@@ -31,33 +32,34 @@ const About = () => {
         <>
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
             <section className="text-gray-600 body-font">
-       
                 <div className="container px-5 py-24 mx-auto">
-                    <div className="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
-                        <p className="leading-relaxed text-lg text-justify">
-                            Welcome to our webApp.
-                        </p>
 
-                        <div className="flex items-center justify-center">
-                          
-                          <input
-                            type="text"
-                            placeholder="Search on the web"
-                            value={searchQuery}
-                            onChange={handleInputChange}
-                            className="border border-gray-300 p-2 rounded-md w-full"
-                          />
-                          <button
-                            onClick={handleSearch}
-                            className="bg-gray-900 text-white rounded-md px-4 ml-2"
-                          >
-                            Search
-                          </button>
-                          
-                          
+                  <div className="container px-5 py-4 mx-auto">
+                    <h2 className="text-2xl font-medium mb-4">Search Results</h2>
+                    {searchResults.length > 0 ? (
+                      searchResults.map((result, index) => (
+                        <div key={index} className="mb-4">
+                          <h3 className="text-lg font-medium">{result.name}</h3>
+                          <p className="text-gray-500">{result.role}</p>
+                          <p>{result.description}</p>
                         </div>
-                      
-                    </div>
+                      ))
+                    ) : (
+                      <p>No results found.</p>
+                    )}
+                  </div>
+            
+                  <div className="container px-5 py-4 mx-auto">
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={handleInputChange}
+                      placeholder="Search..."
+                    />
+                    <button onClick={handleSearch}>Search</button>
+                  </div>
+                 
+      
                 </div>
 
                 <div className="container px-5 py-24 mx-auto">
