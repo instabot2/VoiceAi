@@ -13,7 +13,12 @@ const About = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = () => {
-    const data = []; // Replace with your data source
+    const data = [
+      { name: 'John Doe', role: 'Developer', description: 'Experienced web developer specializing in front-end development.', web: 'https://example.com/johndoe' },
+      { name: 'Jane Smith', role: 'Designer', description: 'Creative UI/UX designer with a passion for user-centered design.', web: 'https://example.com/janesmith' },
+      // Add more items to the data array
+    ];
+  
     const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
     const results = searchQuery ? fuse.search(searchQuery) : [];
     setSearchResults(results.map((result) => result.item));
@@ -22,9 +27,6 @@ const About = () => {
     responsiveVoice.speak(`You searched for ${searchQuery}`);
   };
 
-  const handleInputChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
 
 
   return (
