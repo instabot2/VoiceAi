@@ -38,7 +38,7 @@ const About = () => {
                         <div className="flex items-center justify-center">
                           <input
                             type="text"
-                            placeholder="Search team members"
+                            placeholder="Search.."
                             value={searchQuery}
                             onChange={handleSearch}
                             className="border border-gray-300 p-2 rounded-md w-full"
