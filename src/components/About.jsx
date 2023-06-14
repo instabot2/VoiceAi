@@ -18,13 +18,12 @@ const About = () => {
     const query = event.target.value;
     setSearchQuery(query);
 
-    const fuse = new Fuse(teamMembers, { keys: ['name', 'role', 'description'] });
+    // Update the keys to search on the web
+    const fuse = new Fuse(searchResults, { keys: ['name', 'role', 'description', 'web'] });
     const results = query ? fuse.search(query) : [];
     setSearchResults(results.map((result) => result.item));
   };
 
-  
-    
     return (
         <>
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
@@ -40,7 +39,7 @@ const About = () => {
                           
                           <input
                             type="text"
-                            placeholder="Search team members"
+                            placeholder="Search on the web"
                             value={searchQuery}
                             onChange={handleSearch}
                             className="border border-gray-300 p-2 rounded-md w-full"
