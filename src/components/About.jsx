@@ -8,8 +8,26 @@ import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 
-const About = () => {
+//const About = () => {
+class About extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: '',
+    };
+  }
 
+  handleInputChange = (event) => {
+    this.setState({ inputValue: event.target.value });
+  };
+
+  handleSubmit = () => {
+    // Handle the button click event
+    // You can access the input value using this.state.inputValue
+    console.log(this.state.inputValue);
+  };
+
+  render() {
 
 
 
@@ -21,6 +39,12 @@ const About = () => {
         
         
 
+        <input
+          type="text"
+          value={this.state.inputValue}
+          onChange={this.handleInputChange}
+        />
+        <button onClick={this.handleSubmit}>Submit</button>
 
 
 
