@@ -54,35 +54,41 @@ const About = () => {
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
 
-          <div className="container px-5 py-4 mx-auto">
-            <div className="flex flex-col items-center">
-              <h2 className="text-2xl font-medium mb-4">Search Results</h2>
-              {searchResults.length > 0 ? (
-                searchResults.map((result, index) => (
-                  <div key={index} className="mb-4">
-                    <h3 className="text-lg font-medium">{result.name}</h3>
-                    <p className="text-gray-500">{result.role}</p>
-                    <p>{result.description}</p>
-                  </div>
-                ))
-              ) : (
-                <p>No results found.</p>
-              )}
-            </div>
-          </div>
+          
+<div className="container px-5 py-4 mx-auto">
+  <div className="flex flex-col items-center">
+    <h2 className="text-2xl font-medium mb-4">Search Results</h2>
+    {searchResults.length > 0 ? (
+      searchResults.map((result, index) => (
+        <div key={index} className="mb-4">
+          <h3 className="text-lg font-medium">{result.name}</h3>
+          <p className="text-gray-500">{result.role}</p>
+          <p>{result.description}</p>
+        </div>
+      ))
+    ) : (
+      <p>No results found.</p>
+    )}
+  </div>
+</div>
 
-          <div className="container px-5 py-4 mx-auto">
-            <div className="flex flex-col text-center w-80 mx-auto mb-20">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={handleInputChange}
-                placeholder="Search..."
-              />
-              <button onClick={handleSearch}>Search</button>
-            </div>
-          </div>
+<div className="container px-5 py-4 mx-auto">
+  <div className="flex items-center justify-center space-x-4">
+    <input
+      type="text"
+      value={searchQuery}
+      onChange={handleInputChange}
+      placeholder="Search..."
+      className="w-80"
+    />
+    <button onClick={handleSearch} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+      Search
+    </button>
+  </div>
+</div>
 
+
+          
         </div>
 
 
