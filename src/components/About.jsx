@@ -25,7 +25,7 @@ const About = () => {
       return;
     }
 
-    const searchQuery = 'developer'; // Modify this with your search query
+    //const searchQuery = 'developer'; // Modify this with your search query
 
     try {
       const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
