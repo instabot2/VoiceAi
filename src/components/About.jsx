@@ -56,23 +56,6 @@ const About = () => {
 
           
 <div className="container px-5 py-4 mx-auto">
-  <div className="flex flex-col items-center">
-    <h2 className="text-2xl font-medium mb-4">Search Results</h2>
-    {searchResults.length > 0 ? (
-      searchResults.map((result, index) => (
-        <div key={index} className="mb-4">
-          <h3 className="text-lg font-medium">{result.name}</h3>
-          <p className="text-gray-500">{result.role}</p>
-          <p>{result.description}</p>
-        </div>
-      ))
-    ) : (
-      <p>No results found.</p>
-    )}
-  </div>
-</div>
-
-<div className="container px-5 py-4 mx-auto">
   <div className="flex items-center justify-center space-x-4">
     <input
       type="text"
@@ -88,7 +71,22 @@ const About = () => {
   </div>
 </div>
 
-
+<div className="container px-5 py-4 mx-auto">
+  <div className="flex flex-col items-center">
+    <h2 className="text-2xl font-medium mb-4">Search Results</h2>
+    {searchResults.length > 0 ? (
+      searchResults.map((result, index) => (
+        <div key={index} className="mb-4">
+          <h3 className="text-lg font-medium">{result.name}</h3>
+          <p className="text-gray-500">{result.role}</p>
+          <p>{result.description}</p>
+        </div>
+      ))
+    ) : (
+      <p>No results found.</p>
+    )}
+  </div>
+</div>
           
         </div>
 
