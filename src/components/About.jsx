@@ -72,7 +72,7 @@ const About = () => {
           </div>
 
           <div className="container px-5 py-4 mx-auto">
-            <div className="flex flex-col text-center w-full mb-20">
+            <div className="flex flex-col text-center w-80 mx-auto mb-20">
               <input
                 type="text"
                 value={searchQuery}
