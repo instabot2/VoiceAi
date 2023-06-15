@@ -25,7 +25,7 @@ const About = () => {
       return;
     }
 
-    //const searchQuery = 'developer'; // Modify this with your search query
+    const searchQuery = 'developer'; // Modify this with your search query
 
     try {
       const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
@@ -57,6 +57,8 @@ const About = () => {
     }
   };
 
+
+  
   return (
     <>
       <Navbar1 name="VoiceAi" logo="https://i.postimg.cc/K8sbZ1vM/5cb480cd5f1b6d3fbadece79.png" button5="Get Started" />
@@ -70,6 +72,7 @@ const About = () => {
       type="text"
       value={searchQuery}
       onChange={handleInputChange}
+      onKeyPress={handleKeyPress} // Attach the event listener here
       placeholder="Search..."
       style={{ width: '60vw' }} // Set width to 80% of the viewport width
       className="py-2 px-4 border border-gray-300 rounded h-full"
