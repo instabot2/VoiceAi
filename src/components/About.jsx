@@ -23,7 +23,6 @@ const About = () => {
       console.log('Data array is empty');
       return;
     }
-
     //const searchQuery = 'developer'; // Modify this with your search query
     try {
       const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
@@ -57,40 +56,39 @@ const About = () => {
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
 
+          <div className="container px-5 py-4 mx-auto">
+            <div className="flex items-center justify-center space-x-4">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={handleInputChange}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Search..."
+                  style={{ width: '60vw' }}
+                  className="py-2 px-4 border border-gray-300 rounded h-full"
+                />
+                <button onClick={handleSearch} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded h-full">
+                  Search
+                </button>
+            </div>
+          </div>
           
-<div className="container px-5 py-4 mx-auto">
-  <div className="flex items-center justify-center space-x-4">
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={handleInputChange}
-        onKeyPress={handleKeyPress}
-        placeholder="Search..."
-        style={{ width: '60vw' }}
-        className="py-2 px-4 border border-gray-300 rounded h-full"
-      />
-      <button onClick={handleSearch} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded h-full">
-        Search
-      </button>
-  </div>
-</div>
-
-<div className="container px-5 py-4 mx-auto">
-  <div className="flex flex-col items-center">
-    <h2 className="text-2xl font-medium mb-4">Search Results</h2>
-    {searchResults.length > 0 ? (
-      searchResults.map((result, index) => (
-        <div key={index} className="mb-4">
-          <h3 className="text-lg font-medium">{result.name}</h3>
-          <p className="text-gray-500">{result.role}</p>
-          <p>{result.description}</p>
-        </div>
-      ))
-    ) : (
-      <p>No results found.</p>
-    )}
-  </div>
-</div>
+          <div className="container px-5 py-4 mx-auto">
+            <div className="flex flex-col items-center">
+              <h2 className="text-2xl font-medium mb-4">Search Results</h2>
+              {searchResults.length > 0 ? (
+                searchResults.map((result, index) => (
+                  <div key={index} className="mb-4">
+                    <h3 className="text-lg font-medium">{result.name}</h3>
+                    <p className="text-gray-500">{result.role}</p>
+                    <p>{result.description}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No results found.</p>
+              )}
+            </div>
+          </div>
           
         </div>
 
