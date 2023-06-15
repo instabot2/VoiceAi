@@ -72,14 +72,14 @@ const About = () => {
           </div>
 
           <div className="container px-5 py-4 mx-auto">
-            <div className="flex flex-col items-center">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={handleInputChange}
-              placeholder="Search..."
-            />
-            <button onClick={handleSearch}>Search</button>
+            <div className="flex flex-col text-center w-full mb-20">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={handleInputChange}
+                placeholder="Search..."
+              />
+              <button onClick={handleSearch}>Search</button>
             </div>
           </div>
 
