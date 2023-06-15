@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 import { useState } from 'react';
-//import Fuse from 'https://cdn.skypack.dev/fuse.js';
+import Fuse from 'https://cdn.skypack.dev/fuse.js';
 
 const About = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -27,12 +27,9 @@ const About = () => {
     try {
       const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
       const results = searchQuery ? fuse.search(searchQuery) : [];
-
       console.log('Search Query:', searchQuery);
       console.log('Search Results:', results);
-
       setSearchResults(results.map((result) => result.item));
-
       responsiveVoice.speak(`You searched for ${searchQuery}`);
     } catch (error) {
       console.error('An error occurred during search:', error);
