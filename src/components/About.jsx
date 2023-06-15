@@ -7,6 +7,8 @@ import Navbar1 from './Navbar1';
 import Footer from './Footer';
 import { useState } from 'react';
 import Fuse from 'https://cdn.skypack.dev/fuse.js';
+import cheerio from 'cheerio';
+
 
 const About = () => {
   const [searchResults, setSearchResults] = useState([]);
