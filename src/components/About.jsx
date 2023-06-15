@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 import { useState } from 'react';
-import Fuse from 'https://cdn.skypack.dev/fuse.js';
+//import Fuse from 'https://cdn.skypack.dev/fuse.js';
 
 const About = () => {
   const [searchResults, setSearchResults] = useState([]);
