@@ -51,7 +51,11 @@ const About = () => {
     setSearchQuery(event.target.value);
   };
 
-
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   return (
     <>
