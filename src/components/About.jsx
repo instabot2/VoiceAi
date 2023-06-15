@@ -27,11 +27,13 @@ const About = () => {
     try {
       const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
       const results = searchQuery ? fuse.search(searchQuery) : [];
+      
+      // Log the search query and results to check if they are populated correctly
+      console.log('Search Query:', searchQuery);
+      console.log('Search Results:', results);
+    
       setSearchResults(results.map((result) => result.item));
-  
-      console.log('Search query:', searchQuery);
-      console.log('Search results:', results);
-  
+
       // Speak the search query
       responsiveVoice.speak(`You searched for ${results}`);
     } catch (error) {
