@@ -33,7 +33,7 @@ const About = () => {
       console.log('Search results:', results);
   
       // Speak the search query
-      //responsiveVoice.speak(`You searched for ${searchQuery}`);
+      responsiveVoice.speak(`You searched for ${results}`);
     } catch (error) {
       console.error('An error occurred during search:', error);
       // Perform additional error handling if needed
