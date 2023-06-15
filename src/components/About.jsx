@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
 import { useState } from 'react';
+import Fuse from 'https://cdn.skypack.dev/fuse.js';
 
 const About = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -23,7 +24,9 @@ const About = () => {
       console.log('Data array is empty');
       return;
     }
-  
+
+    const searchQuery = 'developer'; // Modify this with your search query
+
     try {
       const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
       const results = searchQuery ? fuse.search(searchQuery) : [];
