@@ -79,13 +79,14 @@ const About = () => {
       value={searchQuery}
       onChange={handleInputChange}
       placeholder="Search..."
-      className="w-80"
+      className="w-80 h-full"
     />
     <button onClick={handleSearch} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
       Search
     </button>
   </div>
 </div>
+
 
 
           
