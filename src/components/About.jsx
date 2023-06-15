@@ -2,7 +2,6 @@
 //import Navbar1 from './Navbar1';
 //import Footer from './Footer';
 //import { Link } from 'react-router-dom';
-
 import { Link } from 'react-router-dom';
 import Navbar1 from './Navbar1';
 import Footer from './Footer';
@@ -19,30 +18,25 @@ const About = () => {
       { name: 'Jane Smith', role: 'Designer', description: 'Creative UI/UX designer with a passion for user-centered design.', web: 'https://example.com/janesmith' },
       // Add more items to the data array
     ];
-    
+
     if (!data.length) {
       console.log('Data array is empty');
       return;
     }
 
-    const searchQuery = 'developer'; // Modify this with your search query
-
+    //const searchQuery = 'developer'; // Modify this with your search query
     try {
       const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
       const results = searchQuery ? fuse.search(searchQuery) : [];
-      
-      // Log the search query and results to check if they are populated correctly
+
       console.log('Search Query:', searchQuery);
       console.log('Search Results:', results);
-    
+
       setSearchResults(results.map((result) => result.item));
 
-      // Speak the search query
-      responsiveVoice.speak(`You searched for ${results}`);
+      responsiveVoice.speak(`You searched for ${searchQuery}`);
     } catch (error) {
       console.error('An error occurred during search:', error);
-      // Perform additional error handling if needed
-      //responsiveVoice.speak(`You searched for ${searchQuery}`);
       responsiveVoice.speak(`An error occurred during search: ${error}`);
     }
   };
@@ -56,8 +50,6 @@ const About = () => {
       handleSearch();
     }
   };
-
-
   
   return (
     <>
@@ -68,18 +60,18 @@ const About = () => {
           
 <div className="container px-5 py-4 mx-auto">
   <div className="flex items-center justify-center space-x-4">
-    <input
-      type="text"
-      value={searchQuery}
-      onChange={handleInputChange}
-      onKeyPress={handleKeyPress} // Attach the event listener here
-      placeholder="Search..."
-      style={{ width: '60vw' }} // Set width to 80% of the viewport width
-      className="py-2 px-4 border border-gray-300 rounded h-full"
-    />
-    <button onClick={handleSearch} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded h-full">
-      Search
-    </button>
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
+        placeholder="Search..."
+        style={{ width: '60vw' }}
+        className="py-2 px-4 border border-gray-300 rounded h-full"
+      />
+      <button onClick={handleSearch} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded h-full">
+        Search
+      </button>
   </div>
 </div>
 
