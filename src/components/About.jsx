@@ -25,7 +25,7 @@ const About = () => {
     }
     //const searchQuery = 'developer'; // Modify this with your search query
     try {
-      const fuse = new Fuse(data, { keys: ['name', 'role', 'description', 'web'] });
+      const fuse = new Fuse(data, { keys: ['name', 'role', 'description'] });
       const results = searchQuery ? fuse.search(searchQuery) : [];
       console.log('Search Query:', searchQuery);
       console.log('Search Results:', results);
