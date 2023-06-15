@@ -79,7 +79,7 @@ const About = () => {
       value={searchQuery}
       onChange={handleInputChange}
       placeholder="Search..."
-      style={{ width: '80vw' }} // Set width to 80% of the viewport width
+      style={{ width: '60vw' }} // Set width to 80% of the viewport width
       className="py-2 px-4 border border-gray-300 rounded h-full"
     />
     <button onClick={handleSearch} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded h-full">
