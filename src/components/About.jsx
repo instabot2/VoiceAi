@@ -72,6 +72,7 @@ const About = () => {
   </div>
 </div>
 
+          
 <div className="container px-5 py-4 mx-auto">
   <div className="flex items-center justify-center space-x-4">
     <input
@@ -79,13 +80,14 @@ const About = () => {
       value={searchQuery}
       onChange={handleInputChange}
       placeholder="Search..."
-      className="w-80 py-2 px-4 border border-gray-300 rounded h-full"
+      className="w-80 sm:w-auto py-2 px-4 border border-gray-300 rounded h-full"
     />
     <button onClick={handleSearch} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded h-full">
       Search
     </button>
   </div>
 </div>
+
 
 
 
