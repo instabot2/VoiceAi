@@ -72,11 +72,11 @@ const Chatbot = () => {
     setIsProcessing(true);
     const options = {
       method: "POST",
-      url: "https://chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com/v1/chat/completions",
+      url: "https://chatgpt-api8.p.rapidapi.com/",
       headers: {
         "content-type": "application/json",
         "X-RapidAPI-Key": "1825e65d0bmsh424a5ef12353dc4p1f84d8jsn208df257599c",
-        "X-RapidAPI-Host": "chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com",
+        "X-RapidAPI-Host": "chatgpt-api8.p.rapidapi.com",
       },
       data: {
         query: "Introduce yourself",
